@@ -636,81 +636,209 @@ body {
 
 .partners-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .partner-card {
   background: white;
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border-radius: 12px;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 2px 4px rgba(10, 37, 64, 0.04), 0 1px 2px rgba(10, 37, 64, 0.02);
   transition: var(--transition);
+  position: relative;
 }
 
 .partner-card:hover {
-  transform: translateY(-2px);
   border-color: var(--border-medium);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 10px 24px -4px rgba(10, 37, 64, 0.08), 0 4px 6px -2px rgba(10, 37, 64, 0.03);
+  transform: translateY(-2px);
 }
 
-.partner-card-header {
-  margin-bottom: 14px;
+/* Header JustETF */
+.partner-topline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.partner-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .partner-badge-pill {
-  display: inline-block;
-  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-emerald);
-  background: var(--accent-emerald-light);
-  border: 1px solid var(--accent-emerald-border);
-  padding: 2px 10px;
-  border-radius: var(--radius-pill);
-  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+  color: var(--accent-primary);
+  background: var(--accent-primary-light);
+  border: 1px solid rgba(99, 91, 255, 0.2);
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .partner-name {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-heading);
   letter-spacing: -0.015em;
 }
 
-.partner-rating {
+.partner-category-sub {
   font-size: 0.8rem;
-  color: var(--accent-amber);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Box Rating stile JustETF */
+.justetf-rating-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 6px 10px;
+  flex-shrink: 0;
+}
+
+.rating-score-badge {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: white;
+  background: var(--text-heading);
+  padding: 2px 7px;
+  border-radius: 4px;
+  line-height: 1.2;
+}
+
+.rating-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.rating-stars {
+  color: #f59e0b;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.rating-label {
+  font-size: 0.68rem;
   font-weight: 600;
-  margin-top: 2px;
+  color: var(--text-muted);
 }
 
-.partner-tagline {
-  font-size: 0.88rem;
+/* Griglia Metriche / Scheda Tecnica stile JustETF */
+.partner-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spec-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.spec-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.spec-value.highlight-green {
+  color: var(--accent-emerald);
+}
+
+/* Lista Vantaggi Fatti a Mano (Pro-list JustETF) */
+.partner-pros-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.partner-pro-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  line-height: 1.45;
   color: var(--text-body);
-  margin: 10px 0 16px 0;
-  line-height: 1.5;
 }
 
-/* Riquadro Codice Invito Interattivo con Copy */
+.pro-check-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  color: var(--accent-emerald);
+  background: var(--accent-emerald-light);
+  border: 1px solid var(--accent-emerald-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.partner-pro-item strong {
+  color: var(--text-heading);
+}
+
+/* Riquadro Codice Invito */
 .promo-code-container {
   background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 10px 14px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .promo-code-label {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 700;
@@ -751,21 +879,25 @@ body {
 }
 
 .btn-partner-action {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   width: 100%;
   text-align: center;
   text-decoration: none;
   background: var(--text-heading);
   color: white;
   font-weight: 600;
-  font-size: 0.88rem;
-  padding: 10px 16px;
+  font-size: 0.9rem;
+  padding: 12px 18px;
   border-radius: var(--radius-md);
   transition: var(--transition);
 }
 
 .btn-partner-action:hover {
   background: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.25);
 }
 
 /* Tabella Ammortamento */
