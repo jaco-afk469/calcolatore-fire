@@ -34,6 +34,10 @@
   --accent-amber: #d97706;
   --accent-amber-light: #fffbeb;
 
+  /* Serie Grafico & Progress Bar ad Alto Contrasto */
+  --color-principal: #64748B;          /* Slate Grey: Capitale Versato neutro ad alto contrasto */
+  --color-interest: #1E56A0;           /* Trust Blue: Interessi Composti esponenziali e vividi */
+
   /* Componenti specifici */
   --navbar-bg: rgba(255, 255, 255, 0.94);
   --segmented-bg: #e9ecef;
@@ -93,6 +97,9 @@
     --accent-emerald-border: rgba(74, 144, 226, 0.35);
     --accent-amber: #fbbf24;
     --accent-amber-light: rgba(245, 158, 11, 0.15);
+
+    --color-principal: #94A3B8;        /* Slate-400 chiaro ad alta leggibilità su sfondi scuri */
+    --color-interest: #4A90E2;         /* Electric Sky Blue luminoso per dark mode */
 
     --navbar-bg: rgba(10, 25, 47, 0.94);
     --segmented-bg: #192e54;
@@ -592,6 +599,16 @@ body {
 .progress-fill {
   height: 100%;
   transition: width 0.3s ease;
+}
+
+#barPrincipal,
+.dot-principal {
+  background: var(--color-principal);
+}
+
+#barInterest,
+.dot-interest {
+  background: var(--color-interest);
 }
 
 .progress-legend {
