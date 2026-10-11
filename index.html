@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FinCalcolatore Pro | Calcolo Interesse Composto, PAC ETF e Simulatore FIRE</title>
-  <meta name="description" content="Calcolatore finanziario gratuito per simulare la crescita del tuo patrimonio: calcolo interesse composto, Piano di Accumulo (PAC) in ETF, inflazione e simulatore FIRE per la pensione anticipata.">
+  <title>FinCalcolatore Pro — Calcolo Interesse Composto, PAC ETF e Simulatore FIRE</title>
+  <meta name="description" content="Simulatore finanziario indipendente per calcolare la crescita esponenziale del tuo capitale: interesse composto, Piano di Accumulo (PAC) in ETF, inflazione e target FIRE.">
   <meta name="keywords" content="calcolo interesse composto, piano accumulo pac, calcolatore fire pensione anticipata, simulatore etf, rendimento investimenti, finanza personale">
-  <meta name="author" content="FinCalcolatore">
   <meta name="robots" content="index, follow">
   
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Meta Social -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FinCalcolatore Pro | Simulatore Interesse Composto e PAC ETF">
-  <meta property="og:description" content="Scopri quanto può crescere il tuo capitale con la capitalizzazione composta e il metodo FIRE. 100% gratuito e senza registrazione.">
+  <meta property="og:title" content="FinCalcolatore Pro — Simulatore Finanziario Indipendente">
+  <meta property="og:description" content="Simula con precisione matematica la crescita del tuo patrimonio: interesse composto, PAC e regola del 4% FIRE.">
+  <meta property="og:url" content="https://jaco-afk469.github.io/calcolatore-fire/">
   
   <!-- Schema.org Structured Data per Google Rich Snippets -->
   <script type="application/ld+json">
@@ -27,7 +27,7 @@
       "price": "0",
       "priceCurrency": "EUR"
     },
-    "description": "Strumento gratuito e professionale per il calcolo dell'interesse composto, piani di accumulo PAC e simulatore FIRE per la libertà finanziaria."
+    "description": "Strumento per il calcolo dell'interesse composto, piani di accumulo PAC su ETF e simulatore FIRE per l'indipendenza finanziaria."
   }
   </script>
 
@@ -41,7 +41,7 @@
         "name": "Cos'è l'interesse composto?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "L'interesse composto è il processo mediante il quale gli interessi guadagnati su un capitale iniziale vengono reinvestiti per generare a loro volta ulteriori interessi nel tempo, creando una crescita esponenziale del patrimonio."
+          "text": "L'interesse composto è il processo mediante il quale gli interessi generati da un investimento vengono reinvestiti per produrre a loro volta nuovi interessi, generando una crescita esponenziale nel lungo periodo."
         }
       },
       {
@@ -49,15 +49,15 @@
         "name": "Come funziona un Piano di Accumulo Capitale (PAC)?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Un PAC consiste nell'investire una somma costante a intervalli regolari (es. ogni mese) in strumenti finanziari diversificati come gli ETF, mediando il prezzo di acquisto e sfruttando la crescita a lungo termine del mercato."
+          "text": "Un PAC consiste nel versare periodicamente (es. ogni mese) una somma fissa su strumenti diversificati come gli ETF, sfruttando il dollar-cost averaging e riducendo l'impatto della volatilità di mercato."
         }
       },
       {
         "@type": "Question",
-        "name": "Cos'è il movimento FIRE e la regola del 4%?",
+        "name": "Cos'è il metodo FIRE e la regola del 4%?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "FIRE sta per Financial Independence, Retire Early. La regola del 4% stabilisce che accumulando un capitale pari a 25 volte le proprie spese annuali, è possibile ritirare il 4% all'anno senza intaccare la durata del capitale nel lungo termine."
+          "text": "Il movimento FIRE (Financial Independence, Retire Early) prevede di accumulare un capitale pari a 25 volte le proprie spese annuali, consentendo di prelevare il 4% all'anno per vivere di rendita passiva."
         }
       }
     ]
@@ -65,22 +65,28 @@
   </script>
 
   <!-- Favicon SVG Inline -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a2540'/><path d='M7 21l6-6 4 4 8-8' stroke='%23635bff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- Navbar: Stile Stripe minimal -->
   <nav class="navbar">
     <div class="container nav-content">
       <a href="#" class="brand-logo">
-        <div class="brand-icon">📈</div>
-        <div class="brand-text">
-          <h1>FinCalcolatore Pro</h1>
+        <div class="brand-icon-wrapper">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
         </div>
-        <span class="brand-badge">100% Free & Open</span>
+        <span class="brand-title">FinCalcolatore</span>
+        <span class="brand-live-badge">
+          <span class="live-dot"></span>
+          Live
+        </span>
       </a>
-      <div class="nav-actions">
+      <div class="nav-links">
         <a href="#calcolatore" class="nav-link">Calcolatore</a>
         <a href="#piattaforme" class="nav-link">Piattaforme Consigliate</a>
         <a href="#guida-faq" class="nav-link">Guida & FAQ</a>
@@ -91,21 +97,32 @@
   <!-- Hero Section -->
   <header class="hero">
     <div class="container">
-      <div class="hero-tag">
-        <span>⚡ Calcolo Esponenziale del Patrimonio</span>
+      <div class="hero-pill">
+        <span class="hero-pill-tag">Simulatore Indipendente</span>
+        <span>Modello Matematico di Accumulo Patrimoniale</span>
       </div>
-      <h2 class="hero-title">Pianifica la tua Libertà Finanziaria</h2>
+      <h1 class="hero-title">Pianifica la tua Libertà Finanziaria</h1>
       <p class="hero-subtitle">
-        Simula con precisione matematica l'impatto dell'interesse composto, dei piani PAC su ETF e dell'inflazione sul tuo capitale futuro.
+        Simula con precisione analitica l'effetto dell'interesse composto, dei versamenti PAC su ETF e dell'inflazione sul tuo capitale nel lungo periodo.
       </p>
 
-      <!-- Tabs Nav -->
-      <div class="tabs-nav">
-        <button class="tab-btn active" data-tab="pac">
-          <span>📊</span> Calcolatore PAC & Interesse Composto
+      <!-- Segmented Tabs Control -->
+      <div class="segmented-control">
+        <button class="segmented-btn active" data-tab="pac">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Piano PAC & Interesse Composto
         </button>
-        <button class="tab-btn" data-tab="fire">
-          <span>🔥</span> Simulatore FIRE (Pensione Anticipata)
+        <button class="segmented-btn" data-tab="fire">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          Simulatore FIRE (Ritiro Indipendente)
         </button>
       </div>
     </div>
@@ -115,149 +132,171 @@
 
     <!-- SEZIONE 1: CALCOLATORE PAC & INTERESSE COMPOSTO -->
     <div id="sectionPac" class="calc-section">
-      <div class="calc-grid">
+      <div class="dashboard-grid">
         
-        <!-- Colonna Sinistra: Input e Parametri -->
+        <!-- Colonna Sinistra: Controlli -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title"><span>⚙️</span> Parametri del Piano</h3>
-            <p class="card-subtitle">Regola i valori per aggiornare istantaneamente la simulazione</p>
+            <div class="card-title-row">
+              <h2 class="card-title">Parametri del Piano</h2>
+              <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">Reattivo</span>
+            </div>
+            <p class="card-desc">Modifica i valori per calcolare la crescita in tempo reale</p>
           </div>
 
           <!-- Capitale Iniziale -->
-          <div class="input-group">
-            <div class="input-label-row">
+          <div class="form-group">
+            <div class="label-row">
               <label for="initialCapital" class="input-label">Capitale Iniziale</label>
-              <span class="input-value-badge">€</span>
+              <span class="input-val-tag">€</span>
             </div>
-            <div class="input-wrapper">
+            <div class="input-field-wrapper">
               <span class="input-prefix">€</span>
-              <input type="number" id="initialCapital" class="text-input has-prefix" value="5000" min="0" step="500">
+              <input type="number" id="initialCapital" class="text-input has-prefix tabular-nums" value="5000" min="0" step="500">
             </div>
             <input type="range" id="initialCapitalRange" class="range-slider" min="0" max="100000" step="500" value="5000">
           </div>
 
-          <!-- Versamento Mensile -->
-          <div class="input-group">
-            <div class="input-label-row">
+          <!-- Versamento Mensile PAC -->
+          <div class="form-group">
+            <div class="label-row">
               <label for="monthlyContribution" class="input-label">Versamento Mensile (PAC)</label>
-              <span class="input-value-badge">€/mese</span>
+              <span class="input-val-tag">€ / mese</span>
             </div>
-            <div class="input-wrapper">
+            <div class="input-field-wrapper">
               <span class="input-prefix">€</span>
-              <input type="number" id="monthlyContribution" class="text-input has-prefix" value="300" min="0" step="50">
+              <input type="number" id="monthlyContribution" class="text-input has-prefix tabular-nums" value="300" min="0" step="50">
             </div>
             <input type="range" id="monthlyRange" class="range-slider" min="0" max="5000" step="50" value="300">
           </div>
 
           <!-- Rendimento Annuo Stimato -->
-          <div class="input-group">
-            <div class="input-label-row">
-              <label for="annualReturn" class="input-label">Rendimento Annuo Stimato</label>
-              <span class="input-value-badge">%</span>
+          <div class="form-group">
+            <div class="label-row">
+              <label for="annualReturn" class="input-label">Rendimento Annuo Medio Stimato</label>
+              <span class="input-val-tag">%</span>
             </div>
-            <div class="input-wrapper">
-              <input type="number" id="annualReturn" class="text-input has-suffix" value="7.0" min="0.1" max="25" step="0.1">
+            <div class="input-field-wrapper">
+              <input type="number" id="annualReturn" class="text-input has-suffix tabular-nums" value="7.0" min="0.1" max="25" step="0.1">
               <span class="input-suffix">%</span>
             </div>
             <input type="range" id="returnRange" class="range-slider" min="1" max="15" step="0.1" value="7.0">
           </div>
 
           <!-- Orizzonte Temporale (Anni) -->
-          <div class="input-group">
-            <div class="input-label-row">
+          <div class="form-group">
+            <div class="label-row">
               <label for="years" class="input-label">Orizzonte Temporale</label>
-              <span class="input-value-badge">Anni</span>
+              <span class="input-val-tag">Anni</span>
             </div>
-            <div class="input-wrapper">
-              <input type="number" id="years" class="text-input has-suffix" value="25" min="1" max="50" step="1">
+            <div class="input-field-wrapper">
+              <input type="number" id="years" class="text-input has-suffix tabular-nums" value="25" min="1" max="50" step="1">
               <span class="input-suffix">Anni</span>
             </div>
             <input type="range" id="yearsRange" class="range-slider" min="1" max="45" step="1" value="25">
           </div>
 
           <!-- Tasso Inflazione -->
-          <div class="input-group">
-            <div class="input-label-row">
-              <label for="inflationRate" class="input-label">Inflazione Annua Stimata</label>
-              <span class="input-value-badge">%</span>
+          <div class="form-group">
+            <div class="label-row">
+              <label for="inflationRate" class="input-label">Tasso Inflazione Medio Stimato</label>
+              <span class="input-val-tag">%</span>
             </div>
-            <div class="input-wrapper">
-              <input type="number" id="inflationRate" class="text-input has-suffix" value="2.0" min="0" max="10" step="0.1">
+            <div class="input-field-wrapper">
+              <input type="number" id="inflationRate" class="text-input has-suffix tabular-nums" value="2.0" min="0" max="10" step="0.1">
               <span class="input-suffix">%</span>
             </div>
           </div>
 
-          <!-- Scenari Rapidi (Presets) -->
-          <div class="presets-row">
+          <!-- Preset Rapidi -->
+          <div class="presets-group">
             <button class="preset-chip" data-init="1000" data-monthly="150" data-rate="7.0" data-years="20">
-              🌱 Primo PAC (150€/m)
+              PAC Iniziale (150€/m)
             </button>
             <button class="preset-chip" data-init="10000" data-monthly="500" data-rate="8.0" data-years="25">
-              🚀 ETF All-World (500€/m)
+              ETF All-World (500€/m)
             </button>
             <button class="preset-chip" data-init="25000" data-monthly="1000" data-rate="7.5" data-years="15">
-              💎 Accelerazione FIRE
+              Accelerazione FIRE
             </button>
           </div>
         </div>
 
-        <!-- Colonna Destra: Risultati e Grafico -->
+        <!-- Colonna Destra: Risultati KPI e Grafico con Tooltip -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title"><span>📊</span> Proiezione del Capitale</h3>
-            <p class="card-subtitle">Crescita stimata al lordo delle imposte</p>
+            <div class="card-title-row">
+              <h2 class="card-title">Proiezione del Capitale</h2>
+              <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);">Valori nominali lordi</span>
+            </div>
+            <p class="card-desc">Crescita stimata con capitalizzazione composta mensile</p>
           </div>
 
-          <!-- Risultati KPI Grid -->
-          <div class="results-kpi-grid">
-            <div class="kpi-card highlight">
-              <div class="kpi-title">Capitale Finale</div>
-              <div class="kpi-value emerald" id="kpiFinalTotal">€ 0</div>
-              <div class="kpi-note">Valore nominale finale</div>
+          <!-- KPI Grid -->
+          <div class="kpi-cards-grid">
+            <div class="kpi-stat-card featured">
+              <div class="kpi-stat-label">Capitale Finale Stimato</div>
+              <div class="kpi-stat-val emerald tabular-nums" id="kpiFinalTotal">€ 0</div>
+              <div class="kpi-stat-sub">Valore nominale al termine</div>
             </div>
-            <div class="kpi-card">
-              <div class="kpi-title">Capitale Versato</div>
-              <div class="kpi-value blue" id="kpiTotalContributed">€ 0</div>
-              <div class="kpi-note">Totale dei tuoi versamenti</div>
+            <div class="kpi-stat-card">
+              <div class="kpi-stat-label">Capitale Versato</div>
+              <div class="kpi-stat-val tabular-nums" id="kpiTotalContributed">€ 0</div>
+              <div class="kpi-stat-sub">I tuoi versamenti totali</div>
             </div>
-            <div class="kpi-card">
-              <div class="kpi-title">Interessi Maturati</div>
-              <div class="kpi-value purple" id="kpiInterestEarned">€ 0</div>
-              <div class="kpi-note">Guadagno da interesse composto</div>
-            </div>
-          </div>
-
-          <!-- Breakdown Visual Bar -->
-          <div style="margin-bottom: 20px;">
-            <div class="breakdown-bar">
-              <div id="barPrincipal" class="breakdown-segment" style="width: 50%; background: #3b82f6;"></div>
-              <div id="barInterest" class="breakdown-segment" style="width: 50%; background: #10b981;"></div>
-            </div>
-            <div class="breakdown-legend">
-              <div class="legend-item">
-                <span class="legend-dot" style="background: #3b82f6;"></span>
-                <span>Capitale Proprio: <strong id="pctPrincipal">0%</strong></span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot" style="background: #10b981;"></span>
-                <span>Interessi Composti: <strong id="pctInterest">0%</strong></span>
-              </div>
+            <div class="kpi-stat-card">
+              <div class="kpi-stat-label">Interessi Composti</div>
+              <div class="kpi-stat-val indigo tabular-nums" id="kpiInterestEarned">€ 0</div>
+              <div class="kpi-stat-sub">Guadagno puro generato</div>
             </div>
           </div>
 
-          <!-- Grafico Canvas Interattivo -->
-          <div class="chart-container">
+          <!-- Breakdown Progress Bar -->
+          <div class="progress-breakdown">
+            <div class="progress-track">
+              <div id="barPrincipal" class="progress-fill" style="width: 50%; background: #635bff;"></div>
+              <div id="barInterest" class="progress-fill" style="width: 50%; background: #059669;"></div>
+            </div>
+            <div class="progress-legend">
+              <span class="legend-marker">
+                <span class="dot-indicator" style="background: #635bff;"></span>
+                <span>Capitale Versato: <strong id="pctPrincipal" class="tabular-nums">0%</strong></span>
+              </span>
+              <span class="legend-marker">
+                <span class="dot-indicator" style="background: #059669;"></span>
+                <span>Interessi Composti: <strong id="pctInterest" class="tabular-nums">0%</strong></span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Canvas Chart Area con Floating Tooltip -->
+          <div class="chart-card-area">
             <canvas id="wealthChart"></canvas>
+            <div id="chartTooltip" class="chart-tooltip"></div>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">
-              Potere d'acquisto reale stimato (post-inflazione): <strong id="kpiRealValue" style="color: var(--text-primary);">€ 0</strong>
+          <!-- Footer Actions & Inflazione -->
+          <div class="dashboard-actions-row">
+            <span class="real-purchasing-note">
+              Potere d'acquisto reale stimato (post-inflazione): <strong id="kpiRealValue" class="tabular-nums" style="color: var(--text-heading);">€ 0</strong>
             </span>
-            <div class="toolbar-actions" style="margin-top: 0;">
-              <button id="btnExportCsv" class="btn-secondary">📥 Esporta CSV</button>
-              <button id="btnPrintPdf" class="btn-secondary">🖨️ Stampa</button>
+            <div class="btn-group">
+              <button id="btnExportCsv" class="btn-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Esporta CSV
+              </button>
+              <button id="btnPrintPdf" class="btn-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Stampa
+              </button>
             </div>
           </div>
 
@@ -268,142 +307,173 @@
 
     <!-- SEZIONE 2: SIMULATORE FIRE -->
     <div id="sectionFire" class="calc-section" style="display: none;">
-      <div class="calc-grid">
+      <div class="dashboard-grid">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title"><span>🔥</span> Parametri Indipendenza Finanziaria</h3>
-            <p class="card-subtitle">Calcola quando potrai vivere di rendita passiva</p>
+            <h2 class="card-title">Parametri Indipendenza Finanziaria (FIRE)</h2>
+            <p class="card-desc">Calcola quando il tuo capitale genererà una rendita passiva sufficiente per coprire le spese</p>
           </div>
 
-          <div class="input-group">
-            <div class="input-label-row">
-              <label for="fireExpenses" class="input-label">Spese Mensili Desiderate</label>
-              <span class="input-value-badge">€/mese</span>
+          <div class="form-group">
+            <div class="label-row">
+              <label for="fireExpenses" class="input-label">Spese Mensili Previste nel Ritiro</label>
+              <span class="input-val-tag">€ / mese</span>
             </div>
-            <div class="input-wrapper">
+            <div class="input-field-wrapper">
               <span class="input-prefix">€</span>
-              <input type="number" id="fireExpenses" class="text-input has-prefix" value="1500" min="500" step="100">
+              <input type="number" id="fireExpenses" class="text-input has-prefix tabular-nums" value="1500" min="500" step="100">
             </div>
           </div>
 
-          <div class="input-group">
-            <div class="input-label-row">
-              <label for="fireSwr" class="input-label">Tasso di Prelievo Sicuro (SWR - Regola del 4%)</label>
-              <span class="input-value-badge">%</span>
+          <div class="form-group">
+            <div class="label-row">
+              <label for="fireSwr" class="input-label">Tasso di Prelievo Sostenibile (Regola del 4% - SWR)</label>
+              <span class="input-val-tag">%</span>
             </div>
-            <div class="input-wrapper">
-              <input type="number" id="fireSwr" class="text-input has-suffix" value="4.0" min="2.5" max="6.0" step="0.1">
+            <div class="input-field-wrapper">
+              <input type="number" id="fireSwr" class="text-input has-suffix tabular-nums" value="4.0" min="2.5" max="6.0" step="0.1">
               <span class="input-suffix">%</span>
             </div>
             <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
-              Lo standard della "Trinity Study" raccomanda un tasso tra 3.5% e 4.0% per una durata del capitale di 30+ anni.
+              Secondo il Trinity Study, un tasso tra il 3.5% e il 4.0% garantisce una sostenibilità del capitale superiore a 30 anni.
             </p>
           </div>
         </div>
 
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title"><span>🎯</span> Il tuo Target FIRE</h3>
-            <p class="card-subtitle">Obiettivi di patrimonio calcolati sulla base delle tue spese</p>
+            <h2 class="card-title">Il tuo Obiettivo di Capitale</h2>
+            <p class="card-desc">Patrimonio target per raggiungere la libertà finanziaria</p>
           </div>
 
-          <div class="results-kpi-grid">
-            <div class="kpi-card highlight">
-              <div class="kpi-title">FIRE Number</div>
-              <div class="kpi-value emerald" id="fireNumberKpi">€ 450.000</div>
-              <div class="kpi-note">Capitale totale necessario</div>
+          <div class="kpi-cards-grid">
+            <div class="kpi-stat-card featured">
+              <div class="kpi-stat-label">FIRE Number Necessario</div>
+              <div class="kpi-stat-val emerald tabular-nums" id="fireNumberKpi">€ 450.000</div>
+              <div class="kpi-stat-sub">25x le tue spese annuali</div>
             </div>
-            <div class="kpi-card">
-              <div class="kpi-title">Tempo Stimato</div>
-              <div class="kpi-value blue" id="fireYearsKpi">-- Anni</div>
-              <div class="kpi-note">Con il risparmio e rendimento attuale</div>
+            <div class="kpi-stat-card">
+              <div class="kpi-stat-label">Tempo Stimato al Target</div>
+              <div class="kpi-stat-val tabular-nums" id="fireYearsKpi">-- Anni</div>
+              <div class="kpi-stat-sub">Ai ritmi di risparmio attuali</div>
             </div>
-            <div class="kpi-card">
-              <div class="kpi-title">Rendita Passiva Mensile</div>
-              <div class="kpi-value purple" id="fireMonthlyPassiveKpi">€ 1.500/m</div>
-              <div class="kpi-note">Prelievo sostenibile a vita</div>
+            <div class="kpi-stat-card">
+              <div class="kpi-stat-label">Rendita Mensile Passiva</div>
+              <div class="kpi-stat-val indigo tabular-nums" id="fireMonthlyPassiveKpi">€ 1.500 / m</div>
+              <div class="kpi-stat-sub">Prelievo mensile continuo</div>
             </div>
           </div>
 
-          <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
-            💡 <strong>Come raggiungere l'obiettivo prima:</strong> Aumentare il versamento mensile o ridurre le spese correnti ha un doppio effetto positivo: riduce il capitale necessario per il ritiro e accelera la velocità di accumulo.
+          <div style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-light); font-size: 0.86rem; color: var(--text-body); line-height: 1.5;">
+            <strong>Nota di ottimizzazione:</strong> Incrementare il risparmio mensile o ridurre le spese previste produce un duplice effetto: abbassa la cifra necessaria per il ritiro e accorcia significativamente gli anni di accumulo.
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SEZIONE MONETIZZAZIONE: PIATTAFORME CONSIGLIATE (AFFILIAZIONI AD ALTO RENDIMENTO) -->
-    <section class="monetization-section" id="piattaforme">
-      <div class="section-header">
-        <span class="section-badge">Migliori Strumenti & Piattaforme</span>
-        <h3 class="section-title">Dove Investire per Replicare questi Risultati</h3>
-        <p class="section-desc">
-          Per sfruttare l'interesse composto serve una piattaforma con zero commissioni fisse sui piani di accumulo e massima sicurezza normativa.
+    <!-- SEZIONE MONETIZZAZIONE: PIATTAFORME DI GESTIONE & RISPARMIO (STRIPE CONNECT STYLE) -->
+    <section class="partners-section" id="piattaforme">
+      <div class="section-title-wrap">
+        <div class="section-overline">Strumenti Selezionati</div>
+        <h2 class="section-main-heading">Piattaforme di Gestione & Risparmio Consigliate</h2>
+        <p class="section-subtext">
+          Servizi affidabili a canone zero per ottimizzare la liquidità e automatizzare il risparmio quotidiano.
         </p>
       </div>
 
-      <!-- Griglia dinamica popolata da config.js -->
-      <div class="affiliates-grid" id="affiliatesGrid">
-        <!-- Fallback statico per indicizzazione SEO immediata se JS non attivo -->
-        <div class="affiliate-card">
-          <span class="card-badge-top">Più Consigliato</span>
-          <div class="affiliate-header">
-            <div class="affiliate-name">Trade Republic</div>
-            <div class="affiliate-rating">4.9 ★★★★★ &bull; Miglior Broker PAC ETF</div>
+      <!-- Griglia Partner dinamica e statica -->
+      <div class="partners-grid" id="affiliatesGrid">
+        
+        <!-- Satispay -->
+        <div class="partner-card">
+          <div class="partner-card-header">
+            <span class="partner-badge-pill">Salvadanaio Smart</span>
+            <div class="partner-name">Satispay</div>
+            <div class="partner-rating">4.9 su 5 &bull; Risparmio & Pagamenti</div>
+            <p class="partner-tagline">L'applicazione leader in Italia per pagamenti smart, salvadanai digitali con accantonamento automatico e cashback.</p>
           </div>
-          <p class="affiliate-tagline">Interesse remunerato sulla liquidità non investita + Piani di Accumulo su oltre 2.000 ETF a zero costi di acquisto.</p>
-          <div class="bonus-box">
-            <span class="bonus-icon">🎁</span>
-            <span class="bonus-text">Bonus di benvenuto: fino a 20€ in azioni frazionate</span>
+          <div class="promo-code-container">
+            <div>
+              <div class="promo-code-label">Codice Invito</div>
+              <div class="promo-code-val" id="codeSatispayVal">INSERISCI_CODICE_SATISPAY</div>
+            </div>
+            <button class="btn-copy-code" data-copy-target="codeSatispayVal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copia
+            </button>
           </div>
-          <a href="https://traderepublic.com" target="_blank" rel="noopener sponsored" class="btn-affiliate-cta">
+          <a href="https://www.satispay.com/" target="_blank" rel="noopener sponsored" class="btn-partner-action">
+            Scarica Satispay con Bonus &rarr;
+          </a>
+        </div>
+
+        <!-- HYPE -->
+        <div class="partner-card">
+          <div class="partner-card-header">
+            <span class="partner-badge-pill">Canone 0€ Sella</span>
+            <div class="partner-name">HYPE (Banca Sella)</div>
+            <div class="partner-rating">4.8 su 5 &bull; Conto & Carta con IBAN</div>
+            <p class="partner-tagline">Conto italiano a zero canone, carta prepagata contactless e funzioni di salvadanaio per micro-obiettivi di spesa.</p>
+          </div>
+          <div class="promo-code-container">
+            <div>
+              <div class="promo-code-label">Codice Invito</div>
+              <div class="promo-code-val" id="codeHypeVal">INSERISCI_CODICE_HYPE</div>
+            </div>
+            <button class="btn-copy-code" data-copy-target="codeHypeVal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copia
+            </button>
+          </div>
+          <a href="https://www.hype.it/" target="_blank" rel="noopener sponsored" class="btn-partner-action">
+            Registrati su HYPE a 0€ &rarr;
+          </a>
+        </div>
+
+        <!-- Trade Republic -->
+        <div class="partner-card">
+          <div class="partner-card-header">
+            <span class="partner-badge-pill">PAC ETF a 0€</span>
+            <div class="partner-name">Trade Republic</div>
+            <div class="partner-rating">4.9 su 5 &bull; Broker & Conto Liquidità</div>
+            <p class="partner-tagline">Interesse remunerato sulla liquidità non investita e piani di accumulo automatici su oltre 2.000 ETF senza commissioni d'ordine.</p>
+          </div>
+          <div style="margin-bottom: 24px;"></div>
+          <a href="https://traderepublic.com/" target="_blank" rel="noopener sponsored" class="btn-partner-action">
             Inizia con Trade Republic &rarr;
           </a>
         </div>
 
-        <div class="affiliate-card">
-          <span class="card-badge-top">Zero Commissioni</span>
-          <div class="affiliate-header">
-            <div class="affiliate-name">Scalable Capital</div>
-            <div class="affiliate-rating">4.8 ★★★★★ &bull; Ideale per ETF e Azioni</div>
+        <!-- Scalable Capital -->
+        <div class="partner-card">
+          <div class="partner-card-header">
+            <span class="partner-badge-pill">Zero Commissioni Fisse</span>
+            <div class="partner-name">Scalable Capital</div>
+            <div class="partner-rating">4.8 su 5 &bull; Piattaforma Europea ETF</div>
+            <p class="partner-tagline">Broker specializzato per investimenti passivi a lungo termine con piani di accumulo gratuiti e remunerazione sul saldo.</p>
           </div>
-          <p class="affiliate-tagline">Broker leader in Europa per investitori a lungo termine. Ampia scelta di ETF gratuiti e interessi su conto.</p>
-          <div class="bonus-box">
-            <span class="bonus-icon">🎁</span>
-            <span class="bonus-text">Piani di accumulo gratuiti e tassi vantaggiosi</span>
-          </div>
-          <a href="https://scalable.capital" target="_blank" rel="noopener sponsored" class="btn-affiliate-cta">
+          <div style="margin-bottom: 24px;"></div>
+          <a href="https://scalable.capital/" target="_blank" rel="noopener sponsored" class="btn-partner-action">
             Scopri Scalable Capital &rarr;
           </a>
         </div>
 
-        <div class="affiliate-card">
-          <span class="card-badge-top">Rendimento Garantito</span>
-          <div class="affiliate-header">
-            <div class="affiliate-name">Conto BBVA</div>
-            <div class="affiliate-rating">4.8 ★★★★★ &bull; Conto Deposito Flessibile</div>
-          </div>
-          <p class="affiliate-tagline">Remunerazione garantita sul saldo senza vincoli, canone a 0€ per sempre e bonifici istantanei gratuiti.</p>
-          <div class="bonus-box">
-            <span class="bonus-icon">🎁</span>
-            <span class="bonus-text">Zero vincoli sul capitale e cashback mensile</span>
-          </div>
-          <a href="https://www.bbva.it" target="_blank" rel="noopener sponsored" class="btn-affiliate-cta">
-            Apri Conto BBVA a 0€ &rarr;
-          </a>
-        </div>
       </div>
     </section>
 
     <!-- TABELLA AMMORTAMENTO DETTAGLIATA -->
     <section class="table-section">
-      <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-          <h3 class="card-title"><span>📅</span> Tabella di Evoluzione Patrimonio Anno per Anno</h3>
-          <p class="card-subtitle">Dettaglio analitico tra capitale versato, interessi composti e inflazione</p>
-        </div>
+      <div class="card-header" style="border: none; padding-bottom: 0;">
+        <h2 class="card-title">Evoluzione del Patrimonio Anno per Anno</h2>
+        <p class="card-desc">Dettaglio analitico tra capitale versato, interessi composti cumulativi e valore reale rettificato</p>
       </div>
-      <div class="table-responsive">
+      <div class="table-wrapper">
         <table class="amort-table">
           <thead>
             <tr>
@@ -411,7 +481,7 @@
               <th>Capitale Versato</th>
               <th>Interessi Maturati</th>
               <th>Totale Nominale</th>
-              <th>Potere d'Acquisto Reale</th>
+              <th>Valore Reale (Inflazionato)</th>
             </tr>
           </thead>
           <tbody id="amortTableBody">
@@ -421,53 +491,62 @@
       </div>
     </section>
 
-    <!-- SEZIONE SEO & GUIDA COMPLETA ALL'INTERESSE COMPOSTO -->
-    <section class="seo-faq-section" id="guida-faq">
-      <div class="section-header">
-        <span class="section-badge">Guida Finanziaria</span>
-        <h3 class="section-title">Domande Frequenti & Strategie di Investimento</h3>
-        <p class="section-desc">Tutto quello che devi sapere per massimizzare la crescita del tuo capitale.</p>
+    <!-- SEZIONE FAQ ACCORDION (STRIPE DOCS STYLE) -->
+    <section class="faq-section" id="guida-faq">
+      <div class="section-title-wrap">
+        <div class="section-overline">Approfondimento</div>
+        <h2 class="section-main-heading">Domande Frequenti & Strategie</h2>
+        <p class="section-subtext">Concetti chiave di finanza personale spiegati in modo semplice e rigoroso.</p>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Cos'è l'interesse composto e perché è chiamato "l'ottava meraviglia del mondo"?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          L'interesse composto è il fenomeno finanziario per cui gli interessi generati da un investimento non vengono ritirati ma reinvestiti, generando a loro volta ulteriori guadagni nei periodi successivi. All'inizio la crescita sembra lenta, ma dopo 10-15 anni la curva diventa esponenziale, facendo sì che i guadagni annui superino di gran lunga il capitale versato di tasca propria.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Perché conviene fare un PAC (Piano di Accumulo) in ETF?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          Un PAC permette di investire con metodo e disciplina, eliminando lo stress del "market timing" (cercare di indovinare quando il mercato è ai minimi). Comprando a intervalli fissi si sfrutta il Dollar-Cost Averaging (DCA), acquistando più quote quando i prezzi scendono e meno quote quando salgono, ottenendo un prezzo medio di carico vantaggioso.
+      <div class="faq-accordion-item">
+        <button class="faq-trigger" type="button">
+          <span>Come funziona l'interesse composto nel lungo periodo?</span>
+          <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-collapse-body">
+          L'interesse composto si basa sul principio del reinvestimento dei guadagni: gli interessi generati nel primo anno producono a loro volta nuovi interessi negli anni successivi. Nei primi 5-10 anni la crescita è lineare, ma con il passare del tempo la curva diventa esponenziale, fino a far sì che i guadagni annuali superino ampiamente i versamenti effettuati.
         </div>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Come si applica la tassazione sui rendimenti finanziari in Italia?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          In Italia, la tassazione sulle plusvalenze (capital gain) da azioni, ETF e fondi è standardizzata al 26%. I titoli di stato (BTP, BOT e titoli della White List) godono invece di un'aliquota agevolata al 12.5%. Negli strumenti ad accumulazione, l'imposta si paga solo al momento del disinvestimento, permettendo all'intero importo lordo di continuare a comporre interessi nel tempo.
+      <div class="faq-accordion-item">
+        <button class="faq-trigger" type="button">
+          <span>Qual è il vantaggio di un Piano di Accumulo (PAC) rispetto al versamento unico?</span>
+          <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-collapse-body">
+          Un PAC elimina l'errore psicologico del "market timing" (tentare di prevedere i minimi del mercato). Acquistando a cadenza costante si applica il Dollar-Cost Averaging: si acquistano più quote quando i mercati scendono e meno quote quando salgono, ottenendo un prezzo medio vantaggioso e riducendo il rischio emotivo.
         </div>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Qual è la differenza tra FIRE, Lean FIRE e Coast FIRE?</span>
-          <span>▼</span>
-        </div>
-        <div class="faq-answer">
-          Il movimento FIRE propone vari approcci: <strong>Standard FIRE</strong> prevede di accumulare 25 volte le spese correnti; <strong>Lean FIRE</strong> punta a uno stile di vita minimale con spese ridotte all'osso; <strong>Coast FIRE</strong> indica la condizione in cui si è già accumulato abbastanza capitale nei primi anni da non dover più versare nulla, lasciando che l'interesse composto porti il capitale alla cifra target per l'età pensionabile.
+      <div class="faq-accordion-item">
+        <button class="faq-trigger" type="button">
+          <span>Come funziona la tassazione sulle plusvalenze finanziarie in Italia?</span>
+          <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-collapse-body">
+          In Italia l'aliquota sulle plusvalenze (capital gain) da azioni, ETF e conti deposito è del 26%. I titoli di stato italiani ed esteri in White List godono invece di un'aliquota agevolata al 12.5%. Negli ETF ad accumulazione le imposte si applicano solo al momento del disinvestimento effettivo, lasciando che il capitale lordo continui a generare interessi composti durante gli anni.
         </div>
       </div>
+
+      <div class="faq-accordion-item">
+        <button class="faq-trigger" type="button">
+          <span>Cos'è la regola del 4% (Trinity Study) nel movimento FIRE?</span>
+          <svg class="faq-icon-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-collapse-body">
+          La regola del 4% stabilisce che con un portafoglio bilanciato in azioni e obbligazioni mondiali è storicamente possibile prelevare il 4% del capitale iniziale ogni anno (adeguato all'inflazione) con una probabilità molto alta di non esaurire il patrimonio per oltre 30 anni. Di conseguenza, il capitale obiettivo necessario corrisponde a circa 25 volte le proprie spese annuali.
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -477,17 +556,20 @@
     <div class="container">
       <div class="footer-content">
         <div class="brand-logo">
-          <div class="brand-icon">📈</div>
-          <div class="brand-text">
-            <h2>FinCalcolatore Pro</h2>
+          <div class="brand-icon-wrapper">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
           </div>
+          <span class="brand-title">FinCalcolatore Pro</span>
         </div>
-        <div class="footer-copy">
-          &copy; 2026 FinCalcolatore Pro &bull; Nessun tracciamento invasivo &bull; Hosting 100% Green su GitHub Pages
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          &copy; 2026 FinCalcolatore Pro &bull; Nessun tracciamento invasivo &bull; Hosting su GitHub Pages
         </div>
       </div>
       <div class="footer-disclaimer">
-        <strong>Disclaimer di Trasparenza Finanziaria:</strong> Le simulazioni fornite da questo calcolatore sono puramente matematiche e illustrative e non costituiscono in alcun modo consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata ai sensi del TUF. I rendimenti passati non sono garanzia di rendimenti futuri. Alcuni collegamenti su questa pagina possono essere link di affiliazione per i quali potremmo ricevere una commissione senza alcun costo aggiuntivo per l'utente.
+        <strong>Disclaimer di Trasparenza:</strong> Le simulazioni fornite da questo calcolatore sono puramente matematiche e illustrative e non costituiscono consulenza finanziaria, sollecitazione all'investimento o raccomandazione personalizzata ai sensi del TUF. I rendimenti passati non garantiscono rendimenti futuri. Alcuni collegamenti possono essere link di affiliazione per i quali potremmo ricevere una commissione senza alcun costo aggiuntivo per l'utente.
       </div>
     </div>
   </footer>
