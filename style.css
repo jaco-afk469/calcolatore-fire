@@ -124,6 +124,11 @@
     color: #F8F9FA;
   }
 
+  .brand-logo-img {
+    box-shadow: 0 2px 8px rgba(30, 86, 160, 0.45);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+  }
+
   .brand-icon-wrapper {
     background: #1E56A0 !important;
     color: #ffffff !important;
@@ -193,6 +198,15 @@ body {
   gap: 10px;
   text-decoration: none;
   color: var(--text-heading);
+}
+
+.brand-logo-img {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: block;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(10, 25, 47, 0.15);
 }
 
 .brand-icon-wrapper {
