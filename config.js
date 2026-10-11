@@ -10,64 +10,64 @@ const APP_CONFIG = {
   appUrl: "https://tuo-username.github.io/app-per-monetizzare",
   defaultCurrency: "€",
 
-  // 1. MONETIZZAZIONE AFFILIAZIONI (I broker e le banche che ti pagano a conversione)
-  // Sostituisci gli URL di esempio con i tuoi link referral personali o da reti come FinanceAds/Awin
+  // 1. MONETIZZAZIONE AFFILIAZIONI & REFERRAL "INVITA UN AMICO"
   affiliates: {
     enabled: true,
     showDisclaimers: true,
     partners: [
       {
+        id: "satispay",
+        name: "Satispay",
+        tagline: "L'app leader in Italia per pagamenti smart, salvadanai di risparmio automatico e cashback",
+        bonusText: "Bonus di benvenuto esclusivo per i nuovi iscritti",
+        rating: "4.9 ★★★★★",
+        category: "Miglior App Risparmio & Salvadanaio",
+        ctaText: "Scarica Satispay con Bonus",
+        url: "https://web.satispay.com/promocode/249c9a89-2d95-4be2-97be-635827f1ce91", // Sostituisci con il tuo link invito SATISPAY
+        promoCode: "FRP486", // Inserisci il tuo codice invito SATISPAY
+        badge: "Salvadanaio Smart"
+      },
+      {
+        id: "hype",
+        name: "HYPE (Banca Sella)",
+        tagline: "Conto e carta a canone zero con IBAN italiano, ricariche istantanee e salvadanaio automatico",
+        bonusText: "Bonus Benvenuto: apri il conto gratuito e ricevi il bonus promo",
+        rating: "4.8 ★★★★★",
+        category: "Conto & Carta a Canone 0€",
+        ctaText: "Registrati su HYPE a 0€",
+        url: "https://www.hype.it/invite/09ea7f1fbe14783449b453f0dba2ea6ba383a73fea2a6fdb21b5c2f14b7f2d1ab62fac0d", // Sostituisci con il tuo link invito HYPE
+        promoCode: "INSERISCI_CODICE_HYPE", // Inserisci il tuo codice invito HYPE
+        badge: "Zero Spese"
+      },
+      {
         id: "trade_republic",
         name: "Trade Republic",
-        tagline: "Interesse 3.25% sulla liquidità + Piani di Accumulo a 0€",
+        tagline: "Interesse 3.25% remunerato sulla liquidità + Piani di Accumulo ETF a zero commissioni",
         bonusText: "Bonus di benvenuto: fino a 20€ in azioni frazionate",
         rating: "4.9 ★★★★★",
         category: "Miglior Broker per PAC ETF",
         ctaText: "Inizia con Trade Republic",
-        url: "https://traderepublic.com/referral/IL_TUO_CODICE", // Inserisci il tuo link referral
+        url: "https://traderepublic.com/",
         badge: "Più Consigliato"
       },
       {
         id: "scalable_capital",
         name: "Scalable Capital",
-        tagline: "Broker europeo con oltre 2.500 ETF a zero commissioni fisse",
+        tagline: "Broker europeo per investimenti a lungo termine con oltre 2.500 ETF a zero commissioni fisse",
         bonusText: "Piani di accumulo gratuiti e tassi vantaggiosi",
-        rating: "4.8 ★★★★★",
+        rating: "4.7 ★★★★★",
         category: "Ideale per ETF e Azioni",
         ctaText: "Scopri Scalable Capital",
-        url: "https://scalable.capital/referral/IL_TUO_CODICE", // Inserisci il tuo link referral
+        url: "https://scalable.capital/",
         badge: "Zero Commissioni"
-      },
-      {
-        id: "bbva",
-        name: "Conto BBVA",
-        tagline: "4% di remunerazione sul conto corrente senza vincoli + cashback",
-        bonusText: "Canone 0€ per sempre e bonifici istantanei gratuiti",
-        rating: "4.8 ★★★★★",
-        category: "Miglior Conto Deposito / Liquidità",
-        ctaText: "Apri Conto BBVA a 0€",
-        url: "https://www.bbva.it/promo/IL_TUO_CODICE", // Inserisci il tuo link referral
-        badge: "Rendimento Garantito"
-      },
-      {
-        id: "degiro",
-        name: "DEGIRO",
-        tagline: "Accesso a oltre 50 borse globali con commissioni bassissime",
-        bonusText: "Selezione core di ETF popolari senza costi di transazione",
-        rating: "4.7 ★★★★★",
-        category: "Broker per Investitori Avanzati",
-        ctaText: "Registrati su DEGIRO",
-        url: "https://www.degiro.it/referral/IL_TUO_CODICE",
-        badge: "Ampia Scelta"
       }
     ]
   },
 
   // 2. GOOGLE ADSENSE & PUBBLICITÀ DISPLAY
-  // Quando vieni approvato da Google AdSense o EthicalAds, inserisci qui i tuoi ID
   advertising: {
-    enabled: false, // Imposta a true appena hai un account Google AdSense approvato
-    adSenseClientId: "ca-pub-XXXXXXXXXXXXXXXX", // Inserisci il tuo ID publisher AdSense
+    enabled: false,
+    adSenseClientId: "ca-pub-XXXXXXXXXXXXXXXX",
     slots: {
       topBanner: "1234567890",
       inContent: "2345678901",
@@ -78,8 +78,8 @@ const APP_CONFIG = {
   // 3. DONAZIONI & MICRO-PAGAMENTI (Facoltativo)
   donations: {
     enabled: true,
-    buyMeACoffeeUsername: "tuo_username", // es. 'mario' su buymeacoffee.com/mario
-    stripePaymentLink: "" // opzionale: link diretto Stripe per offerte libere
+    buyMeACoffeeUsername: "",
+    stripePaymentLink: ""
   }
 };
 
