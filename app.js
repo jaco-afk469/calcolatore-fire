@@ -477,25 +477,106 @@
   }
 
   /**
-   * SINCRONIZZAZIONE CODICI PROMO DA CONFIG.JS
+   * RENDERING DINAMICO BROKER IN ORDINE DI CONVENIENZA (PRIORITY) & GESTIONE CODICI PROMO
    */
-  function syncPromoCodesFromConfig() {
+  function renderAffiliatePartners() {
     if (!window.APP_CONFIG || !window.APP_CONFIG.affiliates) return;
-    const partners = window.APP_CONFIG.affiliates.partners || [];
+    const config = window.APP_CONFIG.affiliates;
+    if (!config.enabled) return;
+    const partners = [...(config.partners || [])];
+    if (partners.length === 0) return;
 
-    const satispay = partners.find(p => p.id === 'satispay');
-    if (satispay) {
-      if (satispay.promoCode && dom.codeSatispayVal) dom.codeSatispayVal.textContent = satispay.promoCode;
-      const linkSatispay = document.getElementById('linkSatispay');
-      if (satispay.url && linkSatispay) linkSatispay.href = satispay.url;
-    }
+    // Ordina i broker: i più convenienti (priority più bassa: 1, 2, 3...) vengono messi IN ALTO
+    partners.sort((a, b) => {
+      const pA = typeof a.priority === 'number' ? a.priority : 999;
+      const pB = typeof b.priority === 'number' ? b.priority : 999;
+      return pA - pB;
+    });
 
-    const hype = partners.find(p => p.id === 'hype');
-    if (hype) {
-      if (hype.promoCode && dom.codeHypeVal) dom.codeHypeVal.textContent = hype.promoCode;
-      const linkHype = document.getElementById('linkHype');
-      if (hype.url && linkHype) linkHype.href = hype.url;
-    }
+    const grid = dom.affiliatesGrid || document.getElementById('affiliatesGrid');
+    if (!grid) return;
+
+    grid.innerHTML = partners.map(p => {
+      const isHype = p.id === 'hype';
+      const logoPadding = isHype ? ' style="padding: 3px;"' : '';
+
+      const specsHtml = (p.specs || []).map(s => `
+        <div class="spec-item">
+          <span class="spec-label">${s.label}</span>
+          <span class="spec-value${s.highlight ? ' highlight-green' : ''}">${s.value}</span>
+        </div>
+      `).join('');
+
+      const prosHtml = (p.pros || []).map(item => `
+        <li class="partner-pro-item">
+          <span class="pro-check-icon">✓</span>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      const perkHtml = p.promoCode ? `
+        <div class="promo-code-container">
+          <div class="promo-code-info">
+            <span class="promo-code-label">Codice Invito</span>
+            <span class="promo-code-val" id="code_${p.id}Val">${p.promoCode}</span>
+          </div>
+          <button class="btn-copy-code" data-copy-target="code_${p.id}Val" title="Copia codice">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copia
+          </button>
+        </div>
+      ` : `
+        <div class="promo-feature-container">
+          <span class="promo-feature-tag">${p.perkTag || 'PROMO ATTIVA'}</span>
+          <span class="promo-feature-text">${p.perkText || p.bonusText}</span>
+        </div>
+      `;
+
+      return `
+        <div class="partner-card" data-partner-id="${p.id}">
+          <div class="partner-topline-header">
+            <div class="partner-brand-group">
+              <div class="partner-logo-square">
+                <img src="${p.logo}" alt="Logo ${p.name}" class="partner-logo-img"${logoPadding}>
+              </div>
+              <div class="partner-title-group">
+                <h3 class="partner-name">${p.name}</h3>
+                <span class="partner-category-sub">${p.category}</span>
+              </div>
+            </div>
+            <div class="justetf-rating-box">
+              <span class="rating-score-badge">${p.ratingScore || '4.8'}</span>
+              <div class="rating-text-group">
+                <span class="rating-stars">${p.ratingStars || '★★★★★'}</span>
+                <span class="rating-label">${p.ratingLabel || 'Consigliato'}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="partner-specs-grid">
+            ${specsHtml}
+          </div>
+
+          <ul class="partner-pros-list">
+            ${prosHtml}
+          </ul>
+
+          <div class="partner-perk-container">
+            ${perkHtml}
+          </div>
+
+          <a href="${p.url}" target="_blank" rel="noopener sponsored" class="btn-partner-action">
+            ${p.ctaText || 'Scopri Offerta'}
+          </a>
+        </div>
+      `;
+    }).join('');
+
+    // Riattacca i listener sui pulsanti di copia appena generati
+    setupCopyButtons();
   }
 
   /**
@@ -639,7 +720,7 @@
 
   // Inizializzazione
   document.addEventListener('DOMContentLoaded', () => {
-    syncPromoCodesFromConfig();
+    renderAffiliatePartners();
     bindEvents();
     setupChartTooltip();
     setupCopyButtons();
