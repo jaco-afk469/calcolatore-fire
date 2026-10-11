@@ -363,6 +363,24 @@ body {
   margin-bottom: 56px;
 }
 
+#sectionFire .dashboard-grid {
+  align-items: stretch;
+}
+
+#sectionFire .dashboard-grid > .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#sectionFire .fire-inputs-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  gap: 20px;
+}
+
 @media (max-width: 960px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
