@@ -5,7 +5,7 @@
    ========================================================================== */
 
 :root {
-  /* Palette Colori: Stripe Clean Fintech */
+  /* Palette Colori: Stripe Clean Fintech / JustETF Style */
   --bg-page: #ffffff;
   --bg-surface: #ffffff;
   --bg-subtle: #f8fafc;
@@ -31,6 +31,23 @@
   --accent-amber: #d97706;
   --accent-amber-light: #fffbeb;
 
+  /* Componenti specifici */
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --segmented-bg: #e2e8f0;
+  --segmented-active-bg: #ffffff;
+  --segmented-active-text: #0a2540;
+  --input-bg: #ffffff;
+  --slider-thumb-bg: #ffffff;
+  --btn-partner-bg: #0a2540;
+  --btn-partner-text: #ffffff;
+  --btn-partner-hover-bg: #635bff;
+  --btn-copy-bg: #ffffff;
+  --btn-copy-border: #e2e8f0;
+  --btn-outline-bg: #ffffff;
+  --rating-badge-bg: #0a2540;
+  --rating-badge-text: #ffffff;
+  --spec-box-bg: #f8fafc;
+
   /* Ombre naturali e raffinate */
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
   --shadow-card: 0 4px 6px -1px rgba(10, 37, 64, 0.05), 0 2px 4px -2px rgba(10, 37, 64, 0.03);
@@ -46,6 +63,55 @@
   /* Tipografia: Poppins (il font di riferimento dei top comparatori come JustETF) */
   --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modalità Scura Automatica di Sistema (prefers-color-scheme: dark) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page: #0b0f19;
+    --bg-surface: #111827;
+    --bg-subtle: #1e293b;
+    --bg-hover: #1f293d;
+
+    --border-light: #283548;
+    --border-medium: #3b4d66;
+    --border-focus: #818cf8;
+
+    --text-heading: #f8fafc;
+    --text-body: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+
+    --accent-primary: #818cf8;
+    --accent-primary-hover: #6366f1;
+    --accent-primary-light: rgba(99, 102, 241, 0.16);
+    --accent-emerald: #10b981;
+    --accent-emerald-light: rgba(16, 185, 129, 0.15);
+    --accent-emerald-border: rgba(16, 185, 129, 0.35);
+    --accent-amber: #fbbf24;
+    --accent-amber-light: rgba(245, 158, 11, 0.15);
+
+    --navbar-bg: rgba(11, 15, 25, 0.9);
+    --segmented-bg: #1e293b;
+    --segmented-active-bg: #111827;
+    --segmented-active-text: #f8fafc;
+    --input-bg: #1a2233;
+    --slider-thumb-bg: #f8fafc;
+    --btn-partner-bg: #635bff;
+    --btn-partner-text: #ffffff;
+    --btn-partner-hover-bg: #4f46e5;
+    --btn-copy-bg: #1e293b;
+    --btn-copy-border: #283548;
+    --btn-outline-bg: #1e293b;
+    --rating-badge-bg: #1e293b;
+    --rating-badge-text: #f8fafc;
+    --spec-box-bg: #162032;
+
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 24px -4px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    --shadow-tooltip: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* Reset base */
@@ -83,7 +149,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--navbar-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-light);
@@ -171,7 +237,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-subtle);
   padding: 5px 14px;
@@ -207,7 +273,8 @@ body {
 /* Tabs: Segmented Control in stile Apple/Stripe */
 .segmented-control {
   display: inline-flex;
-  background: #e2e8f0;
+  background: var(--segmented-bg);
+  border: 1px solid var(--border-light);
   padding: 4px;
   border-radius: var(--radius-pill);
   gap: 4px;
@@ -234,9 +301,9 @@ body {
 }
 
 .segmented-btn.active {
-  background: white;
-  color: var(--text-heading);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--segmented-active-bg);
+  color: var(--segmented-active-text);
+  box-shadow: var(--shadow-subtle);
 }
 
 /* Dashboard Grid: Split View */
@@ -337,7 +404,7 @@ body {
 
 .text-input {
   width: 100%;
-  background: white;
+  background: var(--input-bg);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   color: var(--text-heading);
@@ -362,7 +429,7 @@ body {
   height: 5px;
   -webkit-appearance: none;
   appearance: none;
-  background: #e2e8f0;
+  background: var(--border-light);
   border-radius: 4px;
   outline: none;
   margin-top: 10px;
@@ -375,7 +442,7 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: white;
+  background: var(--slider-thumb-bg);
   border: 2px solid var(--accent-primary);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   cursor: pointer;
@@ -398,7 +465,7 @@ body {
 }
 
 .preset-chip {
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   color: var(--text-body);
   font-size: 0.8rem;
@@ -430,7 +497,7 @@ body {
 }
 
 .kpi-stat-card {
-  background: var(--bg-page);
+  background: var(--bg-subtle);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 16px;
@@ -477,7 +544,7 @@ body {
   height: 8px;
   border-radius: var(--radius-pill);
   overflow: hidden;
-  background: #e2e8f0;
+  background: var(--border-light);
   margin-bottom: 10px;
 }
 
@@ -511,7 +578,7 @@ body {
   width: 100%;
   height: 270px;
   margin-bottom: 16px;
-  background: white;
+  background: var(--bg-surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   padding: 12px;
@@ -527,7 +594,7 @@ body {
 .chart-tooltip {
   position: absolute;
   pointer-events: none;
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-medium);
   box-shadow: var(--shadow-tooltip);
   padding: 8px 12px;
@@ -575,7 +642,7 @@ body {
 }
 
 .btn-outline {
-  background: white;
+  background: var(--btn-outline-bg);
   color: var(--text-heading);
   border: 1px solid var(--border-light);
   padding: 6px 14px;
@@ -591,7 +658,7 @@ body {
 
 .btn-outline:hover {
   border-color: var(--border-medium);
-  background: var(--bg-page);
+  background: var(--bg-hover);
 }
 
 /* ==========================================================================
@@ -645,20 +712,20 @@ body {
 }
 
 .partner-card {
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(10, 37, 64, 0.04), 0 1px 2px rgba(10, 37, 64, 0.02);
+  box-shadow: var(--shadow-card);
   transition: var(--transition);
   position: relative;
 }
 
 .partner-card:hover {
   border-color: var(--border-medium);
-  box-shadow: 0 10px 24px -4px rgba(10, 37, 64, 0.08), 0 4px 6px -2px rgba(10, 37, 64, 0.03);
+  box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
 }
 
@@ -722,8 +789,8 @@ body {
 .rating-score-badge {
   font-size: 0.95rem;
   font-weight: 800;
-  color: white;
-  background: var(--text-heading);
+  color: var(--rating-badge-text);
+  background: var(--rating-badge-bg);
   padding: 2px 7px;
   border-radius: 4px;
   line-height: 1.2;
@@ -752,7 +819,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  background: #f8fafc;
+  background: var(--spec-box-bg);
   border: 1px solid var(--border-light);
   border-radius: 8px;
   padding: 10px 12px;
@@ -851,8 +918,8 @@ body {
 }
 
 .btn-copy-code {
-  background: white;
-  border: 1px solid var(--border-light);
+  background: var(--btn-copy-bg);
+  border: 1px solid var(--btn-copy-border);
   color: var(--text-heading);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
@@ -867,7 +934,7 @@ body {
 
 .btn-copy-code:hover {
   border-color: var(--border-medium);
-  background: var(--bg-page);
+  background: var(--bg-hover);
 }
 
 .btn-copy-code.copied {
@@ -884,8 +951,8 @@ body {
   width: 100%;
   text-align: center;
   text-decoration: none;
-  background: var(--text-heading);
-  color: white;
+  background: var(--btn-partner-bg);
+  color: var(--btn-partner-text);
   font-weight: 600;
   font-size: 0.9rem;
   padding: 12px 18px;
@@ -894,7 +961,7 @@ body {
 }
 
 .btn-partner-action:hover {
-  background: var(--accent-primary);
+  background: var(--btn-partner-hover-bg);
   box-shadow: 0 4px 12px rgba(99, 91, 255, 0.25);
 }
 
@@ -904,7 +971,7 @@ body {
 }
 
 .table-wrapper {
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   overflow-x: auto;
@@ -928,12 +995,12 @@ body {
 
 .amort-table td {
   padding: 12px 20px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-light);
   color: var(--text-body);
 }
 
 .amort-table tr:hover td {
-  background: var(--bg-page);
+  background: var(--bg-hover);
 }
 
 /* FAQ Accordion: Stile Stripe Docs */
@@ -942,7 +1009,7 @@ body {
 }
 
 .faq-accordion-item {
-  background: white;
+  background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   margin-bottom: 12px;
@@ -993,7 +1060,7 @@ body {
 /* Footer */
 .footer {
   border-top: 1px solid var(--border-light);
-  background: white;
+  background: var(--bg-surface);
   padding: 48px 0 32px 0;
   margin-top: 72px;
 }
