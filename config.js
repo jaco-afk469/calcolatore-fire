@@ -35,8 +35,8 @@ const APP_CONFIG = {
         rating: "4.8 ★★★★★",
         category: "Conto & Carta a Canone 0€",
         ctaText: "Registrati su HYPE a 0€",
-        url: "https://www.hype.it/invite/09ea7f1fbe14783449b453f0dba2ea6ba383a73fea2a6fdb21b5c2f14b7f2d1ab62fac0d", // Sostituisci con il tuo link invito HYPE
-        promoCode: "INSERISCI_CODICE_HYPE", // Inserisci il tuo codice invito HYPE
+        url: "https://www.hype.it/invite/09ea7f1fbe14783449b453f0dba2ea6ba383a73fea2a6fdb21b5c2f14b7f2d1ab62fac0d",
+        promoCode: "",
         badge: "Zero Spese"
       },
       {
