@@ -1262,53 +1262,36 @@ body {
 }
 
 /* ==========================================================================
-   PAGINE LEGALI & INFORMATIVE (GDPR, TUF, AGCM)
+   PAGINE LEGALI & INFORMATIVE (GDPR, TUF, AGCM) — Stile Editoriale Pulito
    ========================================================================== */
 .legal-page-header {
-  padding: 48px 0 32px 0;
-  text-align: center;
-}
-
-.legal-badge {
-  display: inline-block;
-  font-size: 0.76rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-primary);
-  background: var(--accent-primary-light);
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  margin-bottom: 12px;
+  max-width: 760px;
+  margin: 48px auto 28px auto;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
 }
 
 .legal-main-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-heading);
   margin-bottom: 8px;
 }
 
 .legal-meta {
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
 }
 
-.legal-card-wrap {
-  max-width: 860px;
+.legal-doc-wrap {
+  max-width: 760px;
   margin: 0 auto 64px auto;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  box-shadow: var(--shadow-card);
-}
-
-@media (max-width: 640px) {
-  .legal-card-wrap {
-    padding: 24px;
-  }
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 .legal-article {
@@ -1331,9 +1314,9 @@ body {
 
 .legal-article p,
 .legal-article li {
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   color: var(--text-body);
-  line-height: 1.7;
+  line-height: 1.75;
   margin-bottom: 12px;
 }
 
@@ -1342,29 +1325,38 @@ body {
   margin-bottom: 16px;
 }
 
-.legal-highlight-box {
-  background: var(--bg-subtle);
-  border-left: 4px solid var(--accent-primary);
-  padding: 16px 20px;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  margin: 18px 0;
-  font-size: 0.9rem;
-  color: var(--text-body);
-  line-height: 1.6;
+.legal-lead-text {
+  font-size: 0.95rem;
+  color: var(--text-heading);
+  line-height: 1.75;
+  margin-bottom: 16px;
 }
 
-.btn-back-home {
+.nav-back-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.88rem;
-  font-weight: 600;
-  margin-bottom: 24px;
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
   transition: var(--transition);
 }
 
-.btn-back-home:hover {
-  color: var(--accent-primary);
+.nav-back-link:hover {
+  color: var(--text-heading);
+  border-color: var(--border-medium);
+  background: var(--bg-subtle);
+}
+
+.nav-back-link svg {
+  transition: transform 0.2s ease;
+}
+
+.nav-back-link:hover svg {
+  transform: translateX(-3px);
 }
