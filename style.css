@@ -771,7 +771,7 @@ body {
 .section-subtext {
   font-size: 0.98rem;
   color: var(--text-body);
-  max-width: 580px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
