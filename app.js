@@ -493,13 +493,17 @@
     const partners = window.APP_CONFIG.affiliates.partners || [];
 
     const satispay = partners.find(p => p.id === 'satispay');
-    if (satispay && satispay.promoCode && dom.codeSatispayVal) {
-      dom.codeSatispayVal.textContent = satispay.promoCode;
+    if (satispay) {
+      if (satispay.promoCode && dom.codeSatispayVal) dom.codeSatispayVal.textContent = satispay.promoCode;
+      const linkSatispay = document.getElementById('linkSatispay');
+      if (satispay.url && linkSatispay) linkSatispay.href = satispay.url;
     }
 
     const hype = partners.find(p => p.id === 'hype');
-    if (hype && hype.promoCode && dom.codeHypeVal) {
-      dom.codeHypeVal.textContent = hype.promoCode;
+    if (hype) {
+      if (hype.promoCode && dom.codeHypeVal) dom.codeHypeVal.textContent = hype.promoCode;
+      const linkHype = document.getElementById('linkHype');
+      if (hype.url && linkHype) linkHype.href = hype.url;
     }
   }
 
