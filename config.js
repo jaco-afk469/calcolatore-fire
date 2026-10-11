@@ -7,7 +7,7 @@
 const APP_CONFIG = {
   // Impostazioni Generali
   appName: "FinCalcolatore Pro",
-  appUrl: "https://tuo-username.github.io/app-per-monetizzare",
+  appUrl: "https://jaco-afk469.github.io/calcolatore-fire/",
   defaultCurrency: "€",
 
   // 1. MONETIZZAZIONE AFFILIAZIONI & REFERRAL "INVITA UN AMICO"
