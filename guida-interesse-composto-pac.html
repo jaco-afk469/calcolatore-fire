@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guida all'Interesse Composto e PAC ETF: Come Funziona e Formula Matematica — FinCalcolatore</title>
+  <meta name="description" content="Guida pratica e completa all'interesse composto e ai Piani di Accumulo (PAC) su ETF. Scopri la formula matematica, la simulazione a 10-30 anni e il Dollar-Cost Averaging.">
+  <meta name="keywords" content="guida interesse composto, formula interesse composto pac, come funziona piano accumulo etf, dollar cost averaging etf, rendimento pac 20 anni, msci world pac">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jaco-afk469.github.io/calcolatore-fire/guida-interesse-composto-pac.html">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3.0">
+
+  <!-- Schema.org Article Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Guida Completa all'Interesse Composto e ai Piani di Accumulo (PAC) su ETF",
+    "description": "Spiegazione approfondita di come l'interesse composto accelera il patrimonio con un PAC su ETF, la formula matematica e simulazioni reali.",
+    "author": {
+      "@type": "Organization",
+      "name": "FinCalcolatore"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "FinCalcolatore",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jaco-afk469.github.io/calcolatore-fire/assets/logos/fincalcolatore.svg"
+      }
+    },
+    "datePublished": "2026-10-12",
+    "dateModified": "2026-10-12"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+        <span class="brand-title">FinCalcolatore</span>
+      </a>
+      <a href="index.html" class="nav-back-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"></path>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Torna al Calcolatore</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="legal-page-header">
+      <h1 class="legal-main-title">Interesse Composto & PAC in ETF: La Guida Completa</h1>
+      <p class="legal-meta">Tempo di lettura: 6 minuti &bull; A cura del team editoriale di FinCalcolatore</p>
+    </header>
+
+    <div class="legal-doc-wrap">
+
+      <!-- Intro -->
+      <article class="legal-article">
+        <p class="legal-lead-text">
+          Albert Einstein definì l'interesse composto come <em>«l'ottava meraviglia del mondo: chi lo capisce lo guadagna, chi non lo capisce lo paga»</em>. Comprendere questo principio matematico è il pilastro più importante per chiunque desideri costruire ricchezza nel lungo termine attraverso investimenti passivi e piani di accumulo del capitale.
+        </p>
+      </article>
+
+      <!-- Capitolo 1 -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">1. Interesse Semplice vs Interesse Composto: La Differenza</h2>
+        <p>
+          Per comprendere la potenza della capitalizzazione composta, è utile confrontarla con l'interesse semplice:
+        </p>
+        <ul>
+          <li><strong>Interesse Semplice:</strong> I rendimenti vengono calcolati esclusivamente sul capitale iniziale depositato. Se investi 10.000 € con un rendimento del 7% annuo semplice, guadagni 700 € ogni anno. Dopo 30 anni, il guadagno complessivo sarà di 21.000 € (totale patrimonio: 31.000 €).</li>
+          <li><strong>Interesse Composto:</strong> I rendimenti maturati non vengono prelevati, ma vengono automaticamente reinvestiti. Nel secondo anno il 7% non si applica più a 10.000 €, ma a 10.700 €, generando 749 €. Con il passare dei decenni, la crescita passa da lineare a <strong>esponenziale</strong>: dopo 30 anni gli stessi 10.000 € al 7% composto diventano circa <strong>76.122 €</strong>, più del doppio rispetto all'interesse semplice.</li>
+        </ul>
+      </article>
+
+      <!-- Capitolo 2 -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">2. La Formula Matematica del PAC</h2>
+        <p>
+          Nel mondo reale, la maggior parte dei risparmiatori non deposita una somma ingente tutta insieme, ma investe una quota mensile fissa del proprio stipendio (Piano di Accumulo del Capitale - PAC). La formula matematica utilizzata dal nostro algoritmo per calcolare il montante finale con capitalizzazione mensile è la seguente:
+        </p>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px 24px; font-family: monospace; font-size: 0.95rem; color: var(--text-heading); margin: 18px 0; overflow-x: auto;">
+          M = P &times; (1 + r/12)^(12&times;t) + PMT &times; [((1 + r/12)^(12&times;t) - 1) / (r/12)]
+        </div>
+        <p>
+          Dove:
+        </p>
+        <ul>
+          <li><strong>M</strong> = Montante finale accumulato al termine del piano.</li>
+          <li><strong>P</strong> = Capitale iniziale di partenza.</li>
+          <li><strong>PMT</strong> = Versamento mensile ricorrente (PAC).</li>
+          <li><strong>r</strong> = Tasso di rendimento medio annuo stimato (es. 0.07 per il 7%).</li>
+          <li><strong>t</strong> = Orizzonte temporale espresso in anni.</li>
+        </ul>
+      </article>
+
+      <!-- Capitolo 3 -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">3. Esempio Pratico: Quanto puoi accumulare con 300 € al mese?</h2>
+        <p>
+          Ipotizziamo un investimento costante di <strong>300 € al mese</strong> in un ETF azionario globale ben diversificato (storicamente con un rendimento medio nominale del 7-8% annuo, come l'indice MSCI World o S&P 500):
+        </p>
+        <div style="overflow-x: auto; margin: 20px 0;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-medium); color: var(--text-heading);">
+                <th style="padding: 10px 14px;">Orizzonte</th>
+                <th style="padding: 10px 14px;">Capitale Versato</th>
+                <th style="padding: 10px 14px;">Interessi Maturati</th>
+                <th style="padding: 10px 14px;">Patrimonio Totale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-light);">
+                <td style="padding: 10px 14px; font-weight: 600;">10 Anni</td>
+                <td style="padding: 10px 14px;">36.000 €</td>
+                <td style="padding: 10px 14px; color: var(--accent-indigo);">+16.220 €</td>
+                <td style="padding: 10px 14px; font-weight: 700; color: var(--accent-emerald);">52.220 €</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-light);">
+                <td style="padding: 10px 14px; font-weight: 600;">20 Anni</td>
+                <td style="padding: 10px 14px;">72.000 €</td>
+                <td style="padding: 10px 14px; color: var(--accent-indigo);">+84.280 €</td>
+                <td style="padding: 10px 14px; font-weight: 700; color: var(--accent-emerald);">156.280 €</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 14px; font-weight: 600;">30 Anni</td>
+                <td style="padding: 10px 14px;">108.000 €</td>
+                <td style="padding: 10px 14px; color: var(--accent-indigo);">+257.990 €</td>
+                <td style="padding: 10px 14px; font-weight: 700; color: var(--accent-emerald);">365.990 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Osserva con attenzione il passaggio tra il 20° e il 30° anno: a fronte di ulteriori 36.000 € versati, gli interessi crescono di oltre <strong>173.000 €</strong>. È in questa fase che l'effetto valanga diventa inarrestabile.
+        </p>
+      </article>
+
+      <!-- Capitolo 4 -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">4. Dollar-Cost Averaging (DCA): La Protezione dai Crolli di Mercato</h2>
+        <p>
+          Il più grande nemico dell'investitore principiante è l'emotività: la paura di comprare sui massimi storici o il panico durante un crollo di borsa. Il Piano di Accumulo risolve questo problema alla radice grazie alla strategia del <strong>Dollar-Cost Averaging</strong>:
+        </p>
+        <ul>
+          <li>Quando i mercati salgono, la tua rata fissa acquista meno quote a un prezzo più alto.</li>
+          <li>Quando i mercati scendono o attraversano una crisi, la stessa rata acquista <strong>più quote "a sconto"</strong>.</li>
+        </ul>
+        <p>
+          Nel tempo, il prezzo medio di carico si abbassa, consentendo al portafoglio di ripartire con una spinta straordinaria appena il ciclo economico torna positivo.
+        </p>
+      </article>
+
+      <!-- Capitolo 5 -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">5. Perché in Italia gli ETF ad Accumulazione (Acc) sono Superiori</h2>
+        <p>
+          Quando selezioni un ETF su borsa italiana (Borsa Italiana / Euronext), troverai due tipologie:
+        </p>
+        <ul>
+          <li><strong>A Distribuzione (Dist):</strong> Distribuisce periodicamente i dividendi sul conto bancario. In Italia, ogni accredito di dividendo subisce immediatamente la ritenuta fiscale del <strong>26%</strong>, riducendo il capitale che può continuare a crescere.</li>
+          <li><strong>Ad Accumulazione (Acc):</strong> Il fondo reinveste i dividendi direttamente all'interno delle proprie quote senza staccare cedole. Questo consente di <strong>rinviare il pagamento delle tasse</strong> al momento della vendita finale, lasciando che il 100% dei dividendi lordi generi ulteriore interesse composto per decenni.</li>
+        </ul>
+      </article>
+
+      <!-- Capitolo 6: CTA e Strumenti -->
+      <article class="legal-article">
+        <h2 class="legal-article-title">6. Come Iniziare Subito</h2>
+        <p>
+          Oggi non servono capitali elevati per iniziare un PAC: piattaforme moderne e regolamentate in Europa permettono di impostare piani di accumulo automatici a partire da 1 € a commissioni zero.
+        </p>
+        <p>
+          I broker più convenienti e utilizzati dalla community italiana includono:
+        </p>
+        <ul>
+          <li><strong>Trade Republic:</strong> PAC automatici gratuiti su oltre 2.000 ETF, remunerazione mensile sulla liquidità non investita e carta con Saveback 1%.</li>
+          <li><strong>Scalable Capital:</strong> Piattaforma leader in Germania e Italia con oltre 2.500 ETF a zero commissioni e interfaccia avanzata.</li>
+        </ul>
+        <p>
+          Prima di iniziare, definisci con precisione i tuoi obiettivi numerici e la tua tolleranza al rischio.
+        </p>
+      </article>
+
+      <!-- Bottoni Navigazione -->
+      <div class="legal-footer-nav" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <a href="index.html#calcolatore" class="nav-back-link" style="color: var(--accent-emerald); font-weight: 600;">
+          📊 Simula il tuo PAC sul Calcolatore →
+        </a>
+        <a href="guida-metodo-fire-regola-4-percento.html" class="nav-back-link">
+          Leggi la Guida al Metodo FIRE →
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="brand-logo">
+          <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+          <span class="brand-title">FinCalcolatore</span>
+        </div>
+        <div class="footer-links-row">
+          <a href="guida-interesse-composto-pac.html" class="footer-link">Guida PAC</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="guida-metodo-fire-regola-4-percento.html" class="footer-link">Guida FIRE</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="termini-condizioni.html" class="footer-link">Termini di Servizio</a>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          &copy; 2026 FinCalcolatore &bull; Informazione Finanziaria Indipendente
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        Le simulazioni fornite da questo calcolatore sono puramente matematiche e illustrative e non costituiscono consulenza finanziaria ai sensi del TUF.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
