@@ -1,6 +1,7 @@
 /**
- * FINCALCOLATORE PRO — TINES / LINEAR DARK BESPOKE ENGINE (100% CLIENT-SIDE)
- * Motore matematico reattivo, grafici Canvas con effetto laser-glow e micro-interazioni
+ * FINCALCOLATORE PRO — MOTORE FINTECH REATTIVO (100% CLIENT-SIDE)
+ * Design System: Stripe Clean Fintech
+ * Calcoli Matematici Precisi, Grafico Canvas Interattivo con Tooltip e Micro-Interazioni
  */
 
 (function () {
@@ -8,7 +9,7 @@
 
   // Stato dell'applicazione
   const state = {
-    activeTab: 'pac',
+    activeTab: 'pac', // 'pac' | 'fire'
     initialCapital: 5000,
     monthlyContribution: 300,
     annualReturn: 7.0, // %
@@ -19,13 +20,13 @@
     monthlyExpenses: 1500,
     safeWithdrawalRate: 4.0, // %
     
-    // Breakdown memorizzato per il tooltip del grafico
+    // Dati calcolati memorizzati per il tooltip del grafico
     lastBreakdown: []
   };
 
-  // Riferimenti DOM
+  // Elementi DOM
   const dom = {
-    // Input PAC
+    // PAC Inputs & Sliders
     initialCapitalInput: document.getElementById('initialCapital'),
     initialCapitalRange: document.getElementById('initialCapitalRange'),
     monthlyInput: document.getElementById('monthlyContribution'),
@@ -48,14 +49,14 @@
     pctPrincipal: document.getElementById('pctPrincipal'),
     pctInterest: document.getElementById('pctInterest'),
 
-    // Canvas & Floating Tooltip
+    // Canvas & Tooltip
     chartCanvas: document.getElementById('wealthChart'),
     chartTooltip: document.getElementById('chartTooltip'),
     
-    // Tabella Ammortamento
+    // Tabella
     amortTableBody: document.getElementById('amortTableBody'),
     
-    // Controlli Sezioni
+    // Controlli Sezioni & Tabs
     sectionPac: document.getElementById('sectionPac'),
     sectionFire: document.getElementById('sectionFire'),
     segmentedButtons: document.querySelectorAll('.segmented-btn'),
@@ -72,7 +73,8 @@
 
     // Codici Promo
     codeSatispayVal: document.getElementById('codeSatispayVal'),
-    codeHypeVal: document.getElementById('codeHypeVal')
+    codeHypeVal: document.getElementById('codeHypeVal'),
+    affiliatesGrid: document.getElementById('affiliatesGrid')
   };
 
   /**
@@ -88,7 +90,7 @@
   }
 
   /**
-   * MATEMATICA: CALCOLO PAC E INTERESSE COMPOSTO
+   * MATEMATICA: CALCOLO CRESCITA PAC & INTERESSE COMPOSTO
    */
   function calculatePacGrowth(initial, monthly, annualRate, numYears, inflation) {
     const r = annualRate / 100 / 12;
@@ -156,7 +158,7 @@
   }
 
   /**
-   * RENDERING GRAFICO CANVAS TINES DARK CON LASER-GLOW
+   * RENDERING GRAFICO CANVAS INTERATTIVO CON CURVE PULITE
    */
   function renderChart(breakdown, highlightIndex) {
     if (!dom.chartCanvas) return;
@@ -184,12 +186,12 @@
 
     const maxVal = breakdown[breakdown.length - 1].nominalBalance * 1.08;
 
-    // Linee guida orizzontali ed etichette Y
+    // Linee guida orizzontali e etichette asse Y
     const gridLines = 4;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.strokeStyle = '#e2e8f0';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#646471';
-    ctx.font = '500 11px ui-monospace, SFMono-Regular, monospace';
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 11px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.textAlign = 'right';
 
     for (let i = 0; i <= gridLines; i++) {
@@ -206,7 +208,7 @@
       ctx.fillText(labelText, padLeft - 8, y + 4);
     }
 
-    // Coordinate punti
+    // Coordinate dei punti
     const ptsNominal = [];
     const ptsContrib = [];
 
@@ -218,10 +220,10 @@
       ptsContrib.push({ x, y: yCon, data: pt });
     });
 
-    // 1. Area Gradiente Smeraldo (Interesse Composto)
+    // Area Gradiente Smeraldo (Interessi Composti)
     const gradEmerald = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradEmerald.addColorStop(0, 'rgba(16, 185, 129, 0.25)');
-    gradEmerald.addColorStop(1, 'rgba(16, 185, 129, 0.00)');
+    gradEmerald.addColorStop(0, 'rgba(5, 150, 105, 0.18)');
+    gradEmerald.addColorStop(1, 'rgba(5, 150, 105, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -234,10 +236,10 @@
     ctx.fillStyle = gradEmerald;
     ctx.fill();
 
-    // 2. Area Gradiente Viola (Capitale Versato)
-    const gradPurple = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradPurple.addColorStop(0, 'rgba(141, 117, 230, 0.20)');
-    gradPurple.addColorStop(1, 'rgba(141, 117, 230, 0.00)');
+    // Area Gradiente Indaco (Capitale Versato)
+    const gradIndigo = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+    gradIndigo.addColorStop(0, 'rgba(99, 91, 255, 0.15)');
+    gradIndigo.addColorStop(1, 'rgba(99, 91, 255, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -247,12 +249,11 @@
     ctx.lineTo(ptsContrib[ptsContrib.length - 1].x, padTop + plotH);
     ctx.lineTo(ptsContrib[0].x, padTop + plotH);
     ctx.closePath();
-    ctx.fillStyle = gradPurple;
+    ctx.fillStyle = gradIndigo;
     ctx.fill();
 
-    // Linea Capitale Versato (Viola Tines)
-    ctx.save();
-    ctx.strokeStyle = '#8d75e6';
+    // Linea Capitale Versato (Indaco)
+    ctx.strokeStyle = '#635bff';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -260,24 +261,19 @@
       ctx.lineTo(ptsContrib[i].x, ptsContrib[i].y);
     }
     ctx.stroke();
-    ctx.restore();
 
-    // Linea Capitale Totale (Verde Smeraldo con Laser Glow)
-    ctx.save();
-    ctx.strokeStyle = '#10b981';
+    // Linea Capitale Totale (Verde Smeraldo)
+    ctx.strokeStyle = '#059669';
     ctx.lineWidth = 2.5;
-    ctx.shadowColor = 'rgba(16, 185, 129, 0.6)';
-    ctx.shadowBlur = 8;
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
     for (let i = 1; i < ptsNominal.length; i++) {
       ctx.lineTo(ptsNominal[i].x, ptsNominal[i].y);
     }
     ctx.stroke();
-    ctx.restore();
 
     // Etichette Anni Asse X
-    ctx.fillStyle = '#646471';
+    ctx.fillStyle = '#64748b';
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.floor(breakdown.length / 5));
     for (let i = 0; i < breakdown.length; i += step) {
@@ -285,42 +281,35 @@
       ctx.fillText('Anno ' + pt.data.year, pt.x, padTop + plotH + 18);
     }
 
-    // Se un punto è evidenziato dal mouse
+    // Evidenziazione punto selezionato da hover
     if (highlightIndex !== undefined && ptsNominal[highlightIndex]) {
       const pNom = ptsNominal[highlightIndex];
       const pCon = ptsContrib[highlightIndex];
 
-      // Linea guida verticale laser
-      ctx.save();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      // Linea verticale guida
+      ctx.strokeStyle = '#cbd5e1';
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
       ctx.moveTo(pNom.x, padTop);
       ctx.lineTo(pNom.x, padTop + plotH);
       ctx.stroke();
-      ctx.restore();
+      ctx.setLineDash([]);
 
       // Punto Smeraldo
-      ctx.save();
-      ctx.fillStyle = '#10b981';
-      ctx.shadowColor = '#10b981';
-      ctx.shadowBlur = 10;
+      ctx.fillStyle = '#059669';
       ctx.beginPath();
       ctx.arc(pNom.x, pNom.y, 5, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = '#fcf9f5';
+      ctx.fillStyle = 'white';
       ctx.beginPath();
       ctx.arc(pNom.x, pNom.y, 2.5, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
 
-      // Punto Viola
-      ctx.save();
-      ctx.fillStyle = '#8d75e6';
+      // Punto Indaco
+      ctx.fillStyle = '#635bff';
       ctx.beginPath();
       ctx.arc(pCon.x, pCon.y, 4, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
     }
   }
 
@@ -357,16 +346,16 @@
     // Render Canvas
     renderChart(result.breakdown);
 
-    // Popola Tabella Ammortamento
+    // Tabella Ammortamento
     if (dom.amortTableBody) {
       dom.amortTableBody.innerHTML = '';
       result.breakdown.forEach((row) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><strong style="color: var(--text-primary);">Anno ${row.year}</strong></td>
+          <td><strong>Anno ${row.year}</strong></td>
           <td class="tabular-nums">${formatCurrency(row.totalContributed)}</td>
-          <td class="tabular-nums" style="color: var(--emerald-tines); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
-          <td class="tabular-nums"><strong style="color: var(--text-primary);">${formatCurrency(row.nominalBalance)}</strong></td>
+          <td class="tabular-nums" style="color: var(--accent-emerald); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
+          <td class="tabular-nums"><strong>${formatCurrency(row.nominalBalance)}</strong></td>
           <td class="tabular-nums" style="color: var(--text-muted);">${formatCurrency(row.realBalance)}</td>
         `;
         dom.amortTableBody.appendChild(tr);
@@ -388,7 +377,7 @@
   }
 
   /**
-   * TOOLTIP INTERATTIVO SUL GRAFICO (MOUSEMOVE)
+   * GESTIONE TOOLTIP INTERATTIVO SUL GRAFICO
    */
   function setupChartTooltip() {
     if (!dom.chartCanvas || !dom.chartTooltip) return;
@@ -417,7 +406,7 @@
 
       renderChart(state.lastBreakdown, index);
 
-      // Posizionamento del tooltip
+      // Posiziona il tooltip
       const plotX = padLeft + (plotW * (index / (state.lastBreakdown.length - 1)));
       dom.chartTooltip.style.left = `${plotX}px`;
       dom.chartTooltip.style.top = `60px`;
@@ -426,8 +415,8 @@
       dom.chartTooltip.innerHTML = `
         <div class="chart-tooltip-title">Anno ${data.year}</div>
         <div class="chart-tooltip-row">
-          <span>Capitale:</span>
-          <strong style="color: var(--emerald-tines);">${formatCurrency(data.nominalBalance)}</strong>
+          <span>Capitale Totale:</span>
+          <strong style="color: var(--accent-emerald);">${formatCurrency(data.nominalBalance)}</strong>
         </div>
         <div class="chart-tooltip-row">
           <span>Versamenti:</span>
@@ -435,7 +424,7 @@
         </div>
         <div class="chart-tooltip-row">
           <span>Interessi:</span>
-          <span style="color: var(--purple-light);">+${formatCurrency(data.interestEarned)}</span>
+          <span style="color: var(--accent-primary);">+${formatCurrency(data.interestEarned)}</span>
         </div>
       `;
     });
@@ -472,7 +461,7 @@
   }
 
   /**
-   * ACCORDION FAQ
+   * FAQ ACCORDION INTERACTION
    */
   function setupFaqAccordion() {
     document.querySelectorAll('.faq-accordion-item').forEach(item => {
@@ -535,7 +524,7 @@
   }
 
   /**
-   * SINCRONIZZAZIONE INPUT & RANGE SLIDERS
+   * SINCRONIZZAZIONE INPUT E RANGE
    */
   function syncInputs(numberEl, rangeEl, stateKey, parser) {
     if (!numberEl || !rangeEl) return;
@@ -553,7 +542,7 @@
   }
 
   /**
-   * BIND EVENT LISTENERS
+   * BIND EVENTI
    */
   function bindEvents() {
     syncInputs(dom.initialCapitalInput, dom.initialCapitalRange, 'initialCapital', Number);
@@ -640,7 +629,7 @@
     });
   }
 
-  // Avvio al caricamento del DOM
+  // Inizializzazione
   document.addEventListener('DOMContentLoaded', () => {
     syncPromoCodesFromConfig();
     bindEvents();
