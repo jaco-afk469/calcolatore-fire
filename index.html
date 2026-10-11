@@ -69,7 +69,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=2.6">
+  <link rel="stylesheet" href="style.css?v=2.7">
 </head>
 <body>
 
@@ -289,28 +289,27 @@
             <p class="card-desc">Calcola quando il tuo capitale genererà una rendita passiva sufficiente per coprire le spese</p>
           </div>
 
-          <div class="form-group">
-            <div class="label-row">
-              <label for="fireExpenses" class="input-label">Spese Mensili Previste nel Ritiro</label>
-              <span class="input-val-tag">€ / mese</span>
+          <div class="fire-inputs-wrap">
+            <div class="form-group">
+              <div class="label-row">
+                <label for="fireExpenses" class="input-label">Spese Mensili Previste nel Ritiro</label>
+                <span class="input-val-tag">€ / mese</span>
+              </div>
+              <div class="input-field-wrapper">
+                <span class="input-prefix">€</span>
+                <input type="number" id="fireExpenses" class="text-input has-prefix tabular-nums" value="1500" min="500" step="100">
+              </div>
             </div>
-            <div class="input-field-wrapper">
-              <span class="input-prefix">€</span>
-              <input type="number" id="fireExpenses" class="text-input has-prefix tabular-nums" value="1500" min="500" step="100">
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div class="label-row">
-              <label for="fireSwr" class="input-label">Tasso di Prelievo Sostenibile (Regola del 4% - SWR)</label>
-              <span class="input-val-tag">%</span>
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="label-row">
+                <label for="fireSwr" class="input-label">Tasso di Prelievo Sostenibile (Regola del 4% - SWR)</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="fireSwr" class="text-input tabular-nums" value="4.0" min="2.5" max="6.0" step="0.1">
+              </div>
             </div>
-            <div class="input-field-wrapper">
-              <input type="number" id="fireSwr" class="text-input tabular-nums" value="4.0" min="2.5" max="6.0" step="0.1">
-            </div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
-              Secondo il Trinity Study, un tasso tra il 3.5% e il 4.0% garantisce una sostenibilità del capitale superiore a 30 anni.
-            </p>
           </div>
         </div>
 
