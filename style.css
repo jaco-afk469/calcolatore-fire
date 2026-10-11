@@ -5,54 +5,57 @@
    ========================================================================== */
 
 :root {
-  /* Palette Colori: Stripe Clean Fintech / JustETF Style */
+  /* Palette Colori con i codici richiesti: #0A192F (Navy), #1E56A0 (Blue), #F8F9FA (Off-White) */
   --bg-page: #ffffff;
   --bg-surface: #ffffff;
-  --bg-subtle: #f8fafc;
-  --bg-hover: #f1f5f9;
+  --bg-subtle: #F8F9FA;
+  --bg-hover: #e9ecef;
   
   --border-light: #e2e8f0;
   --border-medium: #cbd5e1;
-  --border-focus: #635bff;
+  --border-focus: #1E56A0;
 
-  /* Colori Testo */
-  --text-heading: #0a2540;
-  --text-body: #425466;
-  --text-muted: #64748b;
-  --text-subtle: #94a3b8;
+  /* Colori Testo: #0A192F per titoli e testi istituzionali */
+  --text-heading: #0A192F;
+  --text-body: #334e68;
+  --text-muted: #627d98;
+  --text-subtle: #829ab1;
 
-  /* Accenti di Brand */
-  --accent-primary: #635bff;       /* Stripe Indigo */
-  --accent-primary-hover: #4f46e5;
-  --accent-primary-light: #eef2ff;
-  --accent-emerald: #059669;       /* Crescita patrimoniale */
-  --accent-emerald-light: #ecfdf5;
-  --accent-emerald-border: #a7f3d0;
+  /* Accenti di Brand: Blue Trust Palette */
+  --accent-primary: #1E56A0;            /* Trust Blue */
+  --accent-primary-hover: #16437E;      /* Deep Trust Blue */
+  --accent-primary-light: #EAF2FA;      /* Soft Ice Blue */
+  --accent-navy: #0A192F;               /* Midnight Institutional Navy */
+  --accent-light: #F8F9FA;              /* Crisp Off-White */
+  
+  --accent-emerald: #1E56A0;            /* Sostituito verde con Trust Blue */
+  --accent-emerald-light: #EAF2FA;
+  --accent-emerald-border: #BCD5EF;
   --accent-amber: #d97706;
   --accent-amber-light: #fffbeb;
 
   /* Componenti specifici */
-  --navbar-bg: rgba(255, 255, 255, 0.9);
-  --segmented-bg: #e2e8f0;
+  --navbar-bg: rgba(255, 255, 255, 0.94);
+  --segmented-bg: #e9ecef;
   --segmented-active-bg: #ffffff;
-  --segmented-active-text: #0a2540;
+  --segmented-active-text: #0A192F;
   --input-bg: #ffffff;
   --slider-thumb-bg: #ffffff;
-  --btn-partner-bg: #0a2540;
+  --btn-partner-bg: #0A192F;
   --btn-partner-text: #ffffff;
-  --btn-partner-hover-bg: #635bff;
+  --btn-partner-hover-bg: #1E56A0;
   --btn-copy-bg: #ffffff;
-  --btn-copy-border: #e2e8f0;
+  --btn-copy-border: #cbd5e1;
   --btn-outline-bg: #ffffff;
-  --rating-badge-bg: #0a2540;
+  --rating-badge-bg: #0A192F;
   --rating-badge-text: #ffffff;
-  --spec-box-bg: #f8fafc;
+  --spec-box-bg: #F8F9FA;
 
   /* Ombre naturali e raffinate */
-  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-card: 0 4px 6px -1px rgba(10, 37, 64, 0.05), 0 2px 4px -2px rgba(10, 37, 64, 0.03);
-  --shadow-hover: 0 12px 24px -4px rgba(10, 37, 64, 0.08), 0 4px 6px -2px rgba(10, 37, 64, 0.04);
-  --shadow-tooltip: 0 10px 25px -5px rgba(10, 37, 64, 0.15), 0 8px 10px -6px rgba(10, 37, 64, 0.1);
+  --shadow-subtle: 0 1px 3px rgba(10, 25, 47, 0.05), 0 1px 2px rgba(10, 25, 47, 0.03);
+  --shadow-card: 0 4px 6px -1px rgba(10, 25, 47, 0.05), 0 2px 4px -2px rgba(10, 25, 47, 0.03);
+  --shadow-hover: 0 12px 24px -4px rgba(10, 25, 47, 0.09), 0 4px 6px -2px rgba(10, 25, 47, 0.04);
+  --shadow-tooltip: 0 10px 25px -5px rgba(10, 25, 47, 0.15), 0 8px 10px -6px rgba(10, 25, 47, 0.1);
 
   /* Raggi di curvatura geometrici */
   --radius-sm: 6px;
@@ -60,52 +63,52 @@
   --radius-lg: 16px;
   --radius-pill: 9999px;
 
-  /* Tipografia: Poppins (il font di riferimento dei top comparatori come JustETF) */
+  /* Tipografia: Poppins */
   --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Modalità Scura Automatica di Sistema (prefers-color-scheme: dark) */
+/* Modalità Scura Automatica basata sul Deep Navy #0A192F */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-page: #0b0f19;
-    --bg-surface: #111827;
-    --bg-subtle: #1e293b;
-    --bg-hover: #1f293d;
+    --bg-page: #0A192F;
+    --bg-surface: #112240;
+    --bg-subtle: #192e54;
+    --bg-hover: #233d6b;
 
-    --border-light: #283548;
-    --border-medium: #3b4d66;
-    --border-focus: #818cf8;
+    --border-light: #233554;
+    --border-medium: #3b5075;
+    --border-focus: #4A90E2;
 
-    --text-heading: #f8fafc;
-    --text-body: #cbd5e1;
-    --text-muted: #94a3b8;
-    --text-subtle: #64748b;
+    --text-heading: #F8F9FA;
+    --text-body: #ccd6f6;
+    --text-muted: #8892b0;
+    --text-subtle: #61708f;
 
-    --accent-primary: #818cf8;
-    --accent-primary-hover: #6366f1;
-    --accent-primary-light: rgba(99, 102, 241, 0.16);
-    --accent-emerald: #10b981;
-    --accent-emerald-light: rgba(16, 185, 129, 0.15);
-    --accent-emerald-border: rgba(16, 185, 129, 0.35);
+    --accent-primary: #4A90E2;
+    --accent-primary-hover: #357ABD;
+    --accent-primary-light: rgba(74, 144, 226, 0.16);
+    --accent-emerald: #4A90E2;
+    --accent-emerald-light: rgba(74, 144, 226, 0.14);
+    --accent-emerald-border: rgba(74, 144, 226, 0.35);
     --accent-amber: #fbbf24;
     --accent-amber-light: rgba(245, 158, 11, 0.15);
 
-    --navbar-bg: rgba(11, 15, 25, 0.9);
-    --segmented-bg: #1e293b;
-    --segmented-active-bg: #111827;
-    --segmented-active-text: #f8fafc;
-    --input-bg: #1a2233;
-    --slider-thumb-bg: #f8fafc;
-    --btn-partner-bg: #635bff;
+    --navbar-bg: rgba(10, 25, 47, 0.94);
+    --segmented-bg: #192e54;
+    --segmented-active-bg: #112240;
+    --segmented-active-text: #F8F9FA;
+    --input-bg: #0d1e38;
+    --slider-thumb-bg: #F8F9FA;
+    --btn-partner-bg: #1E56A0;
     --btn-partner-text: #ffffff;
-    --btn-partner-hover-bg: #4f46e5;
-    --btn-copy-bg: #1e293b;
-    --btn-copy-border: #283548;
-    --btn-outline-bg: #1e293b;
-    --rating-badge-bg: #1e293b;
-    --rating-badge-text: #f8fafc;
-    --spec-box-bg: #162032;
+    --btn-partner-hover-bg: #16437E;
+    --btn-copy-bg: #192e54;
+    --btn-copy-border: #233554;
+    --btn-outline-bg: #192e54;
+    --rating-badge-bg: #192e54;
+    --rating-badge-text: #F8F9FA;
+    --spec-box-bg: #0d1e38;
 
     --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
     --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
@@ -420,7 +423,7 @@ body {
 .text-input:focus {
   outline: none;
   border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(30, 86, 160, 0.18);
 }
 
 /* Range Sliders */
@@ -968,7 +971,7 @@ body {
   text-transform: uppercase;
   color: var(--accent-primary);
   background: var(--accent-primary-light);
-  border: 1px solid rgba(99, 91, 255, 0.2);
+  border: 1px solid rgba(30, 86, 160, 0.2);
   padding: 3px 8px;
   border-radius: 4px;
   letter-spacing: 0.04em;
@@ -1029,7 +1032,7 @@ body {
 
 .btn-partner-action:hover {
   background: var(--btn-partner-hover-bg);
-  box-shadow: 0 4px 12px rgba(99, 91, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(30, 86, 160, 0.28);
 }
 
 /* Tabella Ammortamento */
