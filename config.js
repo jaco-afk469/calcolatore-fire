@@ -130,7 +130,7 @@ const APP_CONFIG = {
         priority: 5, // ⭐ PRIORITÀ 5
         promoCode: "ISY30", // Codice amico Isybank
         payoutNote: "Buono Amazon 30€ con promo porta un amico",
-        logo: "assets/logos/isybank.svg",
+        logo: "assets/logos/isybank.jpg",
         category: "Banca Digitale Intesa Sanpaolo",
         ratingScore: "4.7",
         ratingStars: "★★★★★",
@@ -156,7 +156,7 @@ const APP_CONFIG = {
         priority: 6, // ⭐ PRIORITÀ 6
         promoCode: "", // Nessun codice testuale: mostra l'offerta PAC
         payoutNote: "Commissione su primo deposito/PAC",
-        logo: "assets/logos/scalable-capital.svg",
+        logo: "assets/logos/scalable-capital.jpg",
         category: "Broker ETF & Azioni",
         ratingScore: "4.7",
         ratingStars: "★★★★★",
