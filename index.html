@@ -69,7 +69,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=2.8">
+  <link rel="stylesheet" href="style.css?v=2.9">
 </head>
 <body>
 
@@ -132,67 +132,69 @@
             <p class="card-desc">Modifica i valori per calcolare la crescita in tempo reale</p>
           </div>
 
-          <!-- Capitale Iniziale -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="initialCapital" class="input-label">Capitale Iniziale</label>
-              <span class="input-val-tag">€</span>
+          <div class="pac-inputs-wrap">
+            <!-- Capitale Iniziale -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="initialCapital" class="input-label">Capitale Iniziale</label>
+                <span class="input-val-tag">€</span>
+              </div>
+              <div class="input-field-wrapper">
+                <span class="input-prefix">€</span>
+                <input type="number" id="initialCapital" class="text-input has-prefix tabular-nums" value="5000" min="0" step="500">
+              </div>
+              <input type="range" id="initialCapitalRange" class="range-slider" min="0" max="100000" step="500" value="5000">
             </div>
-            <div class="input-field-wrapper">
-              <span class="input-prefix">€</span>
-              <input type="number" id="initialCapital" class="text-input has-prefix tabular-nums" value="5000" min="0" step="500">
-            </div>
-            <input type="range" id="initialCapitalRange" class="range-slider" min="0" max="100000" step="500" value="5000">
-          </div>
 
-          <!-- Versamento Mensile PAC -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="monthlyContribution" class="input-label">Versamento Mensile (PAC)</label>
-              <span class="input-val-tag">€ / mese</span>
+            <!-- Versamento Mensile PAC -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="monthlyContribution" class="input-label">Versamento Mensile (PAC)</label>
+                <span class="input-val-tag">€ / mese</span>
+              </div>
+              <div class="input-field-wrapper">
+                <span class="input-prefix">€</span>
+                <input type="number" id="monthlyContribution" class="text-input has-prefix tabular-nums" value="300" min="0" step="50">
+              </div>
+              <input type="range" id="monthlyRange" class="range-slider" min="0" max="5000" step="50" value="300">
             </div>
-            <div class="input-field-wrapper">
-              <span class="input-prefix">€</span>
-              <input type="number" id="monthlyContribution" class="text-input has-prefix tabular-nums" value="300" min="0" step="50">
-            </div>
-            <input type="range" id="monthlyRange" class="range-slider" min="0" max="5000" step="50" value="300">
-          </div>
 
-          <!-- Rendimento Annuo Stimato -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="annualReturn" class="input-label">Rendimento Annuo Medio Stimato</label>
-              <span class="input-val-tag">%</span>
+            <!-- Rendimento Annuo Stimato -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="annualReturn" class="input-label">Rendimento Annuo Medio Stimato</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="annualReturn" class="text-input has-suffix tabular-nums" value="7.0" min="0.1" max="25" step="0.1">
+                <span class="input-suffix">%</span>
+              </div>
+              <input type="range" id="returnRange" class="range-slider" min="1" max="15" step="0.1" value="7.0">
             </div>
-            <div class="input-field-wrapper">
-              <input type="number" id="annualReturn" class="text-input has-suffix tabular-nums" value="7.0" min="0.1" max="25" step="0.1">
-              <span class="input-suffix">%</span>
-            </div>
-            <input type="range" id="returnRange" class="range-slider" min="1" max="15" step="0.1" value="7.0">
-          </div>
 
-          <!-- Orizzonte Temporale (Anni) -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="years" class="input-label">Orizzonte Temporale</label>
-              <span class="input-val-tag">Anni</span>
+            <!-- Orizzonte Temporale (Anni) -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="years" class="input-label">Orizzonte Temporale</label>
+                <span class="input-val-tag">Anni</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="years" class="text-input has-suffix tabular-nums" value="25" min="1" max="50" step="1">
+                <span class="input-suffix">Anni</span>
+              </div>
+              <input type="range" id="yearsRange" class="range-slider" min="1" max="45" step="1" value="25">
             </div>
-            <div class="input-field-wrapper">
-              <input type="number" id="years" class="text-input has-suffix tabular-nums" value="25" min="1" max="50" step="1">
-              <span class="input-suffix">Anni</span>
-            </div>
-            <input type="range" id="yearsRange" class="range-slider" min="1" max="45" step="1" value="25">
-          </div>
 
-          <!-- Tasso Inflazione -->
-          <div class="form-group">
-            <div class="label-row">
-              <label for="inflationRate" class="input-label">Tasso Inflazione Medio Stimato</label>
-              <span class="input-val-tag">%</span>
-            </div>
-            <div class="input-field-wrapper">
-              <input type="number" id="inflationRate" class="text-input has-suffix tabular-nums" value="2.0" min="0" max="10" step="0.1">
-              <span class="input-suffix">%</span>
+            <!-- Tasso Inflazione -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="inflationRate" class="input-label">Tasso Inflazione Medio Stimato</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="inflationRate" class="text-input has-suffix tabular-nums" value="2.0" min="0" max="10" step="0.1">
+                <span class="input-suffix">%</span>
+              </div>
             </div>
           </div>
         </div>
