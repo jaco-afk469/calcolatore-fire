@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tuo-username.github.io/app-per-monetizzare/sitemap.xml
+Sitemap: https://jaco-afk469.github.io/calcolatore-fire/sitemap.xml
