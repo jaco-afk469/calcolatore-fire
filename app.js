@@ -663,38 +663,6 @@
       });
     }
 
-    // Presets
-    dom.presetChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const init = Number(chip.dataset.init);
-        const monthly = Number(chip.dataset.monthly);
-        const rate = parseFloat(chip.dataset.rate);
-        const years = Number(chip.dataset.years);
-
-        if (!isNaN(init)) {
-          state.initialCapital = init;
-          if (dom.initialCapitalInput) dom.initialCapitalInput.value = init;
-          if (dom.initialCapitalRange) dom.initialCapitalRange.value = init;
-        }
-        if (!isNaN(monthly)) {
-          state.monthlyContribution = monthly;
-          if (dom.monthlyInput) dom.monthlyInput.value = monthly;
-          if (dom.monthlyRange) dom.monthlyRange.value = monthly;
-        }
-        if (!isNaN(rate)) {
-          state.annualReturn = rate;
-          if (dom.returnInput) dom.returnInput.value = rate;
-          if (dom.returnRange) dom.returnRange.value = rate;
-        }
-        if (!isNaN(years)) {
-          state.years = years;
-          if (dom.yearsInput) dom.yearsInput.value = years;
-          if (dom.yearsRange) dom.yearsRange.value = years;
-        }
-        updateUI();
-      });
-    });
-
     // Segmented Buttons (Tabs)
     dom.segmentedButtons.forEach(btn => {
       btn.addEventListener('click', () => {
