@@ -6,10 +6,10 @@
 
 :root {
   /* Palette Colori: Stripe Clean Fintech */
-  --bg-page: #f8fafc;
+  --bg-page: #ffffff;
   --bg-surface: #ffffff;
-  --bg-subtle: #f1f5f9;
-  --bg-hover: #f8fafc;
+  --bg-subtle: #f8fafc;
+  --bg-hover: #f1f5f9;
   
   --border-light: #e2e8f0;
   --border-medium: #cbd5e1;
@@ -63,8 +63,6 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
-  background-size: 28px 28px;
 }
 
 /* Numeri tabulari per evitare salti visivi nei calcoli */
