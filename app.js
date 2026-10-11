@@ -222,6 +222,9 @@
       ptsContrib.push({ x, y: yCon, data: pt });
     });
 
+    const colorPrincipal = isDark ? '#94A3B8' : '#64748B';
+    const colorInterest = isDark ? '#4A90E2' : '#1E56A0';
+
     // Area Gradiente Trust Blue (Interessi Composti / Capitale Totale)
     const gradInterest = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
     gradInterest.addColorStop(0, isDark ? 'rgba(74, 144, 226, 0.28)' : 'rgba(30, 86, 160, 0.20)');
@@ -238,10 +241,10 @@
     ctx.fillStyle = gradInterest;
     ctx.fill();
 
-    // Area Gradiente Deep Navy (Capitale Versato)
+    // Area Gradiente Slate Grey (Capitale Versato)
     const gradContrib = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradContrib.addColorStop(0, isDark ? 'rgba(100, 149, 237, 0.18)' : 'rgba(10, 25, 47, 0.12)');
-    gradContrib.addColorStop(1, 'rgba(10, 25, 47, 0.01)');
+    gradContrib.addColorStop(0, isDark ? 'rgba(148, 163, 184, 0.16)' : 'rgba(100, 116, 139, 0.10)');
+    gradContrib.addColorStop(1, 'rgba(100, 116, 139, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -254,18 +257,20 @@
     ctx.fillStyle = gradContrib;
     ctx.fill();
 
-    // Linea Capitale Versato (Deep Navy)
-    ctx.strokeStyle = isDark ? '#8892b0' : '#0A192F';
+    // Linea Capitale Versato (Slate Grey tratteggiata per distinguere immediatamente i versamenti)
+    ctx.strokeStyle = colorPrincipal;
     ctx.lineWidth = 2;
+    ctx.setLineDash([5, 4]);
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
     for (let i = 1; i < ptsContrib.length; i++) {
       ctx.lineTo(ptsContrib[i].x, ptsContrib[i].y);
     }
     ctx.stroke();
+    ctx.setLineDash([]); // Reset tratteggio
 
-    // Linea Capitale Totale (Trust Blue #1E56A0)
-    ctx.strokeStyle = isDark ? '#4A90E2' : '#1E56A0';
+    // Linea Capitale Totale (Trust Blue continua e marcata)
+    ctx.strokeStyle = colorInterest;
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -298,7 +303,7 @@
       ctx.setLineDash([]);
 
       // Punto Capitale Totale (Trust Blue)
-      ctx.fillStyle = isDark ? '#4A90E2' : '#1E56A0';
+      ctx.fillStyle = colorInterest;
       ctx.beginPath();
       ctx.arc(pNom.x, pNom.y, 5, 0, Math.PI * 2);
       ctx.fill();
@@ -307,10 +312,14 @@
       ctx.arc(pNom.x, pNom.y, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Punto Capitale Versato (Deep Navy)
-      ctx.fillStyle = isDark ? '#8892b0' : '#0A192F';
+      // Punto Capitale Versato (Slate Grey)
+      ctx.fillStyle = colorPrincipal;
       ctx.beginPath();
-      ctx.arc(pCon.x, pCon.y, 4, 0, Math.PI * 2);
+      ctx.arc(pCon.x, pCon.y, 4.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.arc(pCon.x, pCon.y, 2, 0, Math.PI * 2);
       ctx.fill();
     }
   }
@@ -418,15 +427,15 @@
         <div class="chart-tooltip-title">Anno ${data.year}</div>
         <div class="chart-tooltip-row">
           <span>Capitale Totale:</span>
-          <strong style="color: var(--accent-emerald);">${formatCurrency(data.nominalBalance)}</strong>
+          <strong style="color: var(--color-interest);">${formatCurrency(data.nominalBalance)}</strong>
         </div>
         <div class="chart-tooltip-row">
           <span>Versamenti:</span>
-          <span>${formatCurrency(data.totalContributed)}</span>
+          <span style="color: var(--color-principal); font-weight: 600;">${formatCurrency(data.totalContributed)}</span>
         </div>
         <div class="chart-tooltip-row">
           <span>Interessi:</span>
-          <span style="color: var(--accent-primary);">+${formatCurrency(data.interestEarned)}</span>
+          <span style="color: var(--color-interest); font-weight: 600;">+${formatCurrency(data.interestEarned)}</span>
         </div>
       `;
     });
