@@ -186,12 +186,14 @@
 
     const maxVal = breakdown[breakdown.length - 1].nominalBalance * 1.08;
 
+    const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     // Linee guida orizzontali e etichette asse Y
     const gridLines = 4;
-    ctx.strokeStyle = '#e2e8f0';
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : '#e2e8f0';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '500 11px -apple-system, BlinkMacSystemFont, sans-serif';
+    ctx.fillStyle = isDark ? '#9ca3af' : '#64748b';
+    ctx.font = '500 11px Poppins, sans-serif';
     ctx.textAlign = 'right';
 
     for (let i = 0; i <= gridLines; i++) {
@@ -222,8 +224,8 @@
 
     // Area Gradiente Smeraldo (Interessi Composti)
     const gradEmerald = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradEmerald.addColorStop(0, 'rgba(5, 150, 105, 0.18)');
-    gradEmerald.addColorStop(1, 'rgba(5, 150, 105, 0.01)');
+    gradEmerald.addColorStop(0, isDark ? 'rgba(16, 185, 129, 0.28)' : 'rgba(5, 150, 105, 0.18)');
+    gradEmerald.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -238,8 +240,8 @@
 
     // Area Gradiente Indaco (Capitale Versato)
     const gradIndigo = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradIndigo.addColorStop(0, 'rgba(99, 91, 255, 0.15)');
-    gradIndigo.addColorStop(1, 'rgba(99, 91, 255, 0.01)');
+    gradIndigo.addColorStop(0, isDark ? 'rgba(129, 140, 248, 0.24)' : 'rgba(99, 91, 255, 0.15)');
+    gradIndigo.addColorStop(1, 'rgba(129, 140, 248, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -253,7 +255,7 @@
     ctx.fill();
 
     // Linea Capitale Versato (Indaco)
-    ctx.strokeStyle = '#635bff';
+    ctx.strokeStyle = isDark ? '#818cf8' : '#635bff';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -263,7 +265,7 @@
     ctx.stroke();
 
     // Linea Capitale Totale (Verde Smeraldo)
-    ctx.strokeStyle = '#059669';
+    ctx.strokeStyle = isDark ? '#10b981' : '#059669';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -273,7 +275,7 @@
     ctx.stroke();
 
     // Etichette Anni Asse X
-    ctx.fillStyle = '#64748b';
+    ctx.fillStyle = isDark ? '#9ca3af' : '#64748b';
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.floor(breakdown.length / 5));
     for (let i = 0; i < breakdown.length; i += step) {
@@ -287,7 +289,7 @@
       const pCon = ptsContrib[highlightIndex];
 
       // Linea verticale guida
-      ctx.strokeStyle = '#cbd5e1';
+      ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.25)' : '#cbd5e1';
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
       ctx.moveTo(pNom.x, padTop);
@@ -627,6 +629,12 @@
     window.addEventListener('resize', () => {
       renderChart(state.lastBreakdown);
     });
+
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        renderChart(state.lastBreakdown);
+      });
+    }
   }
 
   // Inizializzazione
