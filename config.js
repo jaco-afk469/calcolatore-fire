@@ -60,6 +60,28 @@ const APP_CONFIG = {
         ctaText: "Scopri Scalable Capital",
         url: "https://scalable.capital/",
         badge: "Zero Commissioni"
+      },
+      {
+        id: "buddybank",
+        name: "buddybank (UniCredit)",
+        tagline: "Conto e carta a canone zero con concierge bancario h24 su chat",
+        bonusText: "Canone zero e prelievi UniCredit gratuiti",
+        rating: "4.7 ★★★★★",
+        category: "Banca Digitale UniCredit",
+        ctaText: "Scopri buddybank",
+        url: "https://www.buddybank.com/",
+        badge: "Chat 24/7"
+      },
+      {
+        id: "isybank",
+        name: "isybank (Intesa Sanpaolo)",
+        tagline: "La banca digitale del Gruppo Intesa Sanpaolo con salvadanai smart e canone 0€",
+        bonusText: "Piano isyLight a canone zero",
+        rating: "4.7 ★★★★★",
+        category: "Banca Digitale Intesa Sanpaolo",
+        ctaText: "Scopri isybank",
+        url: "https://www.isybank.com/",
+        badge: "Rete Intesa"
       }
     ]
   },
