@@ -1,7 +1,7 @@
 /**
- * FINCALCOLATORE PRO - MOTORE DI CALCOLO 100% CLIENT-SIDE
- * Calcoli matematici precisi: Interesse Composto, PAC, Simulatore FIRE e Tassazione
- * Zero dipendenze esterne obbligatorie - Alta reattività e velocità
+ * FINCALCOLATORE PRO — MOTORE FINTECH REATTIVO (100% CLIENT-SIDE)
+ * Design System: Stripe Clean Fintech
+ * Calcoli Matematici Precisi, Grafico Canvas Interattivo con Tooltip e Micro-Interazioni
  */
 
 (function () {
@@ -9,24 +9,24 @@
 
   // Stato dell'applicazione
   const state = {
-    activeTab: 'pac', // 'pac' | 'fire' | 'comparison'
+    activeTab: 'pac', // 'pac' | 'fire'
     initialCapital: 5000,
     monthlyContribution: 300,
     annualReturn: 7.0, // %
     years: 25,
     inflationRate: 2.0, // %
-    capitalGainsTax: 26, // % (Aliquota capital gain standard Italia)
     
     // Parametri FIRE
     monthlyExpenses: 1500,
-    safeWithdrawalRate: 4.0, // % (Regola del 4%)
-    currentAge: 30,
-    targetFireAge: 55
+    safeWithdrawalRate: 4.0, // %
+    
+    // Dati calcolati memorizzati per il tooltip del grafico
+    lastBreakdown: []
   };
 
-  // Riferimenti DOM
+  // Elementi DOM
   const dom = {
-    // Input PAC
+    // PAC Inputs & Sliders
     initialCapitalInput: document.getElementById('initialCapital'),
     initialCapitalRange: document.getElementById('initialCapitalRange'),
     monthlyInput: document.getElementById('monthlyContribution'),
@@ -43,41 +43,42 @@
     kpiInterestEarned: document.getElementById('kpiInterestEarned'),
     kpiRealValue: document.getElementById('kpiRealValue'),
     
-    // Breakdown Bar
+    // Progress Bar
     barPrincipal: document.getElementById('barPrincipal'),
     barInterest: document.getElementById('barInterest'),
     pctPrincipal: document.getElementById('pctPrincipal'),
     pctInterest: document.getElementById('pctInterest'),
 
-    // Canvas Chart
+    // Canvas & Tooltip
     chartCanvas: document.getElementById('wealthChart'),
+    chartTooltip: document.getElementById('chartTooltip'),
     
-    // Tabella Ammortamento
+    // Tabella
     amortTableBody: document.getElementById('amortTableBody'),
     
-    // Sezione Affiliazioni
-    affiliatesGrid: document.getElementById('affiliatesGrid'),
-    
-    // Tabs & Presets
-    tabButtons: document.querySelectorAll('.tab-btn'),
+    // Controlli Sezioni & Tabs
+    sectionPac: document.getElementById('sectionPac'),
+    sectionFire: document.getElementById('sectionFire'),
+    segmentedButtons: document.querySelectorAll('.segmented-btn'),
     presetChips: document.querySelectorAll('.preset-chip'),
     btnExportCsv: document.getElementById('btnExportCsv'),
     btnPrintPdf: document.getElementById('btnPrintPdf'),
 
-    // Contenitori sezioni
-    sectionPac: document.getElementById('sectionPac'),
-    sectionFire: document.getElementById('sectionFire'),
-    
-    // FIRE DOM elements
+    // FIRE Elements
     fireExpensesInput: document.getElementById('fireExpenses'),
     fireSwrInput: document.getElementById('fireSwr'),
     fireNumberKpi: document.getElementById('fireNumberKpi'),
     fireYearsKpi: document.getElementById('fireYearsKpi'),
-    fireMonthlyPassiveKpi: document.getElementById('fireMonthlyPassiveKpi')
+    fireMonthlyPassiveKpi: document.getElementById('fireMonthlyPassiveKpi'),
+
+    // Codici Promo
+    codeSatispayVal: document.getElementById('codeSatispayVal'),
+    codeHypeVal: document.getElementById('codeHypeVal'),
+    affiliatesGrid: document.getElementById('affiliatesGrid')
   };
 
   /**
-   * FORMATTAZIONE VALUTA E NUMERI
+   * FORMATTAZIONE VALUTA
    */
   function formatCurrency(amount) {
     const symbol = (window.APP_CONFIG && window.APP_CONFIG.defaultCurrency) || '€';
@@ -88,36 +89,24 @@
     }).format(amount);
   }
 
-  function formatPct(val) {
-    return Number(val).toFixed(1) + '%';
-  }
-
   /**
-   * MATEMATICA: INTERESSE COMPOSTO & PAC
-   * Calcolo mensile con capitalizzazione degli interessi
+   * MATEMATICA: CALCOLO CRESCITA PAC & INTERESSE COMPOSTO
    */
   function calculatePacGrowth(initial, monthly, annualRate, numYears, inflation) {
-    const r = annualRate / 100 / 12; // Tasso mensile
-    const infMonthly = inflation / 100 / 12;
+    const r = annualRate / 100 / 12;
     const totalMonths = numYears * 12;
     
     let balance = initial;
     let totalContributed = initial;
     const yearlyBreakdown = [];
 
-    let currentYearContributed = initial;
-    let currentYearInterest = 0;
-
     for (let m = 1; m <= totalMonths; m++) {
       const interestEarnedMonth = balance * r;
       balance += interestEarnedMonth + monthly;
       totalContributed += monthly;
-      currentYearInterest += interestEarnedMonth;
 
-      // Fine anno o fine periodo
       if (m % 12 === 0) {
         const yearIndex = m / 12;
-        // Valore reale aggiustato per inflazione: PV = FV / (1 + i)^n
         const inflationFactor = Math.pow(1 + (inflation / 100), yearIndex);
         const realBalance = balance / inflationFactor;
 
@@ -142,22 +131,16 @@
 
   /**
    * MATEMATICA: SIMULATORE FIRE
-   * Calcolo target capitale per indipendenza finanziaria
    */
   function calculateFireMetrics(monthlyExpenses, swrRate, currentCapital, monthlySave, annualReturnRate) {
     const annualExpenses = monthlyExpenses * 12;
     const swr = (swrRate || 4.0) / 100;
-    
-    // FIRE Number standard = Spese Annuali / SWR (es. 25x a SWR 4%)
     const fireNumber = Math.round(annualExpenses / swr);
-    const leanFire = Math.round(fireNumber * 0.75); // 75% spese
-    const fatFire = Math.round(fireNumber * 1.35);  // 135% spese
 
-    // Stima mesi necessari per raggiungere il Fire Number
     let balance = currentCapital;
     const r = (annualReturnRate || 7.0) / 100 / 12;
     let monthsToFire = 0;
-    const maxMonths = 1200; // 100 anni limite di salvaguardia
+    const maxMonths = 1200;
 
     while (balance < fireNumber && monthsToFire < maxMonths) {
       balance = balance * (1 + r) + monthlySave;
@@ -169,23 +152,19 @@
 
     return {
       fireNumber,
-      leanFire,
-      fatFire,
       yearsToFire: monthsToFire >= maxMonths ? '> 50' : yearsToFire,
       monthlyPassiveCashflow
     };
   }
 
   /**
-   * RENDERING GRAFICO HTML5 CANVAS
-   * Render ultra-leggero, responsivo, zero dipendenze esterne
+   * RENDERING GRAFICO CANVAS INTERATTIVO CON CURVE PULITE
    */
-  function renderChart(breakdown) {
+  function renderChart(breakdown, highlightIndex) {
     if (!dom.chartCanvas) return;
     const canvas = dom.chartCanvas;
     const ctx = canvas.getContext('2d');
     
-    // Adatta canvas al pixel ratio retina per massima nitidezza
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width * dpr;
@@ -198,20 +177,21 @@
 
     if (!breakdown || breakdown.length === 0) return;
 
-    const padLeft = 65;
+    const padLeft = 60;
     const padRight = 20;
     const padTop = 20;
-    const padBottom = 35;
+    const padBottom = 30;
     const plotW = w - padLeft - padRight;
     const plotH = h - padTop - padBottom;
 
-    const maxVal = breakdown[breakdown.length - 1].nominalBalance * 1.05;
+    const maxVal = breakdown[breakdown.length - 1].nominalBalance * 1.08;
 
-    // Linee guida orizzontali
+    // Linee guida orizzontali e etichette asse Y
     const gridLines = 4;
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.12)';
-    ctx.fillStyle = '#64748b';
-    ctx.font = '11px system-ui, sans-serif';
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 11px -apple-system, BlinkMacSystemFont, sans-serif';
     ctx.textAlign = 'right';
 
     for (let i = 0; i <= gridLines; i++) {
@@ -228,85 +208,115 @@
       ctx.fillText(labelText, padLeft - 8, y + 4);
     }
 
-    // Coordinate punti
-    const pointsNominal = [];
-    const pointsContributed = [];
+    // Coordinate dei punti
+    const ptsNominal = [];
+    const ptsContrib = [];
 
     breakdown.forEach((pt, idx) => {
       const x = padLeft + (plotW * (idx / (breakdown.length - 1)));
       const yNom = padTop + plotH - (plotH * (pt.nominalBalance / maxVal));
       const yCon = padTop + plotH - (plotH * (pt.totalContributed / maxVal));
-      pointsNominal.push({ x, y: yNom, val: pt.nominalBalance, year: pt.year });
-      pointsContributed.push({ x, y: yCon, val: pt.totalContributed, year: pt.year });
+      ptsNominal.push({ x, y: yNom, data: pt });
+      ptsContrib.push({ x, y: yCon, data: pt });
     });
 
-    // 1. Area Sottostante Interesse (Gradiente Emerald/Cyan)
-    const gradInterest = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradInterest.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
-    gradInterest.addColorStop(1, 'rgba(16, 185, 129, 0.02)');
+    // Area Gradiente Smeraldo (Interessi Composti)
+    const gradEmerald = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+    gradEmerald.addColorStop(0, 'rgba(5, 150, 105, 0.18)');
+    gradEmerald.addColorStop(1, 'rgba(5, 150, 105, 0.01)');
 
     ctx.beginPath();
-    ctx.moveTo(pointsNominal[0].x, pointsNominal[0].y);
-    for (let i = 1; i < pointsNominal.length; i++) {
-      ctx.lineTo(pointsNominal[i].x, pointsNominal[i].y);
+    ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
+    for (let i = 1; i < ptsNominal.length; i++) {
+      ctx.lineTo(ptsNominal[i].x, ptsNominal[i].y);
     }
-    ctx.lineTo(pointsNominal[pointsNominal.length - 1].x, padTop + plotH);
-    ctx.lineTo(pointsNominal[0].x, padTop + plotH);
+    ctx.lineTo(ptsNominal[ptsNominal.length - 1].x, padTop + plotH);
+    ctx.lineTo(ptsNominal[0].x, padTop + plotH);
     ctx.closePath();
-    ctx.fillStyle = gradInterest;
+    ctx.fillStyle = gradEmerald;
     ctx.fill();
 
-    // 2. Area Sottostante Capitale Versato (Gradiente Blu)
-    const gradContrib = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradContrib.addColorStop(0, 'rgba(59, 130, 246, 0.45)');
-    gradContrib.addColorStop(1, 'rgba(59, 130, 246, 0.08)');
+    // Area Gradiente Indaco (Capitale Versato)
+    const gradIndigo = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+    gradIndigo.addColorStop(0, 'rgba(99, 91, 255, 0.15)');
+    gradIndigo.addColorStop(1, 'rgba(99, 91, 255, 0.01)');
 
     ctx.beginPath();
-    ctx.moveTo(pointsContributed[0].x, pointsContributed[0].y);
-    for (let i = 1; i < pointsContributed.length; i++) {
-      ctx.lineTo(pointsContributed[i].x, pointsContributed[i].y);
+    ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
+    for (let i = 1; i < ptsContrib.length; i++) {
+      ctx.lineTo(ptsContrib[i].x, ptsContrib[i].y);
     }
-    ctx.lineTo(pointsContributed[pointsContributed.length - 1].x, padTop + plotH);
-    ctx.lineTo(pointsContributed[0].x, padTop + plotH);
+    ctx.lineTo(ptsContrib[ptsContrib.length - 1].x, padTop + plotH);
+    ctx.lineTo(ptsContrib[0].x, padTop + plotH);
     ctx.closePath();
-    ctx.fillStyle = gradContrib;
+    ctx.fillStyle = gradIndigo;
     ctx.fill();
 
-    // Linea Capitale Versato
-    ctx.strokeStyle = '#3b82f6';
-    ctx.lineWidth = 2.5;
+    // Linea Capitale Versato (Indaco)
+    ctx.strokeStyle = '#635bff';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(pointsContributed[0].x, pointsContributed[0].y);
-    for (let i = 1; i < pointsContributed.length; i++) {
-      ctx.lineTo(pointsContributed[i].x, pointsContributed[i].y);
+    ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
+    for (let i = 1; i < ptsContrib.length; i++) {
+      ctx.lineTo(ptsContrib[i].x, ptsContrib[i].y);
     }
     ctx.stroke();
 
-    // Linea Capitale Totale (Interesse Composto)
-    ctx.strokeStyle = '#10b981';
-    ctx.lineWidth = 3;
+    // Linea Capitale Totale (Verde Smeraldo)
+    ctx.strokeStyle = '#059669';
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.moveTo(pointsNominal[0].x, pointsNominal[0].y);
-    for (let i = 1; i < pointsNominal.length; i++) {
-      ctx.lineTo(pointsNominal[i].x, pointsNominal[i].y);
+    ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
+    for (let i = 1; i < ptsNominal.length; i++) {
+      ctx.lineTo(ptsNominal[i].x, ptsNominal[i].y);
     }
     ctx.stroke();
 
     // Etichette Anni Asse X
-    ctx.fillStyle = '#94a3b8';
+    ctx.fillStyle = '#64748b';
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.floor(breakdown.length / 5));
     for (let i = 0; i < breakdown.length; i += step) {
-      const pt = pointsNominal[i];
-      ctx.fillText('Anno ' + pt.year, pt.x, padTop + plotH + 20);
+      const pt = ptsNominal[i];
+      ctx.fillText('Anno ' + pt.data.year, pt.x, padTop + plotH + 18);
+    }
+
+    // Evidenziazione punto selezionato da hover
+    if (highlightIndex !== undefined && ptsNominal[highlightIndex]) {
+      const pNom = ptsNominal[highlightIndex];
+      const pCon = ptsContrib[highlightIndex];
+
+      // Linea verticale guida
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(pNom.x, padTop);
+      ctx.lineTo(pNom.x, padTop + plotH);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Punto Smeraldo
+      ctx.fillStyle = '#059669';
+      ctx.beginPath();
+      ctx.arc(pNom.x, pNom.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.arc(pNom.x, pNom.y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Punto Indaco
+      ctx.fillStyle = '#635bff';
+      ctx.beginPath();
+      ctx.arc(pCon.x, pCon.y, 4, 0, Math.PI * 2);
+      ctx.fill();
     }
   }
 
   /**
-   * AGGIORNAMENTO UI E TABELLA
+   * AGGIORNAMENTO COMPLETO UI
    */
   function updateUI() {
-    // 1. Calcoli PAC
     const result = calculatePacGrowth(
       state.initialCapital,
       state.monthlyContribution,
@@ -315,13 +325,15 @@
       state.inflationRate
     );
 
+    state.lastBreakdown = result.breakdown;
+
     // Aggiornamento KPI
     if (dom.kpiFinalTotal) dom.kpiFinalTotal.textContent = formatCurrency(result.finalBalance);
     if (dom.kpiTotalContributed) dom.kpiTotalContributed.textContent = formatCurrency(result.totalContributed);
     if (dom.kpiInterestEarned) dom.kpiInterestEarned.textContent = formatCurrency(result.totalInterest);
     if (dom.kpiRealValue) dom.kpiRealValue.textContent = formatCurrency(result.realBalance);
 
-    // Aggiornamento Breakdown Bar
+    // Aggiornamento Progress Bar
     const total = result.finalBalance || 1;
     const pctPrincipalVal = Math.round((result.totalContributed / total) * 100);
     const pctInterestVal = 100 - pctPrincipalVal;
@@ -331,26 +343,26 @@
     if (dom.pctPrincipal) dom.pctPrincipal.textContent = `${pctPrincipalVal}% (${formatCurrency(result.totalContributed)})`;
     if (dom.pctInterest) dom.pctInterest.textContent = `${pctInterestVal}% (${formatCurrency(result.totalInterest)})`;
 
-    // Render Canvas Grafico
+    // Render Canvas
     renderChart(result.breakdown);
 
-    // Popola Tabella Ammortamento
+    // Tabella Ammortamento
     if (dom.amortTableBody) {
       dom.amortTableBody.innerHTML = '';
       result.breakdown.forEach((row) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>Anno ${row.year}</strong></td>
-          <td>${formatCurrency(row.totalContributed)}</td>
-          <td style="color: var(--accent-emerald); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
-          <td><strong>${formatCurrency(row.nominalBalance)}</strong></td>
-          <td style="color: var(--text-muted);">${formatCurrency(row.realBalance)}</td>
+          <td class="tabular-nums">${formatCurrency(row.totalContributed)}</td>
+          <td class="tabular-nums" style="color: var(--accent-emerald); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
+          <td class="tabular-nums"><strong>${formatCurrency(row.nominalBalance)}</strong></td>
+          <td class="tabular-nums" style="color: var(--text-muted);">${formatCurrency(row.realBalance)}</td>
         `;
         dom.amortTableBody.appendChild(tr);
       });
     }
 
-    // 2. Calcoli FIRE
+    // Calcoli FIRE
     const fireMetrics = calculateFireMetrics(
       state.monthlyExpenses,
       state.safeWithdrawalRate,
@@ -361,44 +373,127 @@
 
     if (dom.fireNumberKpi) dom.fireNumberKpi.textContent = formatCurrency(fireMetrics.fireNumber);
     if (dom.fireYearsKpi) dom.fireYearsKpi.textContent = `${fireMetrics.yearsToFire} Anni`;
-    if (dom.fireMonthlyPassiveKpi) dom.fireMonthlyPassiveKpi.textContent = `${formatCurrency(fireMetrics.monthlyPassiveCashflow)}/mese`;
+    if (dom.fireMonthlyPassiveKpi) dom.fireMonthlyPassiveKpi.textContent = `${formatCurrency(fireMetrics.monthlyPassiveCashflow)} / m`;
   }
 
   /**
-   * INIZIALIZZAZIONE SEZIONE AFFILIAZIONI DINAMICA
-   * Legge config.js e crea i box broker ad alto tasso di conversione
+   * GESTIONE TOOLTIP INTERATTIVO SUL GRAFICO
    */
-  function initAffiliates() {
-    if (!dom.affiliatesGrid || !window.APP_CONFIG) return;
-    const config = window.APP_CONFIG.affiliates;
-    if (!config || !config.enabled) return;
+  function setupChartTooltip() {
+    if (!dom.chartCanvas || !dom.chartTooltip) return;
 
-    dom.affiliatesGrid.innerHTML = '';
+    dom.chartCanvas.addEventListener('mousemove', (e) => {
+      const rect = dom.chartCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const padLeft = 60;
+      const padRight = 20;
+      const plotW = rect.width - padLeft - padRight;
 
-    config.partners.forEach((p) => {
-      const card = document.createElement('div');
-      card.className = 'affiliate-card';
-      card.innerHTML = `
-        ${p.badge ? `<span class="card-badge-top">${p.badge}</span>` : ''}
-        <div class="affiliate-header">
-          <div class="affiliate-name">${p.name}</div>
-          <div class="affiliate-rating">${p.rating} &bull; ${p.category}</div>
+      if (x < padLeft || x > rect.width - padRight || !state.lastBreakdown.length) {
+        dom.chartTooltip.style.display = 'none';
+        renderChart(state.lastBreakdown);
+        return;
+      }
+
+      const ratio = (x - padLeft) / plotW;
+      const index = Math.min(
+        state.lastBreakdown.length - 1,
+        Math.max(0, Math.round(ratio * (state.lastBreakdown.length - 1)))
+      );
+
+      const data = state.lastBreakdown[index];
+      if (!data) return;
+
+      renderChart(state.lastBreakdown, index);
+
+      // Posiziona il tooltip
+      const plotX = padLeft + (plotW * (index / (state.lastBreakdown.length - 1)));
+      dom.chartTooltip.style.left = `${plotX}px`;
+      dom.chartTooltip.style.top = `60px`;
+      dom.chartTooltip.style.display = 'block';
+
+      dom.chartTooltip.innerHTML = `
+        <div class="chart-tooltip-title">Anno ${data.year}</div>
+        <div class="chart-tooltip-row">
+          <span>Capitale Totale:</span>
+          <strong style="color: var(--accent-emerald);">${formatCurrency(data.nominalBalance)}</strong>
         </div>
-        <p class="affiliate-tagline">${p.tagline}</p>
-        <div class="bonus-box">
-          <span class="bonus-icon">🎁</span>
-          <span class="bonus-text">${p.bonusText}</span>
+        <div class="chart-tooltip-row">
+          <span>Versamenti:</span>
+          <span>${formatCurrency(data.totalContributed)}</span>
         </div>
-        <a href="${p.url}" target="_blank" rel="noopener sponsored" class="btn-affiliate-cta">
-          ${p.ctaText} &rarr;
-        </a>
+        <div class="chart-tooltip-row">
+          <span>Interessi:</span>
+          <span style="color: var(--accent-primary);">+${formatCurrency(data.interestEarned)}</span>
+        </div>
       `;
-      dom.affiliatesGrid.appendChild(card);
+    });
+
+    dom.chartCanvas.addEventListener('mouseleave', () => {
+      dom.chartTooltip.style.display = 'none';
+      renderChart(state.lastBreakdown);
     });
   }
 
   /**
-   * ESPORTAZIONE CSV DATI
+   * TASTI "COPIA CODICE" CON FEEDBACK
+   */
+  function setupCopyButtons() {
+    document.querySelectorAll('.btn-copy-code').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.dataset.copyTarget;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        const codeText = targetEl.textContent.trim();
+        navigator.clipboard.writeText(codeText).then(() => {
+          const originalText = button.innerHTML;
+          button.classList.add('copied');
+          button.innerHTML = `✓ Copiato!`;
+
+          setTimeout(() => {
+            button.classList.remove('copied');
+            button.innerHTML = originalText;
+          }, 2000);
+        });
+      });
+    });
+  }
+
+  /**
+   * FAQ ACCORDION INTERACTION
+   */
+  function setupFaqAccordion() {
+    document.querySelectorAll('.faq-accordion-item').forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', () => {
+          item.classList.toggle('open');
+        });
+      }
+    });
+  }
+
+  /**
+   * SINCRONIZZAZIONE CODICI PROMO DA CONFIG.JS
+   */
+  function syncPromoCodesFromConfig() {
+    if (!window.APP_CONFIG || !window.APP_CONFIG.affiliates) return;
+    const partners = window.APP_CONFIG.affiliates.partners || [];
+
+    const satispay = partners.find(p => p.id === 'satispay');
+    if (satispay && satispay.promoCode && dom.codeSatispayVal) {
+      dom.codeSatispayVal.textContent = satispay.promoCode;
+    }
+
+    const hype = partners.find(p => p.id === 'hype');
+    if (hype && hype.promoCode && dom.codeHypeVal) {
+      dom.codeHypeVal.textContent = hype.promoCode;
+    }
+  }
+
+  /**
+   * ESPORTAZIONE CSV
    */
   function exportToCsv() {
     const result = calculatePacGrowth(
@@ -409,7 +504,7 @@
       state.inflationRate
     );
 
-    let csvContent = 'Anno,Capitale Versato,Interessi Maturati,Totale Nominale,Valore Reale (Inflazionato)\n';
+    let csvContent = 'Anno,Capitale Versato,Interessi Maturati,Totale Nominale,Valore Reale\n';
     result.breakdown.forEach(row => {
       csvContent += `${row.year},${row.totalContributed},${row.interestEarned},${row.nominalBalance},${row.realBalance}\n`;
     });
@@ -425,7 +520,7 @@
   }
 
   /**
-   * SINCRONIZZAZIONE INPUT & RANGE SLIDER
+   * SINCRONIZZAZIONE INPUT E RANGE
    */
   function syncInputs(numberEl, rangeEl, stateKey, parser) {
     if (!numberEl || !rangeEl) return;
@@ -443,7 +538,7 @@
   }
 
   /**
-   * BIND EVENT LISTENERS
+   * BIND EVENTI
    */
   function bindEvents() {
     syncInputs(dom.initialCapitalInput, dom.initialCapitalRange, 'initialCapital', Number);
@@ -504,26 +599,10 @@
       });
     });
 
-    // Export CSV & PDF
-    if (dom.btnExportCsv) dom.btnExportCsv.addEventListener('click', exportToCsv);
-    if (dom.btnPrintPdf) dom.btnPrintPdf.addEventListener('click', () => window.print());
-
-    // Window Resize per Canvas Chart
-    window.addEventListener('resize', () => {
-      const result = calculatePacGrowth(
-        state.initialCapital,
-        state.monthlyContribution,
-        state.annualReturn,
-        state.years,
-        state.inflationRate
-      );
-      renderChart(result.breakdown);
-    });
-
-    // Tabs toggle
-    dom.tabButtons.forEach(btn => {
+    // Segmented Buttons (Tabs)
+    dom.segmentedButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        dom.tabButtons.forEach(b => b.classList.remove('active'));
+        dom.segmentedButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const tab = btn.dataset.tab;
         state.activeTab = tab;
@@ -537,12 +616,22 @@
         }
       });
     });
+
+    if (dom.btnExportCsv) dom.btnExportCsv.addEventListener('click', exportToCsv);
+    if (dom.btnPrintPdf) dom.btnPrintPdf.addEventListener('click', () => window.print());
+
+    window.addEventListener('resize', () => {
+      renderChart(state.lastBreakdown);
+    });
   }
 
-  // Avvio al caricamento del DOM
+  // Inizializzazione
   document.addEventListener('DOMContentLoaded', () => {
-    initAffiliates();
+    syncPromoCodesFromConfig();
     bindEvents();
+    setupChartTooltip();
+    setupCopyButtons();
+    setupFaqAccordion();
     updateUI();
   });
 
