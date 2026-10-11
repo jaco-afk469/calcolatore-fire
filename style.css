@@ -359,18 +359,26 @@ body {
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
   margin-bottom: 56px;
 }
 
-#sectionFire .dashboard-grid {
-  align-items: stretch;
-}
-
-#sectionFire .dashboard-grid > .card {
+.dashboard-grid > .card {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.pac-inputs-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  gap: 18px;
+}
+
+.pac-inputs-wrap .form-group {
+  margin-bottom: 0;
 }
 
 #sectionFire .fire-inputs-wrap {
@@ -702,7 +710,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
+  margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid var(--border-light);
 }
