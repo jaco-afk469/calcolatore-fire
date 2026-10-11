@@ -222,10 +222,10 @@
       ptsContrib.push({ x, y: yCon, data: pt });
     });
 
-    // Area Gradiente Smeraldo (Interessi Composti)
-    const gradEmerald = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradEmerald.addColorStop(0, isDark ? 'rgba(16, 185, 129, 0.28)' : 'rgba(5, 150, 105, 0.18)');
-    gradEmerald.addColorStop(1, 'rgba(16, 185, 129, 0.01)');
+    // Area Gradiente Trust Blue (Interessi Composti / Capitale Totale)
+    const gradInterest = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+    gradInterest.addColorStop(0, isDark ? 'rgba(74, 144, 226, 0.28)' : 'rgba(30, 86, 160, 0.20)');
+    gradInterest.addColorStop(1, 'rgba(30, 86, 160, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -235,13 +235,13 @@
     ctx.lineTo(ptsNominal[ptsNominal.length - 1].x, padTop + plotH);
     ctx.lineTo(ptsNominal[0].x, padTop + plotH);
     ctx.closePath();
-    ctx.fillStyle = gradEmerald;
+    ctx.fillStyle = gradInterest;
     ctx.fill();
 
-    // Area Gradiente Indaco (Capitale Versato)
-    const gradIndigo = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradIndigo.addColorStop(0, isDark ? 'rgba(129, 140, 248, 0.24)' : 'rgba(99, 91, 255, 0.15)');
-    gradIndigo.addColorStop(1, 'rgba(129, 140, 248, 0.01)');
+    // Area Gradiente Deep Navy (Capitale Versato)
+    const gradContrib = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
+    gradContrib.addColorStop(0, isDark ? 'rgba(100, 149, 237, 0.18)' : 'rgba(10, 25, 47, 0.12)');
+    gradContrib.addColorStop(1, 'rgba(10, 25, 47, 0.01)');
 
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -251,11 +251,11 @@
     ctx.lineTo(ptsContrib[ptsContrib.length - 1].x, padTop + plotH);
     ctx.lineTo(ptsContrib[0].x, padTop + plotH);
     ctx.closePath();
-    ctx.fillStyle = gradIndigo;
+    ctx.fillStyle = gradContrib;
     ctx.fill();
 
-    // Linea Capitale Versato (Indaco)
-    ctx.strokeStyle = isDark ? '#818cf8' : '#635bff';
+    // Linea Capitale Versato (Deep Navy)
+    ctx.strokeStyle = isDark ? '#8892b0' : '#0A192F';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(ptsContrib[0].x, ptsContrib[0].y);
@@ -264,8 +264,8 @@
     }
     ctx.stroke();
 
-    // Linea Capitale Totale (Verde Smeraldo)
-    ctx.strokeStyle = isDark ? '#10b981' : '#059669';
+    // Linea Capitale Totale (Trust Blue #1E56A0)
+    ctx.strokeStyle = isDark ? '#4A90E2' : '#1E56A0';
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(ptsNominal[0].x, ptsNominal[0].y);
@@ -275,7 +275,7 @@
     ctx.stroke();
 
     // Etichette Anni Asse X
-    ctx.fillStyle = isDark ? '#9ca3af' : '#64748b';
+    ctx.fillStyle = isDark ? '#8892b0' : '#627d98';
     ctx.textAlign = 'center';
     const step = Math.max(1, Math.floor(breakdown.length / 5));
     for (let i = 0; i < breakdown.length; i += step) {
@@ -297,8 +297,8 @@
       ctx.stroke();
       ctx.setLineDash([]);
 
-      // Punto Smeraldo
-      ctx.fillStyle = '#059669';
+      // Punto Capitale Totale (Trust Blue)
+      ctx.fillStyle = isDark ? '#4A90E2' : '#1E56A0';
       ctx.beginPath();
       ctx.arc(pNom.x, pNom.y, 5, 0, Math.PI * 2);
       ctx.fill();
@@ -307,8 +307,8 @@
       ctx.arc(pNom.x, pNom.y, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Punto Indaco
-      ctx.fillStyle = '#635bff';
+      // Punto Capitale Versato (Deep Navy)
+      ctx.fillStyle = isDark ? '#8892b0' : '#0A192F';
       ctx.beginPath();
       ctx.arc(pCon.x, pCon.y, 4, 0, Math.PI * 2);
       ctx.fill();
@@ -356,7 +356,7 @@
         tr.innerHTML = `
           <td><strong>Anno ${row.year}</strong></td>
           <td class="tabular-nums">${formatCurrency(row.totalContributed)}</td>
-          <td class="tabular-nums" style="color: var(--accent-emerald); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
+          <td class="tabular-nums" style="color: var(--accent-primary); font-weight: 600;">+${formatCurrency(row.interestEarned)}</td>
           <td class="tabular-nums"><strong>${formatCurrency(row.nominalBalance)}</strong></td>
           <td class="tabular-nums" style="color: var(--text-muted);">${formatCurrency(row.realBalance)}</td>
         `;
