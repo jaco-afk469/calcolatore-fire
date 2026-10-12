@@ -9,11 +9,24 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://jaco-afk469.github.io/calcolatore-fire/">
   
-  <!-- Open Graph / Meta Social -->
+  <!-- Open Graph / Meta Social (WhatsApp, Telegram, Reddit, LinkedIn, Facebook) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FinCalcolatore Pro — Simulatore Finanziario Indipendente">
-  <meta property="og:description" content="Simula con precisione matematica la crescita del tuo patrimonio: interesse composto, PAC e regola del 4% FIRE.">
+  <meta property="og:site_name" content="FinCalcolatore">
+  <meta property="og:title" content="FinCalcolatore — Calcola la Crescita del Tuo Patrimonio">
+  <meta property="og:description" content="Simulatore matematico avanzato di PAC in ETF, interesse composto e libertà finanziaria (FIRE). Calcola rendimenti con tasse italiane (26%) e inflazione.">
   <meta property="og:url" content="https://jaco-afk469.github.io/calcolatore-fire/">
+  <meta property="og:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+  <meta property="og:image:secure_url" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FinCalcolatore - Simulatore PAC ETF & Metodo FIRE">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FinCalcolatore — Calcola la Crescita del Tuo Patrimonio">
+  <meta name="twitter:description" content="Simulatore gratuito di interesse composto, PAC ETF e metodo FIRE con tassazione italiana (26%) e inflazione.">
+  <meta name="twitter:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
   
   <!-- Schema.org Structured Data per Google Rich Snippets -->
   <script type="application/ld+json">
@@ -260,6 +273,13 @@
               Potere d'acquisto reale stimato (post-inflazione): <strong id="kpiRealValue" class="tabular-nums" style="color: var(--text-heading);">€ 0</strong>
             </span>
             <div class="btn-group">
+              <button id="btnShareSimulation" class="btn-outline btn-share" title="Copia link condivisibile con questi parametri">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                <span>Condividi Simulazione</span>
+              </button>
               <button id="btnExportCsv" class="btn-outline">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -343,6 +363,30 @@
 
           <div style="background: var(--bg-subtle); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-light); font-size: 0.86rem; color: var(--text-body); line-height: 1.5;">
             <strong>Nota di ottimizzazione:</strong> Incrementare il risparmio mensile o ridurre le spese previste produce un duplice effetto: abbassa la cifra necessaria per il ritiro e accorcia significativamente gli anni di accumulo.
+          </div>
+
+          <!-- Actions Row FIRE -->
+          <div class="dashboard-actions-row" style="margin-top: 20px;">
+            <span class="real-purchasing-note">
+              Calcolo basato sulla regola del 4% (Trinity Study)
+            </span>
+            <div class="btn-group">
+              <button id="btnShareFire" class="btn-outline btn-share" title="Copia link condivisibile per questo obiettivo FIRE">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                <span>Condividi Simulazione FIRE</span>
+              </button>
+              <button id="btnPrintFire" class="btn-outline" title="Scarica o stampa il report PDF della simulazione">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Esporta PDF / Stampa</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
