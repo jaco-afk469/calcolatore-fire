@@ -241,7 +241,7 @@
 
     if (dom.winnerCard) {
       if (diff > 500) {
-        dom.winnerIcon.textContent = '🏆';
+        dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>';
         dom.winnerTitle.textContent = state.reinvestRefund
           ? `Vince la Strategia Fondo Pensione + Reinvestimento ETF (+${fmtEur(diffAbs)})`
           : `Vince il Fondo Pensione (+${fmtEur(diffAbs)})`;
@@ -250,12 +250,12 @@
           : `La deduzione IRPEF e la tassazione agevolata al ${res.finalPensionTaxRate}% compensano il maggior costo di gestione (TER), garantendo un vantaggio netto di ${fmtEur(diffAbs)}.`;
         dom.winnerCard.style.borderColor = 'var(--accent-primary)';
       } else if (diff < -500) {
-        dom.winnerIcon.textContent = '🚀';
+        dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>';
         dom.winnerTitle.textContent = `Vince il PAC in ETF Indipendente (+${fmtEur(diffAbs)})`;
         dom.winnerDesc.textContent = `Su un orizzonte di ${state.years} anni, il costo di gestione ridotto dell'ETF (${state.terEtf}% vs ${state.terPension}% del fondo) e la tassazione differita superano il vantaggio della deduzione fiscale iniziale.`;
         dom.winnerCard.style.borderColor = 'var(--accent-emerald)';
       } else {
-        dom.winnerIcon.textContent = '⚖️';
+        dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>';
         dom.winnerTitle.textContent = `Pareggio Sostanziale tra le due Strategie`;
         dom.winnerDesc.textContent = `Il capitale finale netto si equivale. Scegli il fondo pensione se cerchi disciplina fiscale e tutela dal pignoramento, oppure l'ETF per la massima flessibilità di liquidazione in qualsiasi momento.`;
         dom.winnerCard.style.borderColor = 'var(--border-medium)';
