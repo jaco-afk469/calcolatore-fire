@@ -1457,3 +1457,249 @@ body {
   transform: translateX(4px);
 }
 
+/* ==========================================================================
+   PRINT / PDF EXPORT ISOLATION STYLES (SOLO GRAFICO E TABELLA)
+   ========================================================================== */
+#printReportArea {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+
+  /* Reset body per la stampa su sfondo bianco nitido */
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Nascondi completamente l'intera interfaccia del sito (menu, slider, carte broker, faq, footer) */
+  body > *:not(#printReportArea) {
+    display: none !important;
+  }
+
+  /* Mostra esclusivamente il report isolato del grafico e della tabella */
+  #printReportArea {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .print-doc {
+    width: 100%;
+  }
+
+  .print-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+
+  .print-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .print-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .print-title {
+    font-size: 18pt;
+    font-weight: 700;
+    margin: 0;
+    color: #0f172a;
+    line-height: 1.1;
+  }
+
+  .print-subtitle {
+    font-size: 9pt;
+    color: #475569;
+    margin: 2px 0 0 0;
+  }
+
+  .print-meta {
+    font-size: 8.5pt;
+    text-align: right;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  .print-section-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 14px 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 4px;
+  }
+
+  .print-params-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .print-param-box {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+
+  .print-param-label {
+    display: block;
+    font-size: 7pt;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .print-param-val {
+    display: block;
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .print-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .print-kpi-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: #ffffff;
+  }
+
+  .print-kpi-featured {
+    border: 1.5px solid #0d9488 !important;
+    background: #f0fdfa !important;
+  }
+
+  .print-kpi-label {
+    display: block;
+    font-size: 7.5pt;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .print-kpi-val {
+    display: block;
+    font-size: 12pt;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 2px 0;
+  }
+
+  .print-kpi-sub {
+    display: block;
+    font-size: 6.8pt;
+    color: #64748b;
+  }
+
+  .print-chart-wrap {
+    width: 100%;
+    margin-bottom: 16px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px;
+    background: #ffffff;
+    page-break-inside: avoid;
+  }
+
+  .print-chart-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .print-page-break {
+    page-break-before: auto;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 8pt;
+  }
+
+  .print-table th {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 5px 8px;
+    text-align: right;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .print-table th:first-child {
+    text-align: left;
+  }
+
+  .print-table td {
+    border: 1px solid #e2e8f0 !important;
+    padding: 4px 8px;
+    text-align: right;
+  }
+
+  .print-table td:first-child {
+    text-align: left;
+  }
+
+  .print-table tr:nth-child(even) td {
+    background: #f8fafc !important;
+  }
+
+  .print-table tr {
+    page-break-inside: avoid;
+  }
+
+  .print-footer {
+    margin-top: 20px;
+    padding-top: 8px;
+    border-top: 1px solid #cbd5e1;
+    font-size: 7.5pt;
+    color: #64748b;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .print-disclaimer {
+    margin-top: 3px;
+    font-size: 6.5pt;
+    color: #94a3b8;
+    line-height: 1.3;
+  }
+}
+
