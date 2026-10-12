@@ -147,14 +147,26 @@
   }
 }
 
-/* Reset base */
-*, *::before, *::after {
+/* Reset base & Prevenzione Rigorosa Overflow Orizzontale */
+html {
   box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
   font-family: var(--font-sans);
   background-color: var(--bg-page);
   color: var(--text-body);
@@ -162,6 +174,16 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+canvas {
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 /* Numeri tabulari per evitare salti visivi nei calcoli */
@@ -453,13 +475,17 @@ body {
   }
 }
 
-/* Card: Bordo sottile, sfondo bianco solido, ombra naturale */
-.card {
+/* Card, Calculator-card e Chart-card con protezione overflow */
+.card,
+.calculator-card,
+.chart-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 28px;
   box-shadow: var(--shadow-card);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card-header {
@@ -1199,16 +1225,27 @@ body {
   margin: 56px 0;
 }
 
-.table-wrapper {
+/* Table Wrappers & Responsive Scroll Containers (Tutte le tabelle del sito) */
+.table-wrapper,
+.table-container,
+.comparison-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  overflow-x: auto;
   box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+  margin: 24px 0;
 }
 
-.amort-table {
+.amort-table,
+.data-table,
+.comparison-table {
   width: 100%;
+  min-width: 580px;
   border-collapse: collapse;
   text-align: left;
   font-size: 0.88rem;
@@ -1535,6 +1572,63 @@ body {
   transform: translateX(4px);
 }
 
+
+/* ==========================================================================
+   CALLOUT PILLS & RESPONSIVE SUBGRIDS (ANTI-OVERFLOW SUITE)
+   ========================================================================== */
+.hero-callout-wrap {
+  margin-top: 18px;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-callout-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+  padding: 8px 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 9999px;
+  transition: var(--transition);
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.4;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.hero-callout-pill:hover {
+  background: var(--bg-subtle);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.broker-subgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .broker-subgrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
 /* ==========================================================================
    MOBILE RESPONSIVENESS & ANTI-OVERLAP SUITE (SMARTPHONE & TABLET)
    ========================================================================== */
@@ -1727,9 +1821,22 @@ body {
   }
 
   /* Card e Form Inputs */
-  .card {
+  .card,
+  .calculator-card,
+  .chart-card {
     padding: 20px 16px;
     border-radius: var(--radius-md);
+    max-width: 100%;
+  }
+
+  .hero-callout-pill {
+    display: inline-flex;
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    box-sizing: border-box;
   }
 
   .card-header {
@@ -1880,24 +1987,34 @@ body {
     min-height: 44px;
   }
 
-  /* Tabella Ammortamento */
+  /* Tabelle e Contenitori Scrollabili */
   .table-section {
-    margin: 36px 0;
+    margin: 32px 0;
   }
 
-  .table-wrapper {
+  .table-wrapper,
+  .table-container,
+  .comparison-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-radius: var(--radius-md);
+    margin: 20px 0;
   }
 
-  .amort-table th {
-    padding: 10px 10px;
+  .amort-table th,
+  .data-table th,
+  .comparison-table th {
+    padding: 10px 12px;
     font-size: 0.74rem;
     white-space: nowrap;
   }
 
-  .amort-table td {
-    padding: 9px 10px;
+  .amort-table td,
+  .data-table td,
+  .comparison-table td {
+    padding: 9px 12px;
     font-size: 0.78rem;
     white-space: nowrap;
   }
