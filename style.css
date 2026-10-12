@@ -801,6 +801,59 @@ canvas {
   display: block;
 }
 
+/* Chart Card Headers, Legends & Canvas Containers */
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chart-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.chart-legend-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.chart-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chart-canvas-container {
+  width: 100%;
+  height: 320px;
+  position: relative;
+}
+
+.chart-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
 /* Floating Tooltip */
 .chart-tooltip {
   position: absolute;
@@ -1977,6 +2030,21 @@ canvas {
     padding: 8px;
   }
 
+  .chart-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .chart-legend-wrap {
+    width: 100%;
+    gap: 8px 14px;
+  }
+
+  .chart-canvas-container {
+    height: 280px;
+  }
+
   /* Toolbar Azioni e Bottoni (Condividi, CSV, PDF): Stack verticale a tutta larghezza */
   .dashboard-actions-row {
     flex-direction: column;
@@ -2114,6 +2182,12 @@ canvas {
 @media (max-width: 480px) {
   .navbar .container {
     padding: 0 20px;
+  }
+
+  .card,
+  .calculator-card,
+  .chart-card {
+    padding: 16px 12px;
   }
 
 
