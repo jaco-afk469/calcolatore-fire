@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=3.9">
+  <link rel="stylesheet" href="style.css?v=4.0">
 
   <!-- Schema.org WebApplication Structured Data -->
   <script type="application/ld+json">
@@ -299,25 +299,25 @@
         </div>
 
         <!-- Grafico Canvas Interattivo -->
-        <div class="chart-card" style="padding: 24px; margin-bottom: 24px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
-            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading);">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3 class="chart-card-title">
               Evoluzione Comparativa nel Tempo
             </h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; font-weight: 600;">
-              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-primary);">
-                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary);"></span>
+            <div class="chart-legend-wrap">
+              <span class="chart-legend-item" style="color: var(--accent-primary);">
+                <span class="chart-legend-dot" style="background: var(--accent-primary);"></span>
                 Fondo Pensione (+ Reinvestimento)
               </span>
-              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-emerald);">
-                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-emerald);"></span>
+              <span class="chart-legend-item" style="color: var(--accent-emerald);">
+                <span class="chart-legend-dot" style="background: var(--accent-emerald);"></span>
                 PAC Solo ETF
               </span>
             </div>
           </div>
 
-          <div style="width: 100%; height: 320px; position: relative;">
-            <canvas id="pensionChart" style="width: 100%; height: 100%;"></canvas>
+          <div class="chart-canvas-container">
+            <canvas id="pensionChart"></canvas>
           </div>
         </div>
 
@@ -475,7 +475,7 @@
   </footer>
 
   <!-- Script logica del calcolatore fondo pensione -->
-  <script src="fondo-pensione.js?v=1.3"></script>
+  <script src="fondo-pensione.js?v=1.4"></script>
   <script src="nav.js?v=1.2"></script>
 </body>
 </html>
