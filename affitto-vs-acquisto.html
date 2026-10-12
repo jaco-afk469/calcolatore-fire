@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affitto vs Acquisto Casa Calcolatore: Conviene Comprare o Investire in ETF? (2026)</title>
+  <meta name="description" content="Simulatore matematico indipendente Affitto vs Acquisto Casa: calcola se conviene comprare con mutuo o vivere in affitto e investire la differenza in un PAC in ETF. Modello con ammortamento francese e imposte.">
+  <link rel="canonical" href="https://jaco-afk469.github.io/calcolatore-fire/affitto-vs-acquisto.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Affitto vs Acquisto Casa: Conviene Comprare o Investire in ETF? (Simulatore 2026)">
+  <meta property="og:description" content="Confronta il patrimonio netto tra comprare casa con mutuo o vivere in affitto investendo l'anticipo e la differenza in ETF azionari globali.">
+  <meta property="og:url" content="https://jaco-afk469.github.io/calcolatore-fire/affitto-vs-acquisto.html">
+  <meta property="og:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Affitto vs Acquisto Casa Calcolatore (2026)">
+  <meta name="twitter:description" content="Confronto patrimoniale matematico: mutuo casa vs affitto + PAC in ETF.">
+  <meta name="twitter:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+
+  <!-- Google Fonts & Favicon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
+  <link rel="stylesheet" href="style.css?v=3.5">
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calcolatore Affitto vs Acquisto Casa FinCalcolatore",
+    "url": "https://jaco-afk469.github.io/calcolatore-fire/affitto-vs-acquisto.html",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "description": "Simulatore patrimoniale comparativo tra acquisto casa con mutuo ed affitto con investimento della differenza in PAC ETF.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Navbar: Stile Stripe minimal -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+        <span class="brand-title">FinCalcolatore</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#calcolatore" class="nav-link">Calcolatore PAC</a>
+        <a href="fondo-pensione-vs-etf.html" class="nav-link">Fondo vs ETF</a>
+        <a href="affitto-vs-acquisto.html" class="nav-link active" style="color: var(--accent-primary); font-weight: 600;">Affitto vs Acquisto</a>
+        <a href="migliori-broker-pac-etf-italia.html" class="nav-link">Migliori Broker</a>
+        <a href="index.html#guide" class="nav-link">Guide</a>
+        <a href="index.html#guida-faq" class="nav-link">FAQ</a>
+      </div>
+      <a href="index.html#calcolatore" class="nav-back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Torna alla Home</span>
+      </a>
+
+      <!-- Hamburger Button (Mobile only) -->
+      <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <div class="mobile-menu-section-title">Strumenti & Calcolatori</div>
+        <a href="index.html#calcolatore" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📊</span>
+          <span>Calcolatore PAC & FIRE</span>
+        </a>
+        <a href="fondo-pensione-vs-etf.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📈</span>
+          <span>Fondo Pensione vs ETF (5.164€)</span>
+        </a>
+        <a href="affitto-vs-acquisto.html" class="mobile-nav-link" style="color: var(--accent-primary); font-weight: 600;">
+          <span class="mobile-nav-icon">🏠</span>
+          <span>Affitto vs Acquisto Casa</span>
+        </a>
+        <a href="migliori-broker-pac-etf-italia.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">🏆</span>
+          <span>Migliori Broker PAC (2026)</span>
+        </a>
+
+        <div class="mobile-menu-divider"></div>
+
+        <div class="mobile-menu-section-title">Guide & Approfondimenti</div>
+        <a href="guida-interesse-composto-pac.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">💡</span>
+          <span>Guida Interesse Composto</span>
+        </a>
+        <a href="guida-metodo-fire-regola-4-percento.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">🎯</span>
+          <span>Guida Metodo FIRE (Regola 4%)</span>
+        </a>
+        <a href="index.html#piattaforme" class="mobile-nav-link">
+          <span class="mobile-nav-icon">⭐</span>
+          <span>Piattaforme Consigliate</span>
+        </a>
+        <a href="index.html#guida-faq" class="mobile-nav-link">
+          <span class="mobile-nav-icon">❓</span>
+          <span>Domande Frequenti (FAQ)</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Backdrop -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
+
+  <main class="container">
+
+    <!-- HERO HEADER EDITORIALE -->
+    <header class="legal-page-header" style="max-width: 980px; text-align: center; margin: 36px auto 28px auto;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 9999px; padding: 4px 14px; font-size: 0.78rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+        <span>🏠 Modello Patrimoniale Comparativo</span>
+      </div>
+      <h1 class="legal-main-title" style="font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; text-align: center;">
+        Affitto vs Acquisto Casa: Calcolatore di Convenienza Matematico
+      </h1>
+      <p style="font-size: 1.05rem; color: var(--text-body); max-width: 780px; margin: 12px auto 0 auto; line-height: 1.6;">
+        Confronta il patrimonio netto reale: comprare casa con mutuo conviene davvero, oppure vivere in affitto e investire l'anticipo e la differenza di spesa in un PAC in ETF azionario ti rende più ricco nel lungo periodo?
+      </p>
+    </header>
+
+    <!-- DASHBOARD INTERATTIVA DEL CALCOLATORE -->
+    <div class="pension-dashboard-grid">
+
+      <!-- COLONNA SINISTRA: PANNELLO CONTROLLI -->
+      <div class="calculator-card" style="padding: 24px;">
+        <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-heading); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+          <span>⚙️ Parametri di Confronto</span>
+        </h2>
+
+        <!-- Prezzo Immobile -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="propertyPriceInput" class="input-label">Prezzo Immobile da Acquistare</label>
+            <div class="input-value-badge">
+              <input type="number" id="propertyPriceInput" value="200000" min="50000" max="1000000" step="5000" class="numeric-field">
+              <span class="currency-symbol">€</span>
+            </div>
+          </div>
+          <input type="range" id="propertyPriceRange" min="50000" max="1000000" step="5000" value="200000" class="range-slider">
+          <div class="preset-chips-row">
+            <button type="button" class="preset-chip-btn preset-price" data-val="150000">150.000 €</button>
+            <button type="button" class="preset-chip-btn preset-price active" data-val="200000">200.000 €</button>
+            <button type="button" class="preset-chip-btn preset-price" data-val="300000">300.000 €</button>
+            <button type="button" class="preset-chip-btn preset-price" data-val="450000">450.000 €</button>
+          </div>
+        </div>
+
+        <!-- Canone Affitto Mensile -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="monthlyRentInput" class="input-label">Canone Affitto Mensile Equivalente</label>
+            <div class="input-value-badge">
+              <input type="number" id="monthlyRentInput" value="800" min="300" max="4000" step="50" class="numeric-field">
+              <span class="currency-symbol">€</span>
+            </div>
+          </div>
+          <input type="range" id="monthlyRentRange" min="300" max="4000" step="50" value="800" class="range-slider">
+          <div class="preset-chips-row">
+            <button type="button" class="preset-chip-btn preset-rent" data-val="600">600 €/m</button>
+            <button type="button" class="preset-chip-btn preset-rent active" data-val="800">800 €/m</button>
+            <button type="button" class="preset-chip-btn preset-rent" data-val="1100">1.100 €/m</button>
+            <button type="button" class="preset-chip-btn preset-rent" data-val="1500">1.500 €/m</button>
+          </div>
+        </div>
+
+        <!-- Anticipo Mutuo (%) -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="downPaymentInput" class="input-label">Anticipo sul Prezzo Casa</label>
+            <div class="input-value-badge">
+              <input type="number" id="downPaymentInput" value="20" min="0" max="60" step="5" class="numeric-field">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <input type="range" id="downPaymentRange" min="0" max="60" step="5" value="20" class="range-slider">
+        </div>
+
+        <!-- Durata Mutuo -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="mortgageYearsInput" class="input-label">Durata del Mutuo</label>
+            <div class="input-value-badge">
+              <input type="number" id="mortgageYearsInput" value="25" min="10" max="35" step="5" class="numeric-field">
+              <span class="currency-symbol">anni</span>
+            </div>
+          </div>
+          <input type="range" id="mortgageYearsRange" min="10" max="35" step="5" value="25" class="range-slider">
+          <div class="preset-chips-row">
+            <button type="button" class="preset-chip-btn preset-mortgage-years" data-val="20">20 Anni</button>
+            <button type="button" class="preset-chip-btn preset-mortgage-years active" data-val="25">25 Anni</button>
+            <button type="button" class="preset-chip-btn preset-mortgage-years" data-val="30">30 Anni</button>
+          </div>
+        </div>
+
+        <!-- Tasso Fisso Mutuo -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="mortgageRateInput" class="input-label">Tasso Mutuo (Fisso Annuo)</label>
+            <div class="input-value-badge">
+              <input type="number" id="mortgageRateInput" value="3.0" min="1.0" max="6.5" step="0.1" class="numeric-field">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <input type="range" id="mortgageRateRange" min="1.0" max="6.5" step="0.1" value="3.0" class="range-slider">
+        </div>
+
+        <!-- Orizzonte Temporale di Permanenza -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="yearsHorizonInput" class="input-label">Orizzonte di Confronto</label>
+            <div class="input-value-badge">
+              <input type="number" id="yearsHorizonInput" value="20" min="1" max="35" step="1" class="numeric-field">
+              <span class="currency-symbol">anni</span>
+            </div>
+          </div>
+          <input type="range" id="yearsHorizonRange" min="1" max="35" step="1" value="20" class="range-slider">
+        </div>
+
+        <!-- Rendimento Annuo ETF Atteso -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="etfReturnInput" class="input-label">Rendimento Medio Annuo PAC ETF</label>
+            <div class="input-value-badge">
+              <input type="number" id="etfReturnInput" value="7.0" min="3.0" max="11.0" step="0.5" class="numeric-field">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <input type="range" id="etfReturnRange" min="3.0" max="11.0" step="0.5" value="7.0" class="range-slider">
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+            Storico medio annuo MSCI World / S&P 500: ~7% - 8% lordo
+          </div>
+        </div>
+
+        <!-- ACCORDION PARAMETRI AVANZATI -->
+        <details style="background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 12px 16px; margin-top: 14px;">
+          <summary style="font-size: 0.86rem; font-weight: 600; color: var(--text-heading); cursor: pointer;">
+            🛠️ Parametri Avanzati (Costi Notarili, Manutenzione, Inflazione)
+          </summary>
+          <div style="margin-top: 14px;">
+            <div class="input-group" style="margin-bottom: 12px;">
+              <div class="input-header">
+                <label for="purchaseCostsInput" class="input-label" style="font-size: 0.8rem;">Costi Iniziali Acquisto (Notaio, Imposte, Agenzia)</label>
+                <div class="input-value-badge">
+                  <input type="number" id="purchaseCostsInput" value="8" min="3" max="14" step="0.5" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 12px;">
+              <div class="input-header">
+                <label for="maintenanceInput" class="input-label" style="font-size: 0.8rem;">Manutenzione Annua Proprietario (% sul valore casa)</label>
+                <div class="input-value-badge">
+                  <input type="number" id="maintenanceInput" value="1.0" min="0.3" max="2.5" step="0.1" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 12px;">
+              <div class="input-header">
+                <label for="propertyApprInput" class="input-label" style="font-size: 0.8rem;">Rivalutazione Annua Immobile</label>
+                <div class="input-value-badge">
+                  <input type="number" id="propertyApprInput" value="1.5" min="0.0" max="4.0" step="0.1" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 0;">
+              <div class="input-header">
+                <label for="rentInflationInput" class="input-label" style="font-size: 0.8rem;">Inflazione Annua Canone Affitto (ISTAT)</label>
+                <div class="input-value-badge">
+                  <input type="number" id="rentInflationInput" value="1.5" min="0.0" max="4.0" step="0.1" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- COLONNA DESTRA: RISULTATI, KPI E GRAFICO -->
+      <div>
+
+        <!-- Winner Card Dinamica -->
+        <div class="winner-card" id="winnerCard">
+          <div class="winner-icon" id="winnerIcon">⚖️</div>
+          <div class="winner-content">
+            <h3 class="winner-title" id="winnerTitle">Calcolo in corso...</h3>
+            <p class="winner-desc" id="winnerDesc">Elaborazione della simulazione finanziaria comparativa.</p>
+          </div>
+        </div>
+
+        <!-- KPI Grid Primaria -->
+        <div class="pension-kpi-grid">
+          <!-- Patrimonio Netto Casa -->
+          <div class="pension-kpi-card highlight-pension">
+            <div class="pension-kpi-label">Patrimonio Netto Acquisto Casa</div>
+            <div class="pension-kpi-val" id="kpiHouseNetWorth" style="color: var(--accent-primary);">-- €</div>
+            <div class="pension-kpi-sub" id="kpiHouseEquitySub">Valore immobile al netto del mutuo residuo</div>
+          </div>
+
+          <!-- Patrimonio Netto Affitto + ETF -->
+          <div class="pension-kpi-card highlight-etf">
+            <div class="pension-kpi-label">Patrimonio Netto Affitto + PAC ETF</div>
+            <div class="pension-kpi-val" id="kpiRentNetWorth" style="color: var(--accent-emerald);">-- €</div>
+            <div class="pension-kpi-sub" id="kpiRentSub">Portafoglio ETF netto (imposta 26% detratta)</div>
+          </div>
+
+          <!-- Rata Mutuo Stimata -->
+          <div class="pension-kpi-card">
+            <div class="pension-kpi-label">Rata Mutuo Mensile</div>
+            <div class="pension-kpi-val" id="kpiMonthlyMortgage">-- €</div>
+            <div class="pension-kpi-sub">Ammortamento francese a rata fissa</div>
+          </div>
+
+          <!-- Capitale Iniziale Investito da Inquilino -->
+          <div class="pension-kpi-card">
+            <div class="pension-kpi-label">Capitale Iniziale Investito in ETF</div>
+            <div class="pension-kpi-val" id="kpiInitialInvested">-- €</div>
+            <div class="pension-kpi-sub">Anticipo + Spese notarili/agenzia risparmiate</div>
+          </div>
+
+          <!-- Break-even Year -->
+          <div class="pension-kpi-card" style="grid-column: 1 / -1; background: var(--bg-subtle);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <div class="pension-kpi-label">Punto di Pareggio (Break-Even)</div>
+                <div class="pension-kpi-sub">Anno a partire dal quale l'acquisto supera finanziariamente l'affitto</div>
+              </div>
+              <div style="font-size: 1.35rem; font-weight: 800; color: var(--accent-primary);" id="kpiBreakEven">
+                --
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grafico Canvas Interattivo -->
+        <div class="chart-card" style="padding: 24px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading);">
+              📈 Evoluzione del Patrimonio Netto nel Tempo
+            </h3>
+            <div style="display: flex; gap: 14px; font-size: 0.8rem; font-weight: 600;">
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-primary);">
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary);"></span>
+                Acquisto Casa (Equity Netta)
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-emerald);">
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-emerald);"></span>
+                Affitto + PAC in ETF
+              </span>
+            </div>
+          </div>
+
+          <div style="width: 100%; height: 320px; position: relative;">
+            <canvas id="comparisonChart" style="width: 100%; height: 100%;"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SEZIONE MONETIZZAZIONE / BROKER & RISPARMIO -->
+    <section class="broker-detail-card" style="background: linear-gradient(135deg, rgba(30, 86, 160, 0.04) 0%, rgba(16, 185, 129, 0.04) 100%);">
+      <h2 class="legal-article-title" style="font-size: 1.35rem; margin-bottom: 12px;">
+        💡 Come Mettere a Frutto la Differenza: I Migliori Strumenti
+      </h2>
+      <p style="color: var(--text-body); font-size: 0.94rem; line-height: 1.7; margin-bottom: 18px;">
+        Sia che tu scelga di vivere in affitto e investire nei mercati finanziari, sia che tu stia accumulando l'anticipo del 20% per il mutuo, hai bisogno di piattaforme efficienti con commissioni d'ingresso azzerate e conti remunerati:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 14px;">
+        <!-- Card Trade Republic -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">1. Trade Republic</h3>
+          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
+            Ideale per creare un PAC automatico su ETF a <strong>0€</strong> o per far fruttare il capitale dell'anticipo al <strong>3,25% annuo lordo</strong> sulla liquidità non investita.
+          </p>
+          <a href="https://traderepublic.com/referral/TRPAC20" target="_blank" rel="noopener noreferrer" class="verdict-card-btn" style="background: var(--accent-emerald); color: #fff;">
+            Inizia con Trade Republic (Promo TRPAC20) →
+          </a>
+        </div>
+
+        <!-- Card Scalable Capital -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">2. Scalable Capital</h3>
+          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
+            La più ampia offerta europea con oltre <strong>2.500 ETF</strong> impostabili in PAC automatico gratuito, con trading a 0,99€ e remunerazione liquidità Prime+.
+          </p>
+          <a href="https://scalable.capital/it" target="_blank" rel="noopener noreferrer" class="verdict-card-btn" style="background: var(--accent-primary); color: #fff;">
+            Scopri Scalable Capital →
+          </a>
+        </div>
+
+        <!-- Card Guida Comparativa -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">3. Confronta Tutti i Broker</h3>
+          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
+            Vuoi confrontare costi fissi, regime dichiarativo vs amministrato e report fiscali per il 730? Leggi la nostra analisi comparativa completa.
+          </p>
+          <a href="migliori-broker-pac-etf-italia.html" class="verdict-card-btn">
+            Classifica Migliori Broker 2026 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABELLA DI CONFRONTO PER SCAGLIONI TEMPORALI -->
+    <section class="table-section" style="margin: 48px 0;">
+      <div class="card-header" style="border: none; padding-bottom: 0;">
+        <h2 class="card-title">Tabella Dettagliata per Traguardi Temporali</h2>
+        <p class="card-desc">Confronto netto del patrimonio accumulato nei momenti cardine della vita finanziaria</p>
+      </div>
+      <div class="table-container" style="margin-top: 18px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="text-align: left;">Orizzonte</th>
+              <th style="text-align: right;">Patrimonio Netto Casa</th>
+              <th style="text-align: right;">Patrimonio Netto Affitto + ETF</th>
+              <th style="text-align: right;">Differenza Netta</th>
+              <th style="text-align: right;">Debito Residuo Mutuo</th>
+            </tr>
+          </thead>
+          <tbody id="comparisonTableBody">
+            <!-- Popolato dinamicamente da JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- GUIDA DIDATTICA E FAQ DI APPROFONDIMENTO -->
+    <article class="legal-doc-wrap" style="max-width: 900px; margin-top: 56px;">
+      <h2 class="legal-main-title" style="font-size: 1.85rem; margin-bottom: 24px;">
+        La Guida Definitiva: Comprare Casa o Vivere in Affitto nel 2026?
+      </h2>
+
+      <div class="legal-article">
+        <h3 class="legal-article-title">1. Perché l'affitto non sono "soldi buttati": La Regola del 5%</h3>
+        <p>
+          Il detto popolare italiano <em>"l'affitto è buttare i soldi dalla finestra, il mutuo costruisce qualcosa di tuo"</em> ignora completamente la realtà dei <strong>costi a fondo perduto</strong> che ogni proprietario sostiene ogni anno.
+        </p>
+        <p>
+          Secondo la celebre <em>Regola del 5%</em> della finanza personale, possedere un immobile costa mediamente il <strong>5% del suo valore ogni singolo anno</strong> in spese totalmente irrecuperabili:
+        </p>
+        <ul>
+          <li><strong>~1% in manutenzione e ristrutturazioni:</strong> rifacimento tetti, caldaie, facciate e adeguamento energetico direttiva UE Case Green.</li>
+          <li><strong>~1% in imposte e costi di transazione ammortizzati:</strong> imposta di registro, notaio, agenzia immobiliare e tasse locali.</li>
+          <li><strong>~3% in costo opportunità del capitale:</strong> il rendimento perso dall'anticipo del 20% che non è investito in asset produttivi come gli ETF globali.</li>
+        </ul>
+        <p>
+          Se il canone di affitto annuo è inferiore al 5% del prezzo di acquisto di una casa analoga, <strong>l'affitto è matematicamente più conveniente dell'acquisto</strong>.
+        </p>
+      </div>
+
+      <div class="legal-article">
+        <h3 class="legal-article-title">2. I Costi Iniziali Occulti dell'Acquisto Casa</h3>
+        <p>
+          Quando si acquista una casa in Italia da 200.000 €, il compratore non versa solo l'anticipo di 40.000 € (20%), ma deve sostenere costi di transazione a fondo perduto pari a circa l'<strong>8% - 10% del prezzo</strong>:
+        </p>
+        <ul>
+          <li><strong>Provvigione agenzia immobiliare:</strong> 3% + IVA (3,66% = 7.320 €).</li>
+          <li><strong>Parcella notaio:</strong> 2 atti (rogito d'acquisto + atto di mutuo con ipoteca), circa 3.000 € - 4.000 €.</li>
+          <li><strong>Imposta di registro prima casa:</strong> 2% sul valore catastale rivalutato (~1.500€ - 2.500€).</li>
+          <li><strong>Istruttoria e perizia bancaria:</strong> circa 1.000 € - 1.500 €.</li>
+        </ul>
+        <p>
+          Questo significa che prima ancora di entrare in casa si bruciano tra i 14.000 € e i 18.000 € che <strong>non aumentano il valore dell'immobile</strong>. Chi sceglie l'affitto investe questa esatta somma nel mercato azionario dal primo giorno, sfruttando l'interesse composto per decenni.
+        </p>
+      </div>
+
+      <div class="legal-article">
+        <h3 class="legal-article-title">3. Flessibilità Geografica e Carriera</h3>
+        <p>
+          L'affitto offre una leva finanziaria sottovalutata: la <strong>mobilità</strong>. Un professionista in affitto può cambiare città in 3 mesi per cogliere un'opportunità di lavoro che aumenta la sua RAL del 20-30%, mentre vendere un immobile richiede mediamente 6-12 mesi e ulteriori costi di intermediazione.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <div class="legal-article" style="margin-top: 36px;">
+        <h3 class="legal-article-title">Domande Frequenti (FAQ)</h3>
+
+        <div style="border-top: 1px solid var(--border-light); padding: 16px 0;">
+          <h4 style="font-size: 1.05rem; font-weight: 600; color: var(--text-heading); margin-bottom: 6px;">
+            Dopo quanti anni conviene comprare casa rispetto all'affitto?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">
+            In media, se si prevede di abitare nello stesso immobile per <strong>almeno 10-15 anni</strong>, l'acquisto comincia a risultare conveniente poiché i costi notarili e le imposte iniziali vengono ammortizzati su un orizzonte lungo e la rata del mutuo rimane fissa mentre l'affitto cresce con l'inflazione. Per permanenze inferiori a 7 anni, l'affitto vince quasi sempre.
+          </p>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light); padding: 16px 0;">
+          <h4 style="font-size: 1.05rem; font-weight: 600; color: var(--text-heading); margin-bottom: 6px;">
+            Gli immobili si rivalutano sempre nel tempo?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">
+            No. In Italia, tolte pochissime grandi metropoli attrattive (Milano, Bologna, Roma centro), i prezzi reali degli immobili (al netto dell'inflazione) negli ultimi 15 anni sono rimasti stabili o sono diminuiti nelle province e nei piccoli centri. Al contrario, un ETF azionario diversificato mondiale (MSCI World) storicamente rende il 7-8% medio annuo lordo.
+          </p>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-light); padding: 16px 0;">
+          <h4 style="font-size: 1.05rem; font-weight: 600; color: var(--text-heading); margin-bottom: 6px;">
+            Come posso investire la differenza se vivo in affitto?
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--text-body); line-height: 1.6;">
+            Il metodo più semplice ed efficace è impostare un Piano di Accumulo Capitale (PAC) automatico gratuito su un ETF azionario globale (come MSCI World o FTSE All-World) tramite broker a zero commissioni come <strong>Trade Republic</strong> o <strong>Scalable Capital</strong>. In questo modo, l'anticipo risparmiato e la differenza mensile lavorano autonomamente per te.
+          </p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="brand-logo">
+          <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+          <span class="brand-title">FinCalcolatore</span>
+        </div>
+        <div class="footer-links-row">
+          <a href="index.html#calcolatore" class="footer-link">Calcolatore PAC</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="fondo-pensione-vs-etf.html" class="footer-link">Fondo Pensione vs ETF</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="affitto-vs-acquisto.html" class="footer-link">Affitto vs Acquisto</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="migliori-broker-pac-etf-italia.html" class="footer-link">Migliori Broker</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="termini-condizioni.html" class="footer-link">Termini & Disclaimer</a>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          &copy; 2026 FinCalcolatore &bull; Simulatore matematico indipendente &bull; Nessuna consulenza finanziaria
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        Le simulazioni fornite da FinCalcolatore hanno scopo puramente educativo e illustrativo. I rendimenti passati non sono garanzia di rendimenti futuri. Prima di sottoscrivere mutui o strumenti finanziari, valutare attentamente la propria situazione patrimoniale personale.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="nav.js?v=1.0"></script>
+  <script src="affitto-acquisto.js?v=1.0"></script>
+</body>
+</html>
