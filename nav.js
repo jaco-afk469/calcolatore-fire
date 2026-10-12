@@ -13,23 +13,33 @@
 
     if (!btn || !menu) return;
 
-    function toggleMenu(open) {
-      const isOpen = open !== undefined ? open : !menu.classList.contains('open');
+    function toggleMenu(forceOpen) {
+      const isOpen = forceOpen !== undefined ? forceOpen : !menu.classList.contains('open');
       btn.classList.toggle('active', isOpen);
       menu.classList.toggle('open', isOpen);
       if (backdrop) backdrop.classList.toggle('open', isOpen);
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
       if (backdrop) backdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+
+      // Impedisci lo scroll della pagina di sfondo quando il menu è aperto
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
     }
 
     btn.addEventListener('click', function (e) {
+      e.preventDefault();
       e.stopPropagation();
       toggleMenu();
     });
 
     if (backdrop) {
-      backdrop.addEventListener('click', function () {
+      backdrop.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         toggleMenu(false);
       });
     }
@@ -48,7 +58,7 @@
       }
     });
 
-    // Chiudi se si clicca all'esterno del menu
+    // Chiudi se si clicca all'esterno del menu e del bottone
     document.addEventListener('click', function (e) {
       if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
         toggleMenu(false);
