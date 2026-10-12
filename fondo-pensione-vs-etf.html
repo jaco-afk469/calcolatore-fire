@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcolatore Fondo Pensione vs ETF (2026) | Deduzione 5.164€ & Tasse</title>
+  <meta name="description" content="Simula gratis la convenienza tra Fondo Pensione e PAC in ETF. Calcola il risparmio IRPEF della deduzione 5.164€, l'effetto del reinvestimento nel 730, i costi TER e la tassazione finale.">
+  <meta name="keywords" content="fondo pensione vs etf, calcolo deduzione fondo pensione, deduzione 5164 irpef, conviene fondo pensione aperto, simulatore pensione integrativa pac etf">
+  <meta name="author" content="FinCalcolatore">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jaco-afk469.github.io/calcolatore-fire/fondo-pensione-vs-etf.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FinCalcolatore">
+  <meta property="og:title" content="Calcolatore Fondo Pensione vs PAC ETF (2026) | Deduzione 5.164€">
+  <meta property="og:description" content="Simula il risparmio IRPEF, la tassazione agevolata (15%-9%) e confronta la crescita netta del Fondo Pensione con un PAC autonomo in ETF.">
+  <meta property="og:url" content="https://jaco-afk469.github.io/calcolatore-fire/fondo-pensione-vs-etf.html">
+  <meta property="og:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calcolatore Fondo Pensione vs ETF (2026)">
+  <meta name="twitter:description" content="Confronto matematico: deduzione IRPEF 5.164€ vs rendimento ETF a basso costo.">
+  <meta name="twitter:image" content="https://jaco-afk469.github.io/calcolatore-fire/assets/og-cover.png">
+
+  <!-- Google Fonts & Favicon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
+  <link rel="stylesheet" href="style.css?v=3.5">
+
+  <!-- Schema.org WebApplication Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calcolatore Fondo Pensione vs ETF",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "description": "Simulatore interattivo per confrontare l'efficienza fiscale della previdenza complementare (deduzione IRPEF fino a 5.164€) con un Piano di Accumulo autonomo in ETF."
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+        <span class="brand-title">FinCalcolatore</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#calcolatore" class="nav-link">Calcolatore PAC</a>
+        <a href="fondo-pensione-vs-etf.html" class="nav-link active" style="color: var(--accent-primary); font-weight: 600;">Fondo Pensione vs ETF</a>
+        <a href="migliori-broker-pac-etf-italia.html" class="nav-link">Migliori Broker</a>
+        <a href="index.html#guide" class="nav-link">Guide</a>
+        <a href="index.html#guida-faq" class="nav-link">FAQ</a>
+      </div>
+      <a href="index.html#calcolatore" class="nav-back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Torna alla Home</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="legal-page-header" style="text-align: center; margin-bottom: 32px;">
+      <div class="broker-badge-pill">
+        <span>⚡ MODELLO FISCALE ITALIANO 2026 • ART. 10 TUIR</span>
+      </div>
+      <h1 class="legal-main-title" style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 12px;">
+        Calcolatore Fondo Pensione vs PAC in ETF
+      </h1>
+      <p class="legal-lead-text" style="max-width: 780px; margin: 0 auto; color: var(--text-body);">
+        Confronta la convenienza tra la deduzione IRPEF annuale (fino a 5.164,15 €) della previdenza integrativa e la maggiore libertà con minori commissioni (TER) di un PAC in ETF azionario globale.
+      </p>
+    </header>
+
+    <!-- DASHBOARD INTERATTIVA DEL CALCOLATORE -->
+    <div class="pension-dashboard-grid">
+
+      <!-- COLONNA SINISTRA: PANNELLO CONTROLLI -->
+      <div class="calculator-card" style="padding: 24px;">
+        <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-heading); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+          <span>⚙️ I Tuoi Parametri Finanziari</span>
+        </h2>
+
+        <!-- Input RAL -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="ralInput" class="input-label">Reddito Lordo Annuo (RAL)</label>
+            <div class="input-value-badge">
+              <input type="number" id="ralInput" value="35000" min="15000" max="150000" step="1000" class="numeric-field">
+              <span class="currency-symbol">€</span>
+            </div>
+          </div>
+          <input type="range" id="ralRange" min="15000" max="150000" step="1000" value="35000" class="range-slider">
+          <div class="tax-bracket-summary">
+            Aliquota marginale IRPEF stimata: <strong id="kpiMarginalRate" style="color: var(--accent-primary);">37%</strong> (inclusi ~2% addizionali)
+          </div>
+        </div>
+
+        <!-- Input Versamento Annuo -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="contribInput" class="input-label">Versamento Annuo nel Fondo</label>
+            <div class="input-value-badge">
+              <input type="number" id="contribInput" value="5164" min="500" max="15000" step="50" class="numeric-field">
+              <span class="currency-symbol">€</span>
+            </div>
+          </div>
+          <input type="range" id="contribRange" min="500" max="15000" step="50" value="5164" class="range-slider">
+          <div class="preset-chips-row">
+            <button type="button" class="preset-chip-btn preset-contrib" data-val="1200">100€/m (1.200€)</button>
+            <button type="button" class="preset-chip-btn preset-contrib" data-val="2400">200€/m (2.400€)</button>
+            <button type="button" class="preset-chip-btn preset-contrib active" data-val="5164">Tetto Max 5.164 €</button>
+          </div>
+        </div>
+
+        <!-- Input Anni alla Pensione -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="yearsInput" class="input-label">Orizzonte Temporale (Anni)</label>
+            <div class="input-value-badge">
+              <input type="number" id="yearsInput" value="25" min="5" max="40" step="1" class="numeric-field">
+              <span class="currency-symbol">anni</span>
+            </div>
+          </div>
+          <input type="range" id="yearsRange" min="5" max="40" step="1" value="25" class="range-slider">
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+            Aliquota finale stimata a scadenza: <strong id="kpiPensionTaxRate" style="color: var(--accent-emerald);">12.0%</strong>
+          </div>
+        </div>
+
+        <!-- Input Rendimento Lordo Atteso -->
+        <div class="input-group">
+          <div class="input-header">
+            <label for="returnInput" class="input-label">Rendimento Lordo Annuo di Mercato</label>
+            <div class="input-value-badge">
+              <input type="number" id="returnInput" value="6.5" min="2" max="12" step="0.5" class="numeric-field">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <input type="range" id="returnRange" min="2" max="12" step="0.5" value="6.5" class="range-slider">
+        </div>
+
+        <!-- TOGGLE REINVESTIMENTO RIMBORSO 730 -->
+        <div class="toggle-card-wrap">
+          <div class="toggle-info">
+            <div class="toggle-title">
+              <span>Reinvesti Rimborso 730 in ETF</span>
+              <span class="toggle-badge-star">Consigliato</span>
+            </div>
+            <div class="toggle-desc">
+              Usa il risparmio fiscale annuo per alimentare in automatico un PAC in ETF: è la strategia a doppio binario più efficiente.
+            </div>
+          </div>
+          <label class="switch-control" title="Attiva/disattiva reinvestimento del rimborso">
+            <input type="checkbox" id="toggleReinvest" checked>
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Parametri Costi (TER) -->
+        <details style="background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 12px 16px; margin-top: 14px;">
+          <summary style="font-size: 0.86rem; font-weight: 600; color: var(--text-heading); cursor: pointer;">
+            🛠️ Costi di Gestione Annui (TER / ISC)
+          </summary>
+          <div style="margin-top: 14px;">
+            <div class="input-group" style="margin-bottom: 12px;">
+              <div class="input-header">
+                <label for="terPensionInput" class="input-label" style="font-size: 0.8rem;">TER Fondo Pensione Aperto</label>
+                <div class="input-value-badge">
+                  <input type="number" id="terPensionInput" value="1.4" min="0.4" max="2.5" step="0.1" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+              <input type="range" id="terPensionRange" min="0.4" max="2.5" step="0.1" value="1.4" class="range-slider">
+            </div>
+
+            <div class="input-group" style="margin-bottom: 0;">
+              <div class="input-header">
+                <label for="terEtfInput" class="input-label" style="font-size: 0.8rem;">TER PAC ETF Globale</label>
+                <div class="input-value-badge">
+                  <input type="number" id="terEtfInput" value="0.2" min="0.05" max="0.5" step="0.05" class="numeric-field">
+                  <span class="currency-symbol">%</span>
+                </div>
+              </div>
+              <input type="range" id="terEtfRange" min="0.05" max="0.5" step="0.05" value="0.2" class="range-slider">
+            </div>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- COLONNA DESTRA: RISULTATI, KPI E GRAFICO -->
+      <div>
+
+        <!-- Winner Card Dinamica -->
+        <div class="winner-card" id="winnerCard">
+          <div class="winner-icon" id="winnerIcon">🏆</div>
+          <div class="winner-content">
+            <h3 class="winner-title" id="winnerTitle">Calcolo in corso...</h3>
+            <p class="winner-desc" id="winnerDesc">Elaborazione della simulazione fiscale e finanziaria.</p>
+          </div>
+        </div>
+
+        <!-- KPI Grid Primaria -->
+        <div class="pension-kpi-grid">
+          <!-- Risparmio 730 Annuo -->
+          <div class="pension-kpi-card highlight-pension">
+            <div class="pension-kpi-label">Rimborso IRPEF Annuo (730)</div>
+            <div class="pension-kpi-val" id="kpiAnnualRefund" style="color: var(--accent-primary);">-- €</div>
+            <div class="pension-kpi-sub">Soldi restituiti sul conto ogni anno a luglio</div>
+            <div class="pension-kpi-tax-badge">Totale cumulato: <span id="kpiTotalRefund">-- €</span></div>
+          </div>
+
+          <!-- Strategia Fondo Pensione Netta -->
+          <div class="pension-kpi-card highlight-pension">
+            <div class="pension-kpi-label">Capitale Netto Fondo Pensione</div>
+            <div class="pension-kpi-val" id="kpiPensionNet">-- €</div>
+            <div class="pension-kpi-sub" id="kpiPensionSub">Al netto della tassazione agevolata</div>
+          </div>
+
+          <!-- Strategia PAC ETF Netta -->
+          <div class="pension-kpi-card highlight-etf" style="grid-column: 1 / -1;">
+            <div class="pension-kpi-label">Capitale Netto PAC in ETF Indipendente</div>
+            <div class="pension-kpi-val" id="kpiEtfNet" style="color: var(--accent-emerald);">-- €</div>
+            <div class="pension-kpi-sub" id="kpiEtfSub">Al netto dell'imposta sul capital gain del 26%</div>
+          </div>
+        </div>
+
+        <!-- Grafico Canvas Interattivo -->
+        <div class="chart-card" style="padding: 24px; margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading);">
+              📈 Evoluzione Comparativa nel Tempo
+            </h3>
+            <div style="display: flex; gap: 14px; font-size: 0.8rem; font-weight: 600;">
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-primary);">
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary);"></span>
+                Fondo Pensione (+ Reinvestimento)
+              </span>
+              <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-emerald);">
+                <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-emerald);"></span>
+                PAC Solo ETF
+              </span>
+            </div>
+          </div>
+
+          <div style="width: 100%; height: 320px; position: relative;">
+            <canvas id="pensionChart" style="width: 100%; height: 100%;"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SEZIONE MONETIZZAZIONE / BROKER CONSIGLIATI PER LA STRATEGIA ETF -->
+    <section class="broker-detail-card" style="background: linear-gradient(135deg, rgba(30, 86, 160, 0.04) 0%, rgba(16, 185, 129, 0.04) 100%);">
+      <h2 class="legal-article-title" style="font-size: 1.35rem; margin-bottom: 12px;">
+        💡 Come Massimizzare la Previdenza: La Strategia "A Due Motori"
+      </h2>
+      <p style="color: var(--text-body); font-size: 0.94rem; line-height: 1.7; margin-bottom: 18px;">
+        I massimi esperti di finanza personale consigliano una combinazione strategica: sfruttare il Fondo Pensione fino al tetto massimo deducibile di <strong>5.164,15 € all'anno</strong> per recuperare fino al 43% nel 730, e reinvestire immediatamente tale rimborso in un PAC su ETF azionario globale a zero commissioni.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 14px;">
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">1. Trade Republic</h3>
+          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
+            Ideale per reinvestire il rimborso 730 in PAC ETF a <strong>0€</strong> e ottenere il <strong>3,25% lordo</strong> sulla liquidità libera in attesa dei versamenti.
+          </p>
+          <a href="https://traderepublic.com/referral/TRPAC20" target="_blank" rel="noopener noreferrer" class="verdict-card-btn" style="background: var(--accent-emerald); color: #fff;">
+            Inizia con Trade Republic (Promo TRPAC20) →
+          </a>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">2. Confronta i Broker PAC</h3>
+          <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
+            Vuoi approfondire commissioni, offerta di ETF e gestione fiscale italiana? Leggi la nostra guida comparativa completa.
+          </p>
+          <a href="migliori-broker-pac-etf-italia.html" class="verdict-card-btn">
+            Migliori Broker per PAC ETF 2026 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABELLA DI CONFRONTO ANNO PER ANNO -->
+    <section class="table-section" style="margin: 48px 0;">
+      <div class="card-header" style="border: none; padding-bottom: 0;">
+        <h2 class="card-title">Tabella Dettagliata per Scaglioni Temporali</h2>
+        <p class="card-desc">Confronto netto del capitale accumulato nei traguardi chiave (al netto di imposte e costi TER)</p>
+      </div>
+      <div class="table-wrapper">
+        <table class="amort-table">
+          <thead>
+            <tr>
+              <th>Orizzonte</th>
+              <th>Rimborso 730 Cumulato</th>
+              <th>Netto Fondo (+ Rimborso Reinvestito)</th>
+              <th>Netto PAC Solo ETF</th>
+              <th>Differenza Netta</th>
+            </tr>
+          </thead>
+          <tbody id="pensionTableBody">
+            <!-- Popolato dinamicamente da fondo-pensione.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- GUIDA FORMATIVA E FAQ FISCALI -->
+    <div class="legal-doc-wrap">
+      <article class="legal-article">
+        <h2 class="legal-article-title">1. Come Funziona la Deduzione di 5.164,15 € nel 730</h2>
+        <p>
+          In base all'art. 10 del TUIR (Testo Unico delle Imposte sui Redditi), i contributi versati alla previdenza complementare (Fondi Pensione Chiusi, Fondi Pensione Aperti o PIP) sono deducibili dal reddito complessivo IRPEF fino a un massimo di <strong>5.164,15 € all'anno</strong>.
+        </p>
+        <p>
+          Questo significa che l'importo versato viene sottratto dalla base imponibile su cui paghi le tasse, facendoti risparmiare la tua <strong>aliquota marginale più alta</strong>:
+        </p>
+        <ul>
+          <li><strong>RAL fino a 28.000 €:</strong> Risparmio fiscale del 23% (+ addizionali ~2%) &rarr; fino a <strong>~1.291 €</strong> rimborsati.</li>
+          <li><strong>RAL tra 28.000 € e 50.000 €:</strong> Risparmio fiscale del 35% (+ addizionali ~2%) &rarr; fino a <strong>~1.910 €</strong> rimborsati.</li>
+          <li><strong>RAL oltre 50.000 €:</strong> Risparmio fiscale del 43% (+ addizionali ~2%) &rarr; fino a <strong>~2.323 €</strong> rimborsati.</li>
+        </ul>
+      </article>
+
+      <article class="legal-article">
+        <h2 class="legal-article-title">2. L'Impatto dei Costi di Gestione (TER): Il "Tallone d'Achille" dei Fondi Pensione</h2>
+        <p>
+          Se il vantaggio fiscale iniziale del fondo pensione è imbattibile, nel lungo termine subentra il fattore delle commissioni di gestione annue (TER / ISC). I fondi pensione aperti hanno costi medi compresi tra l'<strong>1,2% e l'1,8% annuo</strong>, mentre un ETF azionario globale (es. su MSCI World o S&P 500) costa tipicamente solo lo <strong>0,20% all'anno</strong>.
+        </p>
+        <p>
+          Un punto percentuale di differenza sui costi, capitalizzato per 25 o 30 anni, può erodere decine di migliaia di euro. Per questo motivo, su orizzonti molto lunghi (&gt;25 anni) e per chi ha redditi bassi (scaglione 23%), un PAC in ETF puro può talvolta superare il fondo pensione, a meno che il rimborso fiscale non venga diligentemente reinvestito.
+        </p>
+      </article>
+
+      <article class="legal-article">
+        <h2 class="legal-article-title">3. Tassazione alla Liquidazione: 15% che scende fino al 9%</h2>
+        <p>
+          Alla maturazione dei requisiti pensionistici, il capitale erogato dal Fondo Pensione gode di una tassazione separata agevolata straordinaria:
+        </p>
+        <ul>
+          <li>Per i primi 15 anni di iscrizione: aliquota fissa del <strong>15%</strong>.</li>
+          <li>Per ogni anno di iscrizione oltre il 15°: l'aliquota si riduce dello <strong>0,30%</strong> ogni anno.</li>
+          <li>Aliquota minima raggiungibile dopo 35 anni: <strong>9,0%</strong>.</li>
+        </ul>
+        <p>
+          Al confronto, i rendimenti delle plusvalenze di un PAC in ETF pagano l'aliquota ordinaria del <strong>26%</strong> al momento della vendita.
+        </p>
+      </article>
+
+      <!-- Bottoni Navigazione Footer -->
+      <div class="legal-footer-nav" style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <a href="index.html#calcolatore" class="nav-back-link" style="color: var(--accent-emerald); font-weight: 600;">
+          📊 Vai al Calcolatore PAC & FIRE →
+        </a>
+        <a href="migliori-broker-pac-etf-italia.html" class="nav-back-link">
+          I Migliori Broker per PAC ETF →
+        </a>
+        <a href="guida-interesse-composto-pac.html" class="nav-back-link">
+          Guida all'Interesse Composto
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer coordinato -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="brand-logo">
+          <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
+          <span class="brand-title">FinCalcolatore</span>
+        </div>
+        <div class="footer-links-row">
+          <a href="index.html#calcolatore" class="footer-link">Calcolatore PAC</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="fondo-pensione-vs-etf.html" class="footer-link">Fondo Pensione vs ETF</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="migliori-broker-pac-etf-italia.html" class="footer-link">Migliori Broker</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="guida-interesse-composto-pac.html" class="footer-link">Guida PAC</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="guida-metodo-fire-regola-4-percento.html" class="footer-link">Guida FIRE</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+          <span class="footer-dot">&bull;</span>
+          <a href="termini-condizioni.html" class="footer-link">Termini di Servizio</a>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          &copy; 2026 FinCalcolatore &bull; Informazione Finanziaria Indipendente
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        Le simulazioni fornite da questo calcolatore sono puramente matematiche e illustrative e non costituiscono consulenza finanziaria o previdenziale ai sensi del TUF e delle normative COVIP.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script logica del calcolatore fondo pensione -->
+  <script src="fondo-pensione.js?v=1.0"></script>
+</body>
+</html>
