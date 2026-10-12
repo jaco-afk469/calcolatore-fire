@@ -288,14 +288,21 @@
 
     if (!trajectory || trajectory.length === 0) return;
 
-    // Padding per assi
-    const padLeft = 65;
-    const padRight = 24;
-    const padTop = 24;
-    const padBottom = 38;
+    // Rilevamento Dark Mode
+    const isDark = (document.documentElement.getAttribute('data-theme') === 'dark') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // Padding per assi reattivo
+    const isMobile = width < 420;
+    const padLeft = isMobile ? 48 : 65;
+    const padRight = isMobile ? 16 : 24;
+    const padTop = 22;
+    const padBottom = 34;
 
     const plotW = width - padLeft - padRight;
     const plotH = height - padTop - padBottom;
+
+    if (plotW <= 0 || plotH <= 0) return;
 
     // Valore massimo per scala Y
     const maxVal = Math.max(
@@ -303,10 +310,10 @@
     ) * 1.1;
 
     // Griglia orizzontale
-    ctx.strokeStyle = 'rgba(148, 163, 184, 0.12)';
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(148, 163, 184, 0.16)';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#64748b';
-    ctx.font = '11px system-ui, sans-serif';
+    ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+    ctx.font = isMobile ? '500 10px Poppins, sans-serif' : '500 11px Poppins, sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
@@ -326,16 +333,19 @@
         ? `${Math.round(val / 1000)}k €`
         : `${Math.round(val)} €`;
 
-      ctx.fillText(label, padLeft - 10, y);
+      ctx.fillText(label, padLeft - 8, y);
     }
 
-    // Funzione coordinate X
+    // Funzione coordinate X e Y
     const getX = (idx) => padLeft + (idx / (trajectory.length - 1)) * plotW;
     const getY = (val) => padTop + plotH - (val / maxVal) * plotH;
 
-    // Curva 1: Strategia Fondo Pensione (Blu Trust #1E56A0)
-    ctx.strokeStyle = '#1E56A0';
-    ctx.lineWidth = 3;
+    // Curva 1: Strategia Fondo Pensione (Blu Trust o Electric Blue in Dark)
+    const colorPension = isDark ? '#4A90E2' : '#1E56A0';
+    const colorEtf = '#10B981';
+
+    ctx.strokeStyle = colorPension;
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
     trajectory.forEach((p, idx) => {
       const x = getX(idx);
@@ -347,8 +357,8 @@
 
     // Area sfumata Fondo Pensione
     const gradP = ctx.createLinearGradient(0, padTop, 0, padTop + plotH);
-    gradP.addColorStop(0, 'rgba(30, 86, 160, 0.22)');
-    gradP.addColorStop(1, 'rgba(30, 86, 160, 0.00)');
+    gradP.addColorStop(0, isDark ? 'rgba(74, 144, 226, 0.22)' : 'rgba(30, 86, 160, 0.18)');
+    gradP.addColorStop(1, 'rgba(0, 0, 0, 0.00)');
     ctx.fillStyle = gradP;
     ctx.beginPath();
     ctx.moveTo(getX(0), padTop + plotH);
@@ -360,8 +370,8 @@
     ctx.fill();
 
     // Curva 2: Strategia Solo ETF (Verde Emerald #10B981)
-    ctx.strokeStyle = '#10B981';
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = colorEtf;
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
     trajectory.forEach((p, idx) => {
       const x = getX(idx);
@@ -371,17 +381,80 @@
     });
     ctx.stroke();
 
-    // Etichette asse X (Anni)
-    ctx.fillStyle = '#64748b';
-    ctx.textAlign = 'center';
+    // Etichette asse X (Anni) con algoritmo dinamico anti-sovrapposizione
+    const totalYears = trajectory[trajectory.length - 1].year || trajectory.length;
+    const minLabelGap = isMobile ? 54 : 75;
+    const maxLabels = Math.max(2, Math.floor(plotW / minLabelGap));
+
+    // Passo arrotondato standard: 1, 2, 5, 10, 15, 20
+    let idealStep = Math.max(1, Math.ceil(totalYears / maxLabels));
+    if (totalYears <= 5) {
+      idealStep = idealStep <= 2 ? 1 : 2;
+    } else if (idealStep <= 3) {
+      idealStep = (totalYears <= 12) ? 2 : 5;
+    } else if (idealStep <= 5) {
+      idealStep = 5;
+    } else if (idealStep <= 10) {
+      idealStep = 10;
+    } else if (idealStep <= 15) {
+      idealStep = 15;
+    } else {
+      idealStep = 20;
+    }
+
+    const indicesToLabel = [];
+    indicesToLabel.push(0);
+
+    for (let y = idealStep; y < totalYears; y += idealStep) {
+      const idx = trajectory.findIndex(p => p.year === y);
+      if (idx !== -1 && !indicesToLabel.includes(idx)) {
+        indicesToLabel.push(idx);
+      }
+    }
+
+    const lastIdx = trajectory.length - 1;
+    if (!indicesToLabel.includes(lastIdx)) {
+      indicesToLabel.push(lastIdx);
+    }
+
+    // Se l'ultimo e il penultimo sono troppo vicini (< 75% del gap minimo), elimina il penultimo
+    if (indicesToLabel.length >= 2) {
+      const lastX = getX(indicesToLabel[indicesToLabel.length - 1]);
+      const prevX = getX(indicesToLabel[indicesToLabel.length - 2]);
+      if (lastX - prevX < minLabelGap * 0.75) {
+        indicesToLabel.splice(indicesToLabel.length - 2, 1);
+      }
+    }
+
+    // Se il primo (Anno 1) e il secondo sono troppo vicini, elimina il secondo
+    if (indicesToLabel.length >= 3) {
+      const firstX = getX(indicesToLabel[0]);
+      const secondX = getX(indicesToLabel[1]);
+      if (secondX - firstX < minLabelGap * 0.75) {
+        indicesToLabel.splice(1, 1);
+      }
+    }
+
+    ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+    ctx.font = isMobile ? '500 10px Poppins, sans-serif' : '500 11px Poppins, sans-serif';
     ctx.textBaseline = 'top';
 
-    const stepYears = trajectory.length > 25 ? 5 : trajectory.length > 15 ? 3 : 2;
-    trajectory.forEach((p, idx) => {
-      if (p.year === 1 || p.year % stepYears === 0 || p.year === trajectory.length) {
-        const x = getX(idx);
-        ctx.fillText(`Anno ${p.year}`, x, padTop + plotH + 10);
+    indicesToLabel.forEach((idx) => {
+      const p = trajectory[idx];
+      if (!p) return;
+      const x = getX(idx);
+
+      if (idx === 0) {
+        ctx.textAlign = 'left';
+      } else if (idx === trajectory.length - 1) {
+        ctx.textAlign = 'right';
+      } else {
+        ctx.textAlign = 'center';
       }
+
+      const yr = p.year;
+      const label = isMobile ? `${yr}a` : `Anno ${yr}`;
+      ctx.fillText(label, x, padTop + plotH + 10);
     });
   }
 
@@ -472,6 +545,14 @@
       const res = simulate();
       renderChart(res.trajectory);
     });
+
+    // Theme change listener per ridisegnare il grafico al cambio dark/light mode
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const res = simulate();
+        renderChart(res.trajectory);
+      });
+    }
 
     updateUI();
   }
