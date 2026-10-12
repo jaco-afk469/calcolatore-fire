@@ -616,6 +616,196 @@
   }
 
   /**
+   * GENERAZIONE REPORT DI STAMPA ISOLATO (GRAFICO + TABELLA)
+   */
+  function generateAndPrintReport() {
+    const printArea = document.getElementById('printReportArea');
+    if (!printArea) {
+      window.print();
+      return;
+    }
+
+    const dateStr = new Date().toLocaleDateString('it-IT', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+
+    // Esporta il canvas in PNG ad alta risoluzione
+    let chartImgSrc = '';
+    if (dom.chartCanvas) {
+      try {
+        chartImgSrc = dom.chartCanvas.toDataURL('image/png');
+      } catch (e) {
+        console.warn('Canvas export failed:', e);
+      }
+    }
+
+    // Clona le righe della tabella
+    const tableRows = dom.amortTableBody ? dom.amortTableBody.innerHTML : '';
+    const isFire = state.activeTab === 'fire';
+
+    let headerSubtitle = 'Report di Proiezione del Patrimonio • Piano di Accumulo (PAC)';
+    let paramsHtml = '';
+    let kpiHtml = '';
+
+    if (isFire) {
+      headerSubtitle = 'Report Obiettivo Libertà Finanziaria • Simulazione FIRE';
+      paramsHtml = `
+        <div class="print-param-box">
+          <span class="print-param-label">Spese Mensili</span>
+          <span class="print-param-val">${formatCurrency(state.fireMonthlyExpenses)}/m</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Tasso SWR</span>
+          <span class="print-param-val">${state.safeWithdrawalRate.toFixed(1)}%</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Risparmio PAC</span>
+          <span class="print-param-val">${formatCurrency(state.monthlyContribution)}/m</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Rendimento Atteso</span>
+          <span class="print-param-val">${state.annualReturn.toFixed(1)}%</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Capitale Attuale</span>
+          <span class="print-param-val">${formatCurrency(state.initialCapital)}</span>
+        </div>
+      `;
+
+      kpiHtml = `
+        <div class="print-kpi-box print-kpi-featured">
+          <span class="print-kpi-label">FIRE Number Necessario</span>
+          <span class="print-kpi-val">${dom.fireNumberKpi ? dom.fireNumberKpi.textContent : ''}</span>
+          <span class="print-kpi-sub">Patrimonio target totale</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Tempo Stimato al Target</span>
+          <span class="print-kpi-val">${dom.fireYearsKpi ? dom.fireYearsKpi.textContent : ''}</span>
+          <span class="print-kpi-sub">Al ritmo di risparmio attuale</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Rendita Mensile Passiva</span>
+          <span class="print-kpi-val" style="color: #0d9488;">${dom.fireMonthlyPassiveKpi ? dom.fireMonthlyPassiveKpi.textContent : ''}</span>
+          <span class="print-kpi-sub">Prelievo mensile continuo</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Capitale Versato</span>
+          <span class="print-kpi-val">${dom.kpiTotalContributed ? dom.kpiTotalContributed.textContent : ''}</span>
+          <span class="print-kpi-sub">Totale versamenti</span>
+        </div>
+      `;
+    } else {
+      paramsHtml = `
+        <div class="print-param-box">
+          <span class="print-param-label">Capitale Iniziale</span>
+          <span class="print-param-val">${formatCurrency(state.initialCapital)}</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Versamento PAC</span>
+          <span class="print-param-val">${formatCurrency(state.monthlyContribution)}/m</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Orizzonte Temporale</span>
+          <span class="print-param-val">${state.years} Anni</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Rendimento Stimato</span>
+          <span class="print-param-val">${state.annualReturn.toFixed(1)}%</span>
+        </div>
+        <div class="print-param-box">
+          <span class="print-param-label">Inflazione Media</span>
+          <span class="print-param-val">${state.inflationRate.toFixed(1)}%</span>
+        </div>
+      `;
+
+      kpiHtml = `
+        <div class="print-kpi-box print-kpi-featured">
+          <span class="print-kpi-label">Capitale Finale Stimato</span>
+          <span class="print-kpi-val">${dom.kpiFinalTotal ? dom.kpiFinalTotal.textContent : ''}</span>
+          <span class="print-kpi-sub">Valore nominale lordo</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Capitale Versato</span>
+          <span class="print-kpi-val">${dom.kpiTotalContributed ? dom.kpiTotalContributed.textContent : ''}</span>
+          <span class="print-kpi-sub">Totale versamenti</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Interessi Maturati</span>
+          <span class="print-kpi-val" style="color: #0d9488;">${dom.kpiInterestEarned ? dom.kpiInterestEarned.textContent : ''}</span>
+          <span class="print-kpi-sub">Da capitalizzazione composta</span>
+        </div>
+        <div class="print-kpi-box">
+          <span class="print-kpi-label">Valore Reale Stimato</span>
+          <span class="print-kpi-val">${dom.kpiRealValue ? dom.kpiRealValue.textContent : ''}</span>
+          <span class="print-kpi-sub">Potere d'acquisto post-inflazione</span>
+        </div>
+      `;
+    }
+
+    printArea.innerHTML = `
+      <div class="print-doc">
+        <div class="print-header">
+          <div class="print-brand">
+            <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" class="print-logo" width="36" height="36">
+            <div>
+              <h1 class="print-title">FinCalcolatore</h1>
+              <p class="print-subtitle">${headerSubtitle}</p>
+            </div>
+          </div>
+          <div class="print-meta">
+            <div><strong>Data:</strong> ${dateStr}</div>
+            <div><strong>Sito:</strong> https://jaco-afk469.github.io/calcolatore-fire/</div>
+          </div>
+        </div>
+
+        <div class="print-section-title">1. Parametri della Simulazione</div>
+        <div class="print-params-grid">
+          ${paramsHtml}
+        </div>
+
+        <div class="print-section-title">2. Risultati della Proiezione</div>
+        <div class="print-kpi-grid">
+          ${kpiHtml}
+        </div>
+
+        ${chartImgSrc ? `
+        <div class="print-section-title print-chart-title">3. Grafico di Proiezione del Capitale</div>
+        <div class="print-chart-wrap">
+          <img src="${chartImgSrc}" alt="Grafico Evoluzione Patrimonio" class="print-chart-img">
+        </div>
+        ` : ''}
+
+        <div class="print-section-title print-page-break">4. Tabella Dettagliata Anno per Anno</div>
+        <table class="print-table">
+          <thead>
+            <tr>
+              <th>Periodo</th>
+              <th>Capitale Versato</th>
+              <th>Interessi Maturati</th>
+              <th>Totale Nominale</th>
+              <th>Valore Reale (Inflazionato)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tableRows}
+          </tbody>
+        </table>
+
+        <div class="print-footer">
+          <p>Documento generato da <strong>FinCalcolatore</strong> &bull; https://jaco-afk469.github.io/calcolatore-fire/</p>
+          <p class="print-disclaimer">Disclaimer: I valori presentati in questo report sono stime matematiche a scopo illustrativo ed educativo. Non costituiscono in alcun modo consulenza finanziaria né sollecitazione all'investimento ai sensi del TUF.</p>
+        </div>
+      </div>
+    `;
+
+    setTimeout(() => {
+      window.print();
+    }, 150);
+  }
+
+  /**
    * SINCRONIZZAZIONE INPUT E RANGE
    */
   function syncInputs(numberEl, rangeEl, stateKey, parser) {
@@ -682,7 +872,7 @@
     });
 
     if (dom.btnExportCsv) dom.btnExportCsv.addEventListener('click', exportToCsv);
-    if (dom.btnPrintPdf) dom.btnPrintPdf.addEventListener('click', () => window.print());
+    if (dom.btnPrintPdf) dom.btnPrintPdf.addEventListener('click', generateAndPrintReport);
 
     window.addEventListener('resize', () => {
       renderChart(state.lastBreakdown);
