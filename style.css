@@ -1557,8 +1557,6 @@ canvas {
 }
 
 .guide-card-icon {
-  font-size: 2rem;
-  line-height: 1;
   flex-shrink: 0;
   width: 48px;
   height: 48px;
@@ -1568,6 +1566,22 @@ canvas {
   background: var(--bg-subtle);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
+  color: var(--accent-primary);
+  transition: var(--transition);
+}
+
+.guide-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.guide-card:hover .guide-card-icon {
+  background: var(--accent-primary-light);
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
 }
 
 .guide-card-content {
@@ -1775,11 +1789,27 @@ canvas {
   }
 
   .mobile-nav-icon {
-    font-size: 1.15rem;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    width: 24px;
-    text-align: center;
+    width: 22px;
+    height: 22px;
+    color: var(--accent-primary);
+  }
+
+  .mobile-nav-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    transition: var(--transition);
+  }
+
+  .mobile-nav-link:hover .mobile-nav-icon svg,
+  .mobile-nav-link:active .mobile-nav-icon svg {
+    transform: scale(1.08);
   }
 
   .mobile-menu-divider {
@@ -2158,6 +2188,38 @@ canvas {
 .verdict-card.featured {
   border-color: var(--accent-emerald);
   background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-surface) 100%);
+}
+
+
+.verdict-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+
+.verdict-rank-badge.rank-1 {
+  background: rgba(30, 86, 160, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(30, 86, 160, 0.25);
+}
+
+.verdict-rank-badge.rank-2 {
+  background: var(--bg-subtle);
+  color: var(--text-heading);
+  border: 1px solid var(--border-medium);
+}
+
+.verdict-rank-badge.rank-warn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .verdict-card-medal {
