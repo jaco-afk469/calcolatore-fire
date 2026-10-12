@@ -1487,12 +1487,20 @@ body {
 @media (max-width: 768px) {
   /* Layout e Container */
   .container {
-    padding: 0 16px;
+    padding: 0 18px;
   }
 
-  /* Navbar */
-  .nav-content {
+  /* Navbar con margini rilassati e comodi dai bordi dello schermo */
+  .navbar {
     padding: 12px 0;
+  }
+
+  .navbar .container {
+    padding: 0 22px;
+  }
+
+  .nav-content {
+    padding: 0;
   }
 
   .brand-title {
@@ -1500,11 +1508,12 @@ body {
   }
 
   .nav-links {
-    gap: 12px;
+    gap: 16px;
+    padding-right: 6px;
   }
 
   .nav-link {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
   }
 
   /* Hero Section */
@@ -1755,13 +1764,18 @@ body {
 
 /* Ottimizzazioni per smartphone compatti (schermi < 480px) */
 @media (max-width: 480px) {
+  .navbar .container {
+    padding: 0 20px;
+  }
+
   .nav-links a[href="#piattaforme"],
   .nav-links a[href="#guida-faq"] {
     display: none;
   }
 
   .nav-links {
-    gap: 14px;
+    gap: 16px;
+    padding-right: 4px;
   }
 
   .nav-back-link span {
