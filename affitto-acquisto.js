@@ -249,19 +249,19 @@
     if (rentNW > houseNW) {
       dom.winnerCard.style.background = 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(56, 189, 248, 0.08) 100%)';
       dom.winnerCard.style.borderColor = 'var(--accent-emerald)';
-      dom.winnerIcon.textContent = '📈';
+      dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>';
       dom.winnerTitle.innerHTML = `Vince l'<strong>Affitto + Investimento PAC</strong> con <span style="color: var(--accent-emerald);">+${formatEuro(diff)}</span>`;
       dom.winnerDesc.innerHTML = `Dopo <strong>${state.yearsHorizon} anni</strong>, investire l'anticipo (${formatEuro(sim.initialEtfPortfolio)}) e il risparmio mensile in un PAC in ETF al ${state.etfReturn}% annuo supera l'acquisto della casa di <strong>${formatEuro(diff)}</strong> netti.`;
     } else if (houseNW > rentNW) {
       dom.winnerCard.style.background = 'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(147, 51, 234, 0.08) 100%)';
       dom.winnerCard.style.borderColor = 'var(--accent-primary)';
-      dom.winnerIcon.textContent = '🏠';
+      dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
       dom.winnerTitle.innerHTML = `Vince l'<strong>Acquisto Casa</strong> con <span style="color: var(--accent-primary);">+${formatEuro(diff)}</span>`;
       dom.winnerDesc.innerHTML = `Dopo <strong>${state.yearsHorizon} anni</strong>, l'immobile rivalutato (${formatEuro(horizon.houseValue)}) e l'estinzione progressiva del mutuo garantiscono un patrimonio superiore di <strong>${formatEuro(diff)}</strong> rispetto all'affitto.`;
     } else {
       dom.winnerCard.style.background = 'var(--bg-surface)';
       dom.winnerCard.style.borderColor = 'var(--border-medium)';
-      dom.winnerIcon.textContent = '⚖️';
+      dom.winnerIcon.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>';
       dom.winnerTitle.textContent = 'Perfetto Pareggio Finanziario';
       dom.winnerDesc.textContent = `Entrambe le strategie producono un patrimonio netto comparabile dopo ${state.yearsHorizon} anni.`;
     }
