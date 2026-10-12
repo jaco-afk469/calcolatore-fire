@@ -282,14 +282,56 @@
     }
     ctx.stroke();
 
-    // Etichette Anni Asse X
-    ctx.fillStyle = isDark ? '#8892b0' : '#627d98';
-    ctx.textAlign = 'center';
-    const step = Math.max(1, Math.floor(breakdown.length / 5));
-    for (let i = 0; i < breakdown.length; i += step) {
-      const pt = ptsNominal[i];
-      ctx.fillText('Anno ' + pt.data.year, pt.x, padTop + plotH + 18);
+    // Etichette Anni Asse X (con spaziatura dinamica anti-sovrapposizione)
+    const totalYears = breakdown[breakdown.length - 1].year || (breakdown.length - 1);
+    const minLabelGap = plotW < 400 ? 52 : 72;
+    const maxLabels = Math.max(2, Math.floor(plotW / minLabelGap));
+
+    // Determina un passo pulito (1, 2, 5, 10, 15, 20)
+    let idealStep = Math.max(1, Math.ceil(totalYears / maxLabels));
+    if (idealStep > 2 && idealStep <= 5) idealStep = 5;
+    else if (idealStep > 5 && idealStep <= 10) idealStep = 10;
+    else if (idealStep > 10 && idealStep <= 15) idealStep = 15;
+    else if (idealStep > 15) idealStep = 20;
+
+    const indicesToLabel = [];
+    for (let i = 0; i < breakdown.length - 1; i += idealStep) {
+      indicesToLabel.push(i);
     }
+    // Aggiungi sempre l'ultimo anno (traguardo finale)
+    indicesToLabel.push(breakdown.length - 1);
+
+    // Se l'ultimo anno e il penultimo sono troppo vicini, elimina il penultimo
+    if (indicesToLabel.length >= 2) {
+      const lastIdx = indicesToLabel[indicesToLabel.length - 1];
+      const prevIdx = indicesToLabel[indicesToLabel.length - 2];
+      if (ptsNominal[lastIdx].x - ptsNominal[prevIdx].x < minLabelGap * 0.75) {
+        indicesToLabel.splice(indicesToLabel.length - 2, 1);
+      }
+    }
+
+    ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+    ctx.font = '500 11px Poppins, sans-serif';
+
+    indicesToLabel.forEach((idx) => {
+      const pt = ptsNominal[idx];
+      if (!pt) return;
+
+      if (idx === 0) {
+        ctx.textAlign = 'left';
+      } else if (idx === breakdown.length - 1) {
+        ctx.textAlign = 'right';
+      } else {
+        ctx.textAlign = 'center';
+      }
+
+      const yr = pt.data.year;
+      const label = (plotW < 380)
+        ? (yr === 0 ? '0' : yr + 'a')
+        : (yr === 0 ? 'Anno 0' : 'Anno ' + yr);
+
+      ctx.fillText(label, pt.x, padTop + plotH + 18);
+    });
 
     // Evidenziazione punto selezionato da hover
     if (highlightIndex !== undefined && ptsNominal[highlightIndex]) {
@@ -759,7 +801,6 @@
           </div>
           <div class="print-meta">
             <div><strong>Data:</strong> ${dateStr}</div>
-            <div><strong>Sito:</strong> https://jaco-afk469.github.io/calcolatore-fire/</div>
           </div>
         </div>
 
@@ -797,7 +838,7 @@
         </table>
 
         <div class="print-footer">
-          <p>Documento generato da <strong>FinCalcolatore</strong> &bull; https://jaco-afk469.github.io/calcolatore-fire/</p>
+          <p>Documento generato da <strong>FinCalcolatore</strong></p>
           <p class="print-disclaimer">Disclaimer: I valori presentati in questo report sono stime matematiche a scopo illustrativo ed educativo. Non costituiscono in alcun modo consulenza finanziaria né sollecitazione all'investimento ai sensi del TUF.</p>
         </div>
       </div>
