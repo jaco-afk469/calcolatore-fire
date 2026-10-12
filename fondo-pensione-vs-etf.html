@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=3.6">
+  <link rel="stylesheet" href="style.css?v=3.7">
 
   <!-- Schema.org WebApplication Structured Data -->
   <script type="application/ld+json">
@@ -304,7 +304,7 @@
             <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading);">
               📈 Evoluzione Comparativa nel Tempo
             </h3>
-            <div style="display: flex; gap: 14px; font-size: 0.8rem; font-weight: 600;">
+            <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; font-weight: 600;">
               <span style="display: flex; align-items: center; gap: 6px; color: var(--accent-primary);">
                 <span style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary);"></span>
                 Fondo Pensione (+ Reinvestimento)
@@ -334,7 +334,7 @@
         I massimi esperti di finanza personale consigliano una combinazione strategica: sfruttare il Fondo Pensione fino al tetto massimo deducibile di <strong>5.164,15 € all'anno</strong> per recuperare fino al 43% nel 730, e reinvestire immediatamente tale rimborso in un PAC su ETF azionario globale a zero commissioni.
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 14px;">
+      <div class="broker-subgrid">
         <div style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 18px;">
           <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-heading); margin-bottom: 6px;">1. Trade Republic</h3>
           <p style="font-size: 0.86rem; color: var(--text-body); line-height: 1.5; margin-bottom: 12px;">
@@ -476,6 +476,6 @@
 
   <!-- Script logica del calcolatore fondo pensione -->
   <script src="fondo-pensione.js?v=1.0"></script>
-  <script src="nav.js?v=1.1"></script>
+  <script src="nav.js?v=1.2"></script>
 </body>
 </html>
