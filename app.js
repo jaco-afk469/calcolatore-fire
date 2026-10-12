@@ -63,6 +63,9 @@
     presetChips: document.querySelectorAll('.preset-chip'),
     btnExportCsv: document.getElementById('btnExportCsv'),
     btnPrintPdf: document.getElementById('btnPrintPdf'),
+    btnShareSimulation: document.getElementById('btnShareSimulation'),
+    btnShareFire: document.getElementById('btnShareFire'),
+    btnPrintFire: document.getElementById('btnPrintFire'),
 
     // FIRE Elements
     fireExpensesInput: document.getElementById('fireExpenses'),
@@ -654,7 +657,7 @@
       paramsHtml = `
         <div class="print-param-box">
           <span class="print-param-label">Spese Mensili</span>
-          <span class="print-param-val">${formatCurrency(state.fireMonthlyExpenses)}/m</span>
+          <span class="print-param-val">${formatCurrency(state.monthlyExpenses)}/m</span>
         </div>
         <div class="print-param-box">
           <span class="print-param-label">Tasso SWR</span>
@@ -855,24 +858,20 @@
 
     // Segmented Buttons (Tabs)
     dom.segmentedButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        dom.segmentedButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = btn.dataset.tab;
-        state.activeTab = tab;
-
-        if (tab === 'pac') {
-          if (dom.sectionPac) dom.sectionPac.style.display = 'block';
-          if (dom.sectionFire) dom.sectionFire.style.display = 'none';
-        } else if (tab === 'fire') {
-          if (dom.sectionPac) dom.sectionPac.style.display = 'none';
-          if (dom.sectionFire) dom.sectionFire.style.display = 'block';
-        }
-      });
+      btn.addEventListener('click', () => setActiveTab(btn.dataset.tab));
     });
 
     if (dom.btnExportCsv) dom.btnExportCsv.addEventListener('click', exportToCsv);
     if (dom.btnPrintPdf) dom.btnPrintPdf.addEventListener('click', generateAndPrintReport);
+    if (dom.btnShareSimulation) {
+      dom.btnShareSimulation.addEventListener('click', () => shareSimulation(dom.btnShareSimulation));
+    }
+    if (dom.btnShareFire) {
+      dom.btnShareFire.addEventListener('click', () => shareSimulation(dom.btnShareFire));
+    }
+    if (dom.btnPrintFire) {
+      dom.btnPrintFire.addEventListener('click', generateAndPrintReport);
+    }
 
     window.addEventListener('resize', () => {
       renderChart(state.lastBreakdown);
@@ -885,6 +884,161 @@
     }
   }
 
+  /**
+   * CAMBIO SCHEDA ATTIVA (PAC / FIRE)
+   */
+  function setActiveTab(tab) {
+    state.activeTab = tab;
+    dom.segmentedButtons.forEach(b => {
+      if (b.dataset.tab === tab) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+
+    if (tab === 'pac') {
+      if (dom.sectionPac) dom.sectionPac.style.display = 'block';
+      if (dom.sectionFire) dom.sectionFire.style.display = 'none';
+    } else if (tab === 'fire') {
+      if (dom.sectionPac) dom.sectionPac.style.display = 'none';
+      if (dom.sectionFire) dom.sectionFire.style.display = 'block';
+    }
+  }
+
+  /**
+   * CONDIVISIONE SIMULAZIONE CON URL QUERY PARAMETERS
+   */
+  function shareSimulation(buttonEl) {
+    const isFire = state.activeTab === 'fire';
+    const params = new URLSearchParams();
+
+    if (isFire) {
+      params.set('tab', 'fire');
+      params.set('spese', Math.round(state.monthlyExpenses || 1500));
+      params.set('swr', (state.safeWithdrawalRate || 4.0).toFixed(1));
+      params.set('cap', Math.round(state.initialCapital || 0));
+      params.set('pac', Math.round(state.monthlyContribution || 0));
+      params.set('rend', (state.annualReturn || 7.0).toFixed(1));
+    } else {
+      params.set('tab', 'pac');
+      params.set('cap', Math.round(state.initialCapital || 0));
+      params.set('pac', Math.round(state.monthlyContribution || 0));
+      params.set('anni', Math.round(state.years || 25));
+      params.set('rend', (state.annualReturn || 7.0).toFixed(1));
+      params.set('inf', (state.inflationRate || 2.0).toFixed(1));
+    }
+
+    const shareUrl = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+
+    // Aggiorna l'URL nella barra degli indirizzi senza ricaricare la pagina
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', '?' + params.toString());
+    }
+
+    const showCopiedFeedback = () => {
+      if (!buttonEl) return;
+      const originalHtml = buttonEl.innerHTML;
+      buttonEl.classList.add('copied');
+      buttonEl.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Link Copiato!</span>
+      `;
+
+      setTimeout(() => {
+        buttonEl.classList.remove('copied');
+        buttonEl.innerHTML = originalHtml;
+      }, 2500);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(shareUrl)
+        .then(showCopiedFeedback)
+        .catch(() => {
+          prompt('Copia il link della tua simulazione:', shareUrl);
+        });
+    } else {
+      prompt('Copia il link della tua simulazione:', shareUrl);
+    }
+  }
+
+  /**
+   * LETTURA PARAMETRI DALL'URL AL CARICAMENTO DELLA PAGINA
+   */
+  function loadStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+
+    if (params.has('tab')) {
+      const tab = params.get('tab').toLowerCase();
+      if (tab === 'fire' || tab === 'pac') {
+        setActiveTab(tab);
+      }
+    }
+
+    if (params.has('cap')) {
+      const val = parseFloat(params.get('cap'));
+      if (!isNaN(val) && val >= 0) {
+        state.initialCapital = val;
+        if (dom.initialCapitalInput) dom.initialCapitalInput.value = val;
+        if (dom.initialCapitalRange) dom.initialCapitalRange.value = Math.min(val, 100000);
+      }
+    }
+
+    if (params.has('pac')) {
+      const val = parseFloat(params.get('pac'));
+      if (!isNaN(val) && val >= 0) {
+        state.monthlyContribution = val;
+        if (dom.monthlyInput) dom.monthlyInput.value = val;
+        if (dom.monthlyRange) dom.monthlyRange.value = Math.min(val, 5000);
+      }
+    }
+
+    if (params.has('anni')) {
+      const val = parseInt(params.get('anni'), 10);
+      if (!isNaN(val) && val >= 1 && val <= 50) {
+        state.years = val;
+        if (dom.yearsInput) dom.yearsInput.value = val;
+        if (dom.yearsRange) dom.yearsRange.value = Math.min(val, 45);
+      }
+    }
+
+    if (params.has('rend')) {
+      const val = parseFloat(params.get('rend'));
+      if (!isNaN(val) && val >= 0.1 && val <= 25) {
+        state.annualReturn = val;
+        if (dom.returnInput) dom.returnInput.value = val;
+        if (dom.returnRange) dom.returnRange.value = Math.min(val, 15);
+      }
+    }
+
+    if (params.has('inf')) {
+      const val = parseFloat(params.get('inf'));
+      if (!isNaN(val) && val >= 0 && val <= 10) {
+        state.inflationRate = val;
+        if (dom.inflationInput) dom.inflationInput.value = val;
+      }
+    }
+
+    if (params.has('spese')) {
+      const val = parseFloat(params.get('spese'));
+      if (!isNaN(val) && val >= 100) {
+        state.monthlyExpenses = val;
+        if (dom.fireExpensesInput) dom.fireExpensesInput.value = val;
+      }
+    }
+
+    if (params.has('swr')) {
+      const val = parseFloat(params.get('swr'));
+      if (!isNaN(val) && val >= 1 && val <= 10) {
+        state.safeWithdrawalRate = val;
+        if (dom.fireSwrInput) dom.fireSwrInput.value = val;
+      }
+    }
+  }
+
   // Inizializzazione
   document.addEventListener('DOMContentLoaded', () => {
     renderAffiliatePartners();
@@ -892,6 +1046,7 @@
     setupChartTooltip();
     setupCopyButtons();
     setupFaqAccordion();
+    loadStateFromUrl();
     updateUI();
   });
 
