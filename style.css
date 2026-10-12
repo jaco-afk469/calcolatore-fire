@@ -145,6 +145,49 @@
   .brand-title {
     color: #F8F9FA !important;
   }
+
+  /* Hamburger & Mobile Menu in Modalità Scura */
+  .hamburger-btn {
+    background: #112240 !important;
+    border-color: #233554 !important;
+  }
+
+  .hamburger-btn:hover {
+    background: #192e54 !important;
+    border-color: #4A90E2 !important;
+  }
+
+  .hamburger-line {
+    background-color: #F8F9FA !important;
+  }
+
+  .mobile-menu {
+    background: #112240 !important;
+    border: 1px solid #233554 !important;
+    box-shadow: 0 20px 45px -5px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .mobile-menu-section-title {
+    color: #8892b0 !important;
+  }
+
+  .mobile-nav-link {
+    color: #F8F9FA !important;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:active {
+    background: #192e54 !important;
+    color: #4A90E2 !important;
+  }
+
+  .mobile-menu-divider {
+    background: #233554 !important;
+  }
+
+  .mobile-menu-backdrop {
+    background: rgba(0, 0, 0, 0.65) !important;
+  }
 }
 
 /* Reset base & Prevenzione Rigorosa Overflow Orizzontale */
@@ -1674,10 +1717,10 @@ canvas {
     top: calc(100% + 8px);
     left: 12px;
     right: 12px;
-    background: #ffffff;
+    background: var(--bg-surface);
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
-    box-shadow: 0 20px 45px -5px rgba(10, 25, 47, 0.25), 0 8px 16px -4px rgba(10, 25, 47, 0.15);
+    box-shadow: 0 20px 45px -5px rgba(10, 25, 47, 0.22), 0 8px 16px -4px rgba(10, 25, 47, 0.12);
     padding: 16px 12px;
     opacity: 0;
     visibility: hidden;
