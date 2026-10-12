@@ -292,7 +292,17 @@
 
     ctx.clearRect(0, 0, width, height);
 
-    const padding = { top: 25, right: 35, bottom: 40, left: 65 };
+    // Rilevamento Dark Mode
+    const isDark = (document.documentElement.getAttribute('data-theme') === 'dark') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    const isMobile = width < 420;
+    const padding = {
+      top: 22,
+      right: isMobile ? 16 : 30,
+      bottom: 34,
+      left: isMobile ? 48 : 65
+    };
     const chartW = width - padding.left - padding.right;
     const chartH = height - padding.top - padding.bottom;
 
@@ -309,10 +319,10 @@
 
     // Linee griglia orizzontali
     const steps = 5;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(148, 163, 184, 0.16)';
     ctx.lineWidth = 1;
-    ctx.fillStyle = '#64748b';
-    ctx.font = '10px Poppins, sans-serif';
+    ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+    ctx.font = isMobile ? '500 10px Poppins, sans-serif' : '500 11px Poppins, sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
@@ -338,18 +348,10 @@
       return padding.top + chartH - (val / maxY) * chartH;
     }
 
-    // Etichette asse X (ogni 5 anni)
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'top';
-    for (let i = 0; i < count; i++) {
-      const year = yearlyData[i].year;
-      if (year === 1 || year % 5 === 0 || year === 35) {
-        const xPos = getX(i);
-        ctx.fillText(year + 'a', xPos, padding.top + chartH + 10);
-      }
-    }
-
     // Curva 1: Acquisto Casa (Blu)
+    const colorHouse = isDark ? '#4A90E2' : '#1E56A0';
+    const colorRent = '#10B981';
+
     ctx.beginPath();
     yearlyData.forEach((d, idx) => {
       const x = getX(idx);
@@ -357,7 +359,7 @@
       if (idx === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
-    ctx.strokeStyle = '#3b82f6';
+    ctx.strokeStyle = colorHouse;
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
@@ -369,7 +371,7 @@
       if (idx === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
-    ctx.strokeStyle = '#10b981';
+    ctx.strokeStyle = colorRent;
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
@@ -379,7 +381,7 @@
 
     ctx.save();
     ctx.setLineDash([4, 4]);
-    ctx.strokeStyle = '#f59e0b';
+    ctx.strokeStyle = isDark ? '#fbbf24' : '#d97706';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(horizonX, padding.top);
@@ -392,7 +394,7 @@
     const rentY = getY(yearlyData[horizonIdx].rentNetWorth);
 
     // Punto Casa
-    ctx.fillStyle = '#3b82f6';
+    ctx.fillStyle = colorHouse;
     ctx.beginPath();
     ctx.arc(horizonX, houseY, 5, 0, Math.PI * 2);
     ctx.fill();
@@ -401,13 +403,86 @@
     ctx.stroke();
 
     // Punto Affitto
-    ctx.fillStyle = '#10b981';
+    ctx.fillStyle = colorRent;
     ctx.beginPath();
     ctx.arc(horizonX, rentY, 5, 0, Math.PI * 2);
     ctx.fill();
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 2;
     ctx.stroke();
+
+    // Etichette asse X (Anni) con algoritmo anti-sovrapposizione
+    const totalYears = yearlyData[yearlyData.length - 1].year || yearlyData.length;
+    const minLabelGap = isMobile ? 54 : 75;
+    const maxLabels = Math.max(2, Math.floor(chartW / minLabelGap));
+
+    let idealStep = Math.max(1, Math.ceil(totalYears / maxLabels));
+    if (totalYears <= 5) {
+      idealStep = idealStep <= 2 ? 1 : 2;
+    } else if (idealStep <= 3) {
+      idealStep = (totalYears <= 12) ? 2 : 5;
+    } else if (idealStep <= 5) {
+      idealStep = 5;
+    } else if (idealStep <= 10) {
+      idealStep = 10;
+    } else if (idealStep <= 15) {
+      idealStep = 15;
+    } else {
+      idealStep = 20;
+    }
+
+    const indicesToLabel = [];
+    indicesToLabel.push(0);
+
+    for (let y = idealStep; y < totalYears; y += idealStep) {
+      const idx = yearlyData.findIndex(d => d.year === y);
+      if (idx !== -1 && !indicesToLabel.includes(idx)) {
+        indicesToLabel.push(idx);
+      }
+    }
+
+    const lastIdx = count - 1;
+    if (!indicesToLabel.includes(lastIdx)) {
+      indicesToLabel.push(lastIdx);
+    }
+
+    if (indicesToLabel.length >= 2) {
+      const lastX = getX(indicesToLabel[indicesToLabel.length - 1]);
+      const prevX = getX(indicesToLabel[indicesToLabel.length - 2]);
+      if (lastX - prevX < minLabelGap * 0.75) {
+        indicesToLabel.splice(indicesToLabel.length - 2, 1);
+      }
+    }
+
+    if (indicesToLabel.length >= 3) {
+      const firstX = getX(indicesToLabel[0]);
+      const secondX = getX(indicesToLabel[1]);
+      if (secondX - firstX < minLabelGap * 0.75) {
+        indicesToLabel.splice(1, 1);
+      }
+    }
+
+    ctx.fillStyle = isDark ? '#94a3b8' : '#64748b';
+    ctx.font = isMobile ? '500 10px Poppins, sans-serif' : '500 11px Poppins, sans-serif';
+    ctx.textBaseline = 'top';
+
+    indicesToLabel.forEach((idx) => {
+      const d = yearlyData[idx];
+      if (!d) return;
+      const x = getX(idx);
+
+      if (idx === 0) {
+        ctx.textAlign = 'left';
+      } else if (idx === count - 1) {
+        ctx.textAlign = 'right';
+      } else {
+        ctx.textAlign = 'center';
+      }
+
+      const yr = d.year;
+      const label = isMobile ? `${yr}a` : `Anno ${yr}`;
+      ctx.fillText(label, x, padding.top + chartH + 10);
+    });
   }
 
   // Popolamento Tabella Scaglioni
@@ -550,6 +625,14 @@
       const sim = runSimulation();
       renderChart(sim.yearlyData, state.yearsHorizon);
     });
+
+    // Cambio tema Dark/Light
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const sim = runSimulation();
+        renderChart(sim.yearlyData, state.yearsHorizon);
+      });
+    }
   }
 
   // Inizializzazione al caricamento
