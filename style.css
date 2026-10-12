@@ -745,6 +745,26 @@ body {
   background: var(--bg-hover);
 }
 
+.btn-share {
+  background: var(--bg-surface);
+  color: var(--accent-primary);
+  border-color: rgba(30, 86, 160, 0.35);
+}
+
+.btn-share:hover {
+  background: rgba(30, 86, 160, 0.08);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary-hover);
+}
+
+.btn-share.copied,
+.btn-share.copied:hover {
+  background: #059669 !important;
+  color: #ffffff !important;
+  border-color: #059669 !important;
+  box-shadow: 0 0 12px rgba(5, 150, 105, 0.35);
+}
+
 /* ==========================================================================
    PARTNER STRIPE CONNECT CARDS (Satispay, HYPE, Broker)
    Bordi 1px, badge puliti e tasto "Copia Codice" interattivo
