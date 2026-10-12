@@ -1478,6 +1478,307 @@ body {
 }
 
 /* ==========================================================================
+   MOBILE RESPONSIVENESS & ANTI-OVERLAP SUITE (SMARTPHONE & TABLET)
+   ========================================================================== */
+.tab-label-short {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Layout e Container */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Navbar */
+  .nav-content {
+    padding: 12px 0;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-link {
+    font-size: 0.82rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 36px 0 24px 0;
+  }
+
+  .hero-pill {
+    font-size: 0.76rem;
+    padding: 4px 12px;
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 22px;
+    padding: 0 4px;
+  }
+
+  /* Segmented Control: Tab responsive a tutta larghezza */
+  .tab-label-full {
+    display: none;
+  }
+
+  .tab-label-short {
+    display: inline;
+  }
+
+  .segmented-control {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    margin-bottom: 24px;
+  }
+
+  .segmented-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    gap: 6px;
+  }
+
+  /* Card e Form Inputs */
+  .card {
+    padding: 20px 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .card-header {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 1.05rem;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .label-row {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .input-label {
+    font-size: 0.82rem;
+    line-height: 1.3;
+  }
+
+  .input-val-tag {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .text-input {
+    font-size: 16px; /* Previene lo zoom forzato automatico su iOS Safari */
+    padding: 10px 14px;
+  }
+
+  /* KPI Grid */
+  .kpi-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .kpi-stat-card {
+    padding: 14px 16px;
+  }
+
+  .kpi-stat-val {
+    font-size: 1.45rem;
+  }
+
+  /* Progress Bar & Legend: Mai più scritte sovrapposte */
+  .progress-legend {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  /* Chart Area */
+  .chart-card-area {
+    height: 250px;
+    padding: 8px;
+  }
+
+  /* Toolbar Azioni e Bottoni (Condividi, CSV, PDF): Stack verticale a tutta larghezza */
+  .dashboard-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 14px;
+  }
+
+  .real-purchasing-note {
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+
+  /* Card Partner: Rimuove altezze fisse per impedire testo sovrapposto */
+  .partner-card {
+    padding: 20px 16px;
+  }
+
+  .partner-topline-header {
+    min-height: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+
+  .partner-specs-grid {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 10px 8px;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .spec-label {
+    font-size: 0.62rem;
+    line-height: 1.2;
+  }
+
+  .spec-value {
+    font-size: 0.82rem;
+  }
+
+  .partner-pros-list {
+    height: auto !important;
+    min-height: auto !important;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .partner-pro-item {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .partner-perk-container {
+    height: auto !important;
+    min-height: 48px;
+    margin-bottom: 14px;
+  }
+
+  .promo-code-container,
+  .promo-feature-container {
+    padding: 8px 12px;
+    height: auto;
+    min-height: 44px;
+  }
+
+  /* Tabella Ammortamento */
+  .table-section {
+    margin: 36px 0;
+  }
+
+  .table-wrapper {
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md);
+  }
+
+  .amort-table th {
+    padding: 10px 10px;
+    font-size: 0.74rem;
+    white-space: nowrap;
+  }
+
+  .amort-table td {
+    padding: 9px 10px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 36px 0 24px 0;
+    margin-top: 48px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .footer-links-row {
+    justify-content: center;
+    gap: 8px 12px;
+  }
+}
+
+/* Ottimizzazioni per smartphone compatti (schermi < 480px) */
+@media (max-width: 480px) {
+  .nav-links a[href="#piattaforme"],
+  .nav-links a[href="#guida-faq"] {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+
+  .nav-back-link span {
+    font-size: 0.78rem;
+  }
+
+  .brand-logo-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-title {
+    font-size: 0.92rem;
+  }
+}
+
+/* ==========================================================================
    PRINT / PDF EXPORT ISOLATION STYLES (SOLO GRAFICO E TABELLA)
    ========================================================================== */
 #printReportArea {
