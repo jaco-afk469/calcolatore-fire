@@ -181,7 +181,7 @@ body {
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10000;
   background: var(--navbar-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -292,8 +292,10 @@ body {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: var(--transition);
-  z-index: 1002;
+  position: relative;
+  z-index: 10002;
   box-shadow: var(--shadow-sm);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hamburger-btn:hover {
@@ -308,6 +310,7 @@ body {
   background-color: var(--text-heading);
   border-radius: 2px;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 /* Animazione Hamburger a 'X' quando attivo */
@@ -1574,27 +1577,30 @@ body {
   .mobile-menu {
     display: block;
     position: absolute;
-    top: calc(100% + 4px);
-    left: 14px;
-    right: 14px;
-    background: var(--bg-surface);
+    top: calc(100% + 8px);
+    left: 12px;
+    right: 12px;
+    background: #ffffff;
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
-    box-shadow: 0 16px 36px -4px rgba(10, 25, 47, 0.4), 0 8px 16px -4px rgba(10, 25, 47, 0.25);
-    padding: 16px;
+    box-shadow: 0 20px 45px -5px rgba(10, 25, 47, 0.25), 0 8px 16px -4px rgba(10, 25, 47, 0.15);
+    padding: 16px 12px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1001;
-    max-height: calc(100vh - 90px);
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s ease;
+    z-index: 10001;
+    max-height: calc(100vh - 80px);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .mobile-menu.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(4px);
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .mobile-menu-inner {
@@ -1653,17 +1659,19 @@ body {
     right: 0;
     bottom: 0;
     background: rgba(10, 25, 47, 0.45);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.25s ease;
-    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+    z-index: 9998;
   }
 
   .mobile-menu-backdrop.open {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
 
   /* Hero Section */
