@@ -22,6 +22,13 @@
         <img src="assets/logos/fincalcolatore.svg" alt="Logo FinCalcolatore" width="32" height="32" class="brand-logo-img">
         <span class="brand-title">FinCalcolatore</span>
       </a>
+      <div class="nav-links">
+        <a href="index.html#calcolatore" class="nav-link">Calcolatore</a>
+        <a href="fondo-pensione-vs-etf.html" class="nav-link">Fondo vs ETF</a>
+        <a href="migliori-broker-pac-etf-italia.html" class="nav-link">Migliori Broker</a>
+        <a href="index.html#guide" class="nav-link">Guide</a>
+        <a href="index.html#guida-faq" class="nav-link">FAQ</a>
+      </div>
       <a href="index.html" class="nav-back-link">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5"></path>
@@ -29,8 +36,57 @@
         </svg>
         <span>Torna al Calcolatore</span>
       </a>
+
+      <!-- Hamburger Button (Mobile only) -->
+      <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <div class="mobile-menu-section-title">Strumenti & Calcolatori</div>
+        <a href="index.html#calcolatore" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📊</span>
+          <span>Calcolatore PAC & FIRE</span>
+        </a>
+        <a href="fondo-pensione-vs-etf.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">📈</span>
+          <span>Fondo Pensione vs ETF (5.164€)</span>
+        </a>
+        <a href="migliori-broker-pac-etf-italia.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">🏆</span>
+          <span>Migliori Broker PAC (2026)</span>
+        </a>
+
+        <div class="mobile-menu-divider"></div>
+
+        <div class="mobile-menu-section-title">Guide & Approfondimenti</div>
+        <a href="guida-interesse-composto-pac.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">💡</span>
+          <span>Guida Interesse Composto</span>
+        </a>
+        <a href="guida-metodo-fire-regola-4-percento.html" class="mobile-nav-link">
+          <span class="mobile-nav-icon">🎯</span>
+          <span>Guida Metodo FIRE (Regola 4%)</span>
+        </a>
+        <a href="index.html#piattaforme" class="mobile-nav-link">
+          <span class="mobile-nav-icon">⭐</span>
+          <span>Piattaforme Consigliate</span>
+        </a>
+        <a href="index.html#guida-faq" class="mobile-nav-link">
+          <span class="mobile-nav-icon">❓</span>
+          <span>Domande Frequenti (FAQ)</span>
+        </a>
+      </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Backdrop -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop" aria-hidden="true"></div>
 
   <main class="container">
     <header class="legal-page-header">
@@ -173,5 +229,6 @@
     </div>
   </footer>
 
+  <script src="nav.js?v=1.0"></script>
 </body>
 </html>
