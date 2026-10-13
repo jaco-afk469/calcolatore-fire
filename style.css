@@ -234,6 +234,35 @@ canvas {
   font-variant-numeric: tabular-nums;
 }
 
+/* Liste editoriali standard e rientro elenchi puntati */
+ul:not([class]),
+ol:not([class]) {
+  padding-left: 26px;
+  margin: 14px 0 18px 0;
+  list-style-position: outside;
+}
+
+ul:not([class]) li,
+ol:not([class]) li {
+  margin-bottom: 10px;
+  line-height: 1.68;
+}
+
+ul:not([class]) li:last-child,
+ol:not([class]) li:last-child {
+  margin-bottom: 0;
+}
+
+ul:not([class]) li::marker {
+  color: var(--accent-primary);
+  font-size: 1.05em;
+}
+
+ol:not([class]) li::marker {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
 /* Layout Container */
 .container {
   width: 100%;
@@ -1531,9 +1560,14 @@ canvas {
   margin-bottom: 12px;
 }
 
-.legal-article ul {
-  padding-left: 20px;
-  margin-bottom: 16px;
+.legal-article ul,
+.legal-article ol {
+  padding-left: 26px;
+  margin-bottom: 18px;
+}
+
+.legal-article li::marker {
+  color: var(--accent-primary);
 }
 
 .legal-lead-text {
@@ -2452,6 +2486,36 @@ canvas {
 @media (max-width: 768px) {
   .broker-detail-card {
     padding: 22px;
+  }
+}
+
+/* Liste puntate nei dettagli broker */
+.broker-detail-card ul {
+  padding-left: 28px;
+  margin: 16px 0 22px 0;
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.broker-detail-card ul li {
+  margin-bottom: 12px;
+  line-height: 1.68;
+  color: var(--text-body);
+  padding-left: 4px;
+}
+
+.broker-detail-card ul li:last-child {
+  margin-bottom: 0;
+}
+
+.broker-detail-card ul li::marker {
+  color: var(--accent-primary);
+  font-size: 1.1em;
+}
+
+@media (max-width: 600px) {
+  .broker-detail-card ul {
+    padding-left: 22px;
   }
 }
 
