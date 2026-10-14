@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=4.3">
+  <link rel="stylesheet" href="style.css?v=4.4">
 
   <!-- Schema.org JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -151,15 +151,16 @@
         </h2>
 
         <!-- Prezzo Immobile -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="propertyPriceInput" class="input-label">Prezzo Immobile da Acquistare</label>
-            <div class="input-value-badge">
-              <input type="number" id="propertyPriceInput" value="200000" min="50000" max="1000000" step="5000" class="numeric-field">
-              <span class="currency-symbol">€</span>
-            </div>
+            <span class="input-val-tag">€</span>
           </div>
-          <input type="range" id="propertyPriceRange" min="50000" max="1000000" step="5000" value="200000" class="range-slider">
+          <div class="input-field-wrapper">
+            <span class="input-prefix">€</span>
+            <input type="number" id="propertyPriceInput" class="text-input has-prefix tabular-nums" value="200000" min="50000" max="1000000" step="5000">
+          </div>
+          <input type="range" id="propertyPriceRange" class="range-slider" min="50000" max="1000000" step="5000" value="200000">
           <div class="preset-chips-row">
             <button type="button" class="preset-chip-btn preset-price" data-val="150000">150.000 €</button>
             <button type="button" class="preset-chip-btn preset-price active" data-val="200000">200.000 €</button>
@@ -169,15 +170,16 @@
         </div>
 
         <!-- Canone Affitto Mensile -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="monthlyRentInput" class="input-label">Canone Affitto Mensile Equivalente</label>
-            <div class="input-value-badge">
-              <input type="number" id="monthlyRentInput" value="800" min="300" max="4000" step="50" class="numeric-field">
-              <span class="currency-symbol">€</span>
-            </div>
+            <span class="input-val-tag">€ / mese</span>
           </div>
-          <input type="range" id="monthlyRentRange" min="300" max="4000" step="50" value="800" class="range-slider">
+          <div class="input-field-wrapper">
+            <span class="input-prefix">€</span>
+            <input type="number" id="monthlyRentInput" class="text-input has-prefix tabular-nums" value="800" min="300" max="4000" step="50">
+          </div>
+          <input type="range" id="monthlyRentRange" class="range-slider" min="300" max="4000" step="50" value="800">
           <div class="preset-chips-row">
             <button type="button" class="preset-chip-btn preset-rent" data-val="600">600 €/m</button>
             <button type="button" class="preset-chip-btn preset-rent active" data-val="800">800 €/m</button>
@@ -187,27 +189,29 @@
         </div>
 
         <!-- Anticipo Mutuo (%) -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="downPaymentInput" class="input-label">Anticipo sul Prezzo Casa</label>
-            <div class="input-value-badge">
-              <input type="number" id="downPaymentInput" value="20" min="0" max="60" step="5" class="numeric-field">
-              <span class="currency-symbol">%</span>
-            </div>
+            <span class="input-val-tag">%</span>
           </div>
-          <input type="range" id="downPaymentRange" min="0" max="60" step="5" value="20" class="range-slider">
+          <div class="input-field-wrapper">
+            <input type="number" id="downPaymentInput" class="text-input has-suffix tabular-nums" value="20" min="0" max="60" step="5">
+            <span class="input-suffix">%</span>
+          </div>
+          <input type="range" id="downPaymentRange" class="range-slider" min="0" max="60" step="5" value="20">
         </div>
 
         <!-- Durata Mutuo -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="mortgageYearsInput" class="input-label">Durata del Mutuo</label>
-            <div class="input-value-badge">
-              <input type="number" id="mortgageYearsInput" value="25" min="10" max="35" step="5" class="numeric-field">
-              <span class="currency-symbol">anni</span>
-            </div>
+            <span class="input-val-tag">Anni</span>
           </div>
-          <input type="range" id="mortgageYearsRange" min="10" max="35" step="5" value="25" class="range-slider">
+          <div class="input-field-wrapper">
+            <input type="number" id="mortgageYearsInput" class="text-input has-suffix tabular-nums" value="25" min="10" max="35" step="5">
+            <span class="input-suffix">Anni</span>
+          </div>
+          <input type="range" id="mortgageYearsRange" class="range-slider" min="10" max="35" step="5" value="25">
           <div class="preset-chips-row">
             <button type="button" class="preset-chip-btn preset-mortgage-years" data-val="20">20 Anni</button>
             <button type="button" class="preset-chip-btn preset-mortgage-years active" data-val="25">25 Anni</button>
@@ -216,40 +220,43 @@
         </div>
 
         <!-- Tasso Fisso Mutuo -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="mortgageRateInput" class="input-label">Tasso Mutuo (Fisso Annuo)</label>
-            <div class="input-value-badge">
-              <input type="number" id="mortgageRateInput" value="3.0" min="1.0" max="6.5" step="0.1" class="numeric-field">
-              <span class="currency-symbol">%</span>
-            </div>
+            <span class="input-val-tag">%</span>
           </div>
-          <input type="range" id="mortgageRateRange" min="1.0" max="6.5" step="0.1" value="3.0" class="range-slider">
+          <div class="input-field-wrapper">
+            <input type="number" id="mortgageRateInput" class="text-input has-suffix tabular-nums" value="3.0" min="1.0" max="6.5" step="0.1">
+            <span class="input-suffix">%</span>
+          </div>
+          <input type="range" id="mortgageRateRange" class="range-slider" min="1.0" max="6.5" step="0.1" value="3.0">
         </div>
 
         <!-- Orizzonte Temporale di Permanenza -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="yearsHorizonInput" class="input-label">Orizzonte di Confronto</label>
-            <div class="input-value-badge">
-              <input type="number" id="yearsHorizonInput" value="20" min="1" max="35" step="1" class="numeric-field">
-              <span class="currency-symbol">anni</span>
-            </div>
+            <span class="input-val-tag">Anni</span>
           </div>
-          <input type="range" id="yearsHorizonRange" min="1" max="35" step="1" value="20" class="range-slider">
+          <div class="input-field-wrapper">
+            <input type="number" id="yearsHorizonInput" class="text-input has-suffix tabular-nums" value="20" min="1" max="35" step="1">
+            <span class="input-suffix">Anni</span>
+          </div>
+          <input type="range" id="yearsHorizonRange" class="range-slider" min="1" max="35" step="1" value="20">
         </div>
 
         <!-- Rendimento Annuo ETF Atteso -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="etfReturnInput" class="input-label">Rendimento Medio Annuo PAC ETF</label>
-            <div class="input-value-badge">
-              <input type="number" id="etfReturnInput" value="7.0" min="3.0" max="11.0" step="0.5" class="numeric-field">
-              <span class="currency-symbol">%</span>
-            </div>
+            <span class="input-val-tag">%</span>
           </div>
-          <input type="range" id="etfReturnRange" min="3.0" max="11.0" step="0.5" value="7.0" class="range-slider">
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+          <div class="input-field-wrapper">
+            <input type="number" id="etfReturnInput" class="text-input has-suffix tabular-nums" value="7.0" min="3.0" max="11.0" step="0.5">
+            <span class="input-suffix">%</span>
+          </div>
+          <input type="range" id="etfReturnRange" class="range-slider" min="3.0" max="11.0" step="0.5" value="7.0">
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
             Storico medio annuo MSCI World / S&P 500: ~7% - 8% lordo
           </div>
         </div>
@@ -260,43 +267,47 @@
             Parametri Avanzati (Costi Notarili, Manutenzione, Inflazione)
           </summary>
           <div style="margin-top: 14px;">
-            <div class="input-group" style="margin-bottom: 12px;">
-              <div class="input-header">
-                <label for="purchaseCostsInput" class="input-label" style="font-size: 0.8rem;">Costi Iniziali Acquisto (Notaio, Imposte, Agenzia)</label>
-                <div class="input-value-badge">
-                  <input type="number" id="purchaseCostsInput" value="8" min="3" max="14" step="0.5" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <div class="label-row">
+                <label for="purchaseCostsInput" class="input-label" style="font-size: 0.84rem;">Costi Iniziali Acquisto (Notaio, Imposte, Agenzia)</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="purchaseCostsInput" class="text-input has-suffix tabular-nums" value="8" min="3" max="14" step="0.5">
+                <span class="input-suffix">%</span>
               </div>
             </div>
 
-            <div class="input-group" style="margin-bottom: 12px;">
-              <div class="input-header">
-                <label for="maintenanceInput" class="input-label" style="font-size: 0.8rem;">Manutenzione Annua Proprietario (% sul valore casa)</label>
-                <div class="input-value-badge">
-                  <input type="number" id="maintenanceInput" value="1.0" min="0.3" max="2.5" step="0.1" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <div class="label-row">
+                <label for="maintenanceInput" class="input-label" style="font-size: 0.84rem;">Manutenzione Annua Proprietario (% sul valore casa)</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="maintenanceInput" class="text-input has-suffix tabular-nums" value="1.0" min="0.3" max="2.5" step="0.1">
+                <span class="input-suffix">%</span>
               </div>
             </div>
 
-            <div class="input-group" style="margin-bottom: 12px;">
-              <div class="input-header">
-                <label for="propertyApprInput" class="input-label" style="font-size: 0.8rem;">Rivalutazione Annua Immobile</label>
-                <div class="input-value-badge">
-                  <input type="number" id="propertyApprInput" value="1.5" min="0.0" max="4.0" step="0.1" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <div class="label-row">
+                <label for="propertyApprInput" class="input-label" style="font-size: 0.84rem;">Rivalutazione Annua Immobile</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="propertyApprInput" class="text-input has-suffix tabular-nums" value="1.5" min="0.0" max="4.0" step="0.1">
+                <span class="input-suffix">%</span>
               </div>
             </div>
 
-            <div class="input-group" style="margin-bottom: 0;">
-              <div class="input-header">
-                <label for="rentInflationInput" class="input-label" style="font-size: 0.8rem;">Inflazione Annua Canone Affitto (ISTAT)</label>
-                <div class="input-value-badge">
-                  <input type="number" id="rentInflationInput" value="1.5" min="0.0" max="4.0" step="0.1" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="label-row">
+                <label for="rentInflationInput" class="input-label" style="font-size: 0.84rem;">Inflazione Annua Canone Affitto (ISTAT)</label>
+                <span class="input-val-tag">%</span>
+              </div>
+              <div class="input-field-wrapper">
+                <input type="number" id="rentInflationInput" class="text-input has-suffix tabular-nums" value="1.5" min="0.0" max="4.0" step="0.1">
+                <span class="input-suffix">%</span>
               </div>
             </div>
           </div>
