@@ -2,51 +2,72 @@
   <defs>
     <linearGradient id="rdBg" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#0A192F"/>
-      <stop offset="45%" stop-color="#0F2442"/>
-      <stop offset="100%" stop-color="#060E1A"/>
+      <stop offset="45%" stop-color="#0E213D"/>
+      <stop offset="100%" stop-color="#050C17"/>
     </linearGradient>
     <linearGradient id="rdLogo" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#3B82F6"/>
       <stop offset="100%" stop-color="#1E56A0"/>
     </linearGradient>
-    <pattern id="rdGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1E56A0" stroke-width="0.6" opacity="0.18"/>
+    <pattern id="rdGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E56A0" stroke-width="0.8" opacity="0.18"/>
     </pattern>
+    <filter id="rdGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#1E56A0" flood-opacity="0.45"/>
+    </filter>
   </defs>
 
   <rect width="1920" height="384" fill="url(#rdBg)"/>
   <rect width="1920" height="384" fill="url(#rdGrid)"/>
 
   <!-- Glowing Accents -->
-  <circle cx="1550" cy="192" r="220" fill="#2563EB" opacity="0.18" filter="blur(70px)"/>
-  <circle cx="350" cy="192" r="180" fill="#4A90E2" opacity="0.12" filter="blur(60px)"/>
+  <circle cx="1550" cy="192" r="260" fill="#2563EB" opacity="0.22" filter="blur(80px)"/>
+  <circle cx="350" cy="192" r="220" fill="#4A90E2" opacity="0.16" filter="blur(70px)"/>
 
-  <!-- Left: Emblem & Brand -->
-  <g transform="translate(120, 112)">
-    <rect width="80" height="80" rx="20" fill="url(#rdLogo)" stroke="#60A5FA" stroke-width="2"/>
-    <polyline points="58,22 36,46 24,34 10,48" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    <polyline points="44,22 58,22 58,36" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Side: Grande Logo + Brand Title + Subtitle -->
+  <g transform="translate(100, 112)">
+    <!-- Logo Emblem Grande (120x120) -->
+    <g filter="url(#rdGlow)">
+      <rect width="120" height="120" rx="30" fill="url(#rdLogo)" stroke="#60A5FA" stroke-width="3"/>
+      <polyline points="88,32 54,66 36,48 16,68" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="66,32 88,32 88,54" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
 
-    <text x="105" y="48" font-family="'Poppins', system-ui, sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">
+    <!-- Brand Name (Grande, 58px) -->
+    <text x="155" y="65" font-family="'Poppins', system-ui, sans-serif" font-size="58" font-weight="900" fill="#FFFFFF" letter-spacing="-0.02em">
       FinCalcolatore
     </text>
-    <text x="105" y="75" font-family="'Poppins', system-ui, sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
-      Strumenti &amp; Calcolatori Finanziari Indipendenti • Modello Fiscale Italiano 2026
+
+    <!-- Subtitle (Grande, 21px) -->
+    <text x="155" y="105" font-family="'Poppins', system-ui, sans-serif" font-size="21" font-weight="500" fill="#94A3B8">
+      Strumenti &amp; Calcolatori Finanziari Indipendenti • Modello Fiscale 2026
     </text>
   </g>
 
-  <!-- Right: Feature Cards Horizontal Strip -->
-  <g transform="translate(1080, 128)">
-    <rect x="0" y="0" width="165" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
-    <text x="82" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">📈 PAC &amp; ETF</text>
+  <!-- Right Side: 4 Grandi Bottoni Strumenti (Altezza 70px) -->
+  <g transform="translate(980, 140)">
+    <!-- Bottone 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="195" height="70" rx="14" fill="#112240" stroke="#233554" stroke-width="2"/>
+      <text x="97" y="44" font-family="'Poppins', system-ui, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">PAC &amp; ETF</text>
+    </g>
 
-    <rect x="180" y="0" width="165" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
-    <text x="262" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">🔥 Metodo FIRE</text>
+    <!-- Bottone 2 -->
+    <g transform="translate(215, 0)">
+      <rect width="195" height="70" rx="14" fill="#112240" stroke="#233554" stroke-width="2"/>
+      <text x="97" y="44" font-family="'Poppins', system-ui, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">Metodo FIRE</text>
+    </g>
 
-    <rect x="360" y="0" width="180" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
-    <text x="450" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">🏛️ Fondo Pensione</text>
+    <!-- Bottone 3 -->
+    <g transform="translate(430, 0)">
+      <rect width="220" height="70" rx="14" fill="#112240" stroke="#233554" stroke-width="2"/>
+      <text x="110" y="44" font-family="'Poppins', system-ui, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">Fondo Pensione</text>
+    </g>
 
-    <rect x="555" y="0" width="170" height="50" rx="8" fill="#1E56A0"/>
-    <text x="640" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">🌐 Calcola Gratis</text>
+    <!-- Bottone 4 (CTA Principale) -->
+    <g transform="translate(670, 0)" filter="url(#rdGlow)">
+      <rect width="210" height="70" rx="14" fill="#1E56A0"/>
+      <text x="105" y="44" font-family="'Poppins', system-ui, sans-serif" font-size="19" font-weight="800" fill="#FFFFFF" text-anchor="middle">Calcola Gratis →</text>
+    </g>
   </g>
 </svg>
