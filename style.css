@@ -195,7 +195,7 @@ html {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -208,7 +208,7 @@ html {
 body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   font-family: var(--font-sans);
   background-color: var(--bg-page);
@@ -363,10 +363,24 @@ ol:not([class]) li::marker {
   font-size: 0.88rem;
   font-weight: 500;
   transition: var(--transition);
+  padding: 4px 0;
+  position: relative;
 }
 
 .nav-link:hover {
   color: var(--text-heading);
+}
+
+.nav-link.active {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .nav-link.active {
+    color: #0A192F !important;
+    font-weight: 700 !important;
+  }
 }
 
 /* ==========================================================================
@@ -1821,8 +1835,10 @@ ol:not([class]) li::marker {
     padding: 0 18px;
   }
 
-  /* Navbar con Hamburger Menu Drawer */
+  /* Navbar con Hamburger Menu Drawer (non-sticky su mobile come da comportamento originario) */
   .navbar {
+    position: relative !important;
+    top: auto !important;
     padding: 12px 0;
   }
 
