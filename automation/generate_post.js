@@ -55,11 +55,6 @@ function generateSvgCard(p) {
     <text x="70" y="34" font-family="'Poppins', Arial, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">
       FinCalcolatore
     </text>
-
-    <rect x="710" y="8" width="210" height="36" rx="18" fill="rgba(74, 144, 226, 0.15)" stroke="#4A90E2" stroke-width="1"/>
-    <text x="815" y="32" font-family="'Poppins', Arial, sans-serif" font-size="12" font-weight="700" fill="#4A90E2" text-anchor="middle">
-      ${escapeXml(p.tag)}
-    </text>
   </g>
 
   <!-- Hook Question -->
@@ -123,7 +118,7 @@ function generateSvgCard(p) {
   <g transform="translate(80, 890)">
     <rect width="920" height="90" rx="20" fill="#1E56A0"/>
     <text x="460" y="52" font-family="'Poppins', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-      👉 Calcola gratis la tua simulazione su fincalcolatore.vercel.app (Link in Bio)
+      Calcola gratis la tua simulazione su fincalcolatore.vercel.app (Link in Bio)
     </text>
   </g>
 </svg>`;
