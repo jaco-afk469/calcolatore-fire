@@ -66,9 +66,32 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMobileMenu);
-  } else {
+  // Se si è già sulla home page (index.html) e si clicca su Calcolatore o sul Brand Logo,
+  // scorre dolcemente all'inizio della pagina invece di saltare a metà pagina
+  function initHomeScroll() {
+    const path = window.location.pathname;
+    const isHomePage = path.endsWith('index.html') || path === '/' || path.endsWith('/');
+    if (!isHomePage) return;
+
+    document.querySelectorAll('.navbar a[href="index.html"], .navbar a[href="#"], .navbar a[href="#calcolatore"]').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, null, window.location.pathname);
+        }
+      });
+    });
+  }
+
+  function init() {
     initMobileMenu();
+    initHomeScroll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
