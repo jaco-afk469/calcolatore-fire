@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="c4Grad1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E56A0"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="c4Grad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="c4Grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <filter id="c4Glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#3B82F6" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="100" height="100" rx="22" fill="#0A192F" stroke="#233554" stroke-width="1.5"/>
+
+  <!-- Tre Strati di Crescita Esponenziale (Curve di Compounding che formano la F) -->
+  <g filter="url(#c4Glow)">
+    <!-- Barra Base / Asta -->
+    <rect x="20" y="24" width="12" height="56" rx="6" fill="url(#c4Grad1)"/>
+
+    <!-- 1° Ramo Esponenziale Superiore -->
+    <path d="M 32 30 C 48 30, 62 26, 80 18 C 82 17, 84 19, 83 22 C 78 32, 60 42, 32 42 Z" fill="url(#c4Grad3)"/>
+
+    <!-- 2° Ramo Esponenziale Mediano -->
+    <path d="M 32 50 C 45 50, 56 46, 68 40 C 70 39, 72 41, 71 43 C 66 52, 52 59, 32 60 Z" fill="url(#c4Grad2)"/>
+  </g>
+</svg>
