@@ -71,8 +71,11 @@
     fireExpensesInput: document.getElementById('fireExpenses'),
     fireSwrInput: document.getElementById('fireSwr'),
     fireNumberKpi: document.getElementById('fireNumberKpi'),
+    fireMultiplierSub: document.getElementById('fireMultiplierSub'),
     fireYearsKpi: document.getElementById('fireYearsKpi'),
     fireMonthlyPassiveKpi: document.getElementById('fireMonthlyPassiveKpi'),
+    horizonPills: document.getElementById('horizonPills'),
+    horizonLabelTag: document.getElementById('horizonLabelTag'),
 
     // Codici Promo
     codeSatispayVal: document.getElementById('codeSatispayVal'),
@@ -428,6 +431,10 @@
     );
 
     if (dom.fireNumberKpi) dom.fireNumberKpi.textContent = formatCurrency(fireMetrics.fireNumber);
+    if (dom.fireMultiplierSub) {
+      const mult = (100 / (state.safeWithdrawalRate || 4.0)).toFixed(1);
+      dom.fireMultiplierSub.textContent = `${mult}x le tue spese annuali`;
+    }
     if (dom.fireYearsKpi) dom.fireYearsKpi.textContent = `${fireMetrics.yearsToFire} Anni`;
     if (dom.fireMonthlyPassiveKpi) dom.fireMonthlyPassiveKpi.textContent = `${formatCurrency(fireMetrics.monthlyPassiveCashflow)} / m`;
   }
@@ -890,9 +897,40 @@
       });
     }
 
+    if (dom.horizonPills) {
+      dom.horizonPills.querySelectorAll('.horizon-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          dom.horizonPills.querySelectorAll('.horizon-pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const swr = parseFloat(btn.dataset.swr);
+          const years = btn.dataset.years;
+          if (dom.horizonLabelTag) dom.horizonLabelTag.textContent = `${years} Anni`;
+          if (dom.fireSwrInput) dom.fireSwrInput.value = swr.toFixed(1);
+          state.safeWithdrawalRate = swr;
+          updateUI();
+        });
+      });
+    }
+
     if (dom.fireSwrInput) {
       dom.fireSwrInput.addEventListener('input', (e) => {
-        state.safeWithdrawalRate = parseFloat(e.target.value) || 4.0;
+        const swr = parseFloat(e.target.value) || 4.0;
+        state.safeWithdrawalRate = swr;
+        if (dom.horizonPills) {
+          let matched = false;
+          dom.horizonPills.querySelectorAll('.horizon-pill-btn').forEach(b => {
+            if (Math.abs(parseFloat(b.dataset.swr) - swr) < 0.05) {
+              b.classList.add('active');
+              matched = true;
+              if (dom.horizonLabelTag) dom.horizonLabelTag.textContent = `${b.dataset.years} Anni`;
+            } else {
+              b.classList.remove('active');
+            }
+          });
+          if (!matched && dom.horizonLabelTag) {
+            dom.horizonLabelTag.textContent = 'Personalizzato';
+          }
+        }
         updateUI();
       });
     }
@@ -1024,7 +1062,7 @@
       if (!isNaN(val) && val >= 0) {
         state.initialCapital = val;
         if (dom.initialCapitalInput) dom.initialCapitalInput.value = val;
-        if (dom.initialCapitalRange) dom.initialCapitalRange.value = Math.min(val, 100000);
+        if (dom.initialCapitalRange) dom.initialCapitalRange.value = Math.min(val, 500000);
       }
     }
 
