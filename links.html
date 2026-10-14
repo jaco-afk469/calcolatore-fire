@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinCalcolatore — Tutti i Calcolatori e Risorse Gratuite</title>
+  <meta name="description" content="Tutti i calcolatori finanziari gratuiti e indipendenti: PAC ETF, Fondo Pensione vs ETF, Affitto vs Acquisto e Promozioni Broker.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4.5">
+
+  <style>
+    .bio-page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 18px 60px;
+      background: radial-gradient(circle at 50% 10%, rgba(30, 86, 160, 0.25) 0%, transparent 60%), var(--bg-page);
+    }
+    .bio-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .bio-avatar-wrap {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #4A90E2 0%, #1E56A0 100%);
+      box-shadow: 0 8px 24px rgba(30, 86, 160, 0.4);
+      margin-bottom: 16px;
+    }
+    .bio-avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .bio-handle {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+    .bio-verified-badge {
+      display: inline-flex;
+      color: #4A90E2;
+    }
+    .bio-tagline {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .bio-links-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bio-link-card {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+    .bio-link-card:hover {
+      transform: translateY(-2px);
+      border-color: #4A90E2;
+      box-shadow: 0 8px 20px rgba(30, 86, 160, 0.25);
+      color: var(--text-heading);
+    }
+    .bio-link-featured {
+      background: linear-gradient(135deg, rgba(30, 86, 160, 0.15) 0%, rgba(74, 144, 226, 0.08) 100%);
+      border-color: #4A90E2;
+    }
+    .bio-link-icon {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      margin-right: 12px;
+    }
+    .bio-link-body {
+      flex: 1;
+      text-align: left;
+    }
+    .bio-link-title {
+      display: block;
+      line-height: 1.3;
+    }
+    .bio-link-subtitle {
+      font-size: 0.76rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+    .bio-link-arrow {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-left: 8px;
+    }
+    .bio-promo-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: #10B981;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .bio-footer {
+      margin-top: 36px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bio-page-wrapper">
+    <main class="bio-container">
+      
+      <!-- Profile Avatar -->
+      <div class="bio-avatar-wrap">
+        <img src="assets/social/avatar.svg" alt="FinCalcolatore" class="bio-avatar-img">
+      </div>
+
+      <!-- Handle & Bio -->
+      <h1 class="bio-handle">
+        <span>FinCalcolatore</span>
+        <svg class="bio-verified-badge" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </h1>
+      <p class="bio-tagline">
+        Simula il tuo futuro finanziario con modelli quantitativi gratuiti, indipendenti e aggiornati alla fiscalità italiana 2026.
+      </p>
+
+      <!-- Stack Link -->
+      <div class="bio-links-stack">
+        
+        <!-- 1. Calcolatore PAC -->
+        <a href="index.html" class="bio-link-card bio-link-featured">
+          <span class="bio-link-icon">📈</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Calcolatore PAC &amp; Interesse Composto</span>
+            <span class="bio-link-subtitle">Vedi la crescita esponenziale del tuo capitale nel tempo</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+        <!-- 2. Fondo Pensione vs ETF -->
+        <a href="fondo-pensione-vs-etf.html" class="bio-link-card">
+          <span class="bio-link-icon">🏛️</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Fondo Pensione vs PAC in ETF</span>
+            <span class="bio-link-subtitle">Simula il risparmio IRPEF fino a 5.164€ nel 730</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+        <!-- 3. Affitto vs Acquisto -->
+        <a href="affitto-vs-acquisto.html" class="bio-link-card">
+          <span class="bio-link-icon">🏠</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Affitto vs Acquisto Casa</span>
+            <span class="bio-link-subtitle">Confronto patrimoniale con tassi mutuo e costi reali</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+        <!-- 4. Metodo FIRE 4% -->
+        <a href="index.html#calcolatore" class="bio-link-card">
+          <span class="bio-link-icon">🔥</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Simulatore Metodo FIRE &amp; Regola 4%</span>
+            <span class="bio-link-subtitle">Calcola quanti anni ti mancano alla pensione anticipata</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+        <!-- 5. Migliori Broker PAC ETF -->
+        <a href="migliori-broker-pac-etf-italia.html" class="bio-link-card">
+          <span class="bio-link-icon">🏆</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Migliori Broker per PAC ETF (2026)</span>
+            <span class="bio-link-subtitle">Classifica indipendente: zero commissioni e regime fiscale</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+        <!-- 6. Offerta Trade Republic (Affiliazione) -->
+        <a href="https://traderepublic.com/referral/TRPAC20" target="_blank" rel="noopener noreferrer" class="bio-link-card" style="border-color: #10B981; background: rgba(16, 185, 129, 0.06);">
+          <span class="bio-link-icon">🎁</span>
+          <div class="bio-link-body">
+            <span class="bio-link-title">Trade Republic: 3,25% + PAC a 0€ <span class="bio-promo-badge">PROMO</span></span>
+            <span class="bio-link-subtitle">Interessi mensili sulla liquidità e piani ETF automatici</span>
+          </div>
+          <span class="bio-link-arrow">→</span>
+        </a>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="bio-footer">
+        <p>&copy; 2026 FinCalcolatore • Informazione Finanziaria Indipendente</p>
+      </footer>
+
+    </main>
+  </div>
+
+</body>
+</html>
