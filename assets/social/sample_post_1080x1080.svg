@@ -34,12 +34,6 @@
     <text x="70" y="34" font-family="'Poppins', system-ui, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">
       FinCalcolatore
     </text>
-
-    <!-- Badge -->
-    <rect x="740" y="8" width="180" height="36" rx="18" fill="rgba(74, 144, 226, 0.15)" stroke="#4A90E2" stroke-width="1"/>
-    <text x="830" y="32" font-family="'Poppins', system-ui, sans-serif" font-size="13" font-weight="700" fill="#4A90E2" text-anchor="middle">
-      CASO STUDIO PAC
-    </text>
   </g>
 
   <!-- Main Question / Hook -->
@@ -108,7 +102,7 @@
   <g transform="translate(80, 910)">
     <rect width="920" height="80" rx="20" fill="#1E56A0"/>
     <text x="460" y="48" font-family="'Poppins', system-ui, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-      👉 Calcola gratis il tuo piano su fincalcolatore.vercel.app (Link in Bio)
+      Calcola gratis il tuo piano su fincalcolatore.vercel.app (Link in Bio)
     </text>
   </g>
 </svg>
