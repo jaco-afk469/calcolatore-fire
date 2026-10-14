@@ -123,11 +123,15 @@
     const finalPensionTaxRate = getFinalPensionTaxRate(years);
 
     // Rendimento netto Fondo Pensione:
-    // (Gross - TER) tassato annualmente al 20% sui rendimenti maturi
+    // (Gross - TER) tassato annualmente al 20% sui rendimenti maturati (art. 17 D.Lgs. 252/2005).
+    // I fondi pensione sono esenti dall'imposta di bollo dello 0,20% sul dossier titoli.
     const pensionNetReturn = Math.max(0, (grossReturn - terP) * 0.80);
 
-    // Rendimento lordo ETF (la tassazione 26% è differita alla vendita)
-    const etfNetReturn = Math.max(0, grossReturn - terE);
+    // Rendimento netto annuale ETF (fase di accumulo):
+    // Gross - TER - Imposta di Bollo patrimoniale sul conto titoli (0,20% annuo ex art. 19 D.L. 201/2011).
+    // La tassazione sulle plusvalenze (26%) è differita al realizzo finale.
+    const etfAnnualStampDuty = 0.002;
+    const etfNetReturn = Math.max(0, grossReturn - terE - etfAnnualStampDuty);
 
     // Tracciamento annuale
     const trajectory = [];
@@ -141,6 +145,9 @@
     const pureEtfAnnualContrib = reinvest ? contrib : Math.max(0, contrib - annualRefund);
     let pureEtfBalance = 0;
     let pureEtfPrincipal = 0;
+
+    // Quota deducibile annua (tetto art. 10 TUIR: max 5.164,15 €)
+    const deductibleAnnual = Math.min(contrib, 5164.15);
 
     for (let y = 1; y <= years; y++) {
       // 1. Fondo Pensione: rendimento + nuovo versamento
@@ -156,11 +163,17 @@
       pureEtfBalance = (pureEtfBalance * (1 + etfNetReturn)) + pureEtfAnnualContrib;
       pureEtfPrincipal += pureEtfAnnualContrib;
 
-      // Calcolo netto anno corrente
-      // Fondo Pensione: tassazione finale (15% -> 9%)
-      const currentPensionNet = fundBalance * (1 - (finalPensionTaxRate / 100));
+      // Calcolo netto anno corrente:
+      // Tassazione finale agevolata Fondo Pensione (dal 15% al 9% ex D.Lgs. 252/2005):
+      // Si applica ESCLUSIVAMENTE sui contributi dedotti dall'IRPEF.
+      // I rendimenti hanno già pagato il 20% annuale (nessuna doppia imposizione),
+      // e gli eventuali contributi non dedotti (oltre 5.164,15 €) sono esenti alla liquidazione.
+      const totalDeductedPrincipal = deductibleAnnual * y;
+      const rateAtY = getFinalPensionTaxRate(y);
+      const finalPensionTax = totalDeductedPrincipal * (rateAtY / 100);
+      const currentPensionNet = Math.max(0, fundBalance - finalPensionTax);
 
-      // Satellite ETF netto (26% su plusvalenza)
+      // Satellite ETF netto (26% su plusvalenza differita)
       let currentSatelliteNet = 0;
       if (reinvest && satelliteEtfBalance > 0) {
         const satGain = Math.max(0, satelliteEtfBalance - satelliteEtfPrincipal);
@@ -169,7 +182,7 @@
 
       const totalPensionStrategyNet = currentPensionNet + currentSatelliteNet;
 
-      // Pure ETF netto (26% su plusvalenza)
+      // Pure ETF netto (26% su plusvalenza differita)
       const pureGain = Math.max(0, pureEtfBalance - pureEtfPrincipal);
       const pureEtfNet = pureEtfBalance - (pureGain * 0.26);
 
@@ -226,7 +239,7 @@
     if (dom.kpiPensionSub) {
       dom.kpiPensionSub.textContent = state.reinvestRefund
         ? `Fondo (${fmtEur(res.fundNetOnly)}) + ETF da rimborso (${fmtEur(res.satelliteNetOnly)})`
-        : `Montante Fondo al netto dell'imposta finale al ${res.finalPensionTaxRate}%`;
+        : `Montante Fondo al netto dell'imposta finale (${res.finalPensionTaxRate}% su dedotto)`;
     }
 
     if (dom.kpiEtfSub) {
