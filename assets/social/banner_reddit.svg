@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 384" width="1920" height="384">
+  <defs>
+    <linearGradient id="rdBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A192F"/>
+      <stop offset="45%" stop-color="#0F2442"/>
+      <stop offset="100%" stop-color="#060E1A"/>
+    </linearGradient>
+    <linearGradient id="rdLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1E56A0"/>
+    </linearGradient>
+    <pattern id="rdGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#1E56A0" stroke-width="0.6" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <rect width="1920" height="384" fill="url(#rdBg)"/>
+  <rect width="1920" height="384" fill="url(#rdGrid)"/>
+
+  <!-- Glowing Accents -->
+  <circle cx="1550" cy="192" r="220" fill="#2563EB" opacity="0.18" filter="blur(70px)"/>
+  <circle cx="350" cy="192" r="180" fill="#4A90E2" opacity="0.12" filter="blur(60px)"/>
+
+  <!-- Left: Emblem & Brand -->
+  <g transform="translate(120, 112)">
+    <rect width="80" height="80" rx="20" fill="url(#rdLogo)" stroke="#60A5FA" stroke-width="2"/>
+    <polyline points="58,22 36,46 24,34 10,48" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="44,22 58,22 58,36" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="105" y="48" font-family="'Poppins', system-ui, sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">
+      FinCalcolatore
+    </text>
+    <text x="105" y="75" font-family="'Poppins', system-ui, sans-serif" font-size="16" font-weight="500" fill="#94A3B8">
+      Strumenti &amp; Calcolatori Finanziari Indipendenti • Modello Fiscale Italiano 2026
+    </text>
+  </g>
+
+  <!-- Right: Feature Cards Horizontal Strip -->
+  <g transform="translate(1080, 128)">
+    <rect x="0" y="0" width="165" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
+    <text x="82" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">📈 PAC &amp; ETF</text>
+
+    <rect x="180" y="0" width="165" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
+    <text x="262" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">🔥 Metodo FIRE</text>
+
+    <rect x="360" y="0" width="180" height="50" rx="8" fill="#112240" stroke="#233554" stroke-width="1.5"/>
+    <text x="450" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">🏛️ Fondo Pensione</text>
+
+    <rect x="555" y="0" width="170" height="50" rx="8" fill="#1E56A0"/>
+    <text x="640" y="31" font-family="'Poppins', system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">🌐 Calcola Gratis</text>
+  </g>
+</svg>
