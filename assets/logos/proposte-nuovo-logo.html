@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proposte Nuovo Logo — FinCalcolatore</title>
+  <title>Evoluzione Grafica del Logo "F" Esponenziale — FinCalcolatore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -17,48 +17,77 @@
       min-height: 100vh;
     }
     .container {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
     }
     header {
       text-align: center;
       margin-bottom: 48px;
     }
+    .badge-pill {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(74, 144, 226, 0.16);
+      color: #4A90E2;
+      border: 1px solid rgba(74, 144, 226, 0.35);
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
     h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
+      font-size: 2.3rem;
+      font-weight: 900;
       color: #FFFFFF;
-      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
     }
     p.lead {
       color: #94A3B8;
       font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 24px;
       margin-bottom: 48px;
     }
     .card {
       background: #112240;
-      border: 1px solid #233554;
-      border-radius: 18px;
-      padding: 24px;
+      border: 1.5px solid #233554;
+      border-radius: 20px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
     .card:hover {
-      transform: translateY(-4px);
-      border-color: #4A90E2;
+      transform: translateY(-6px);
+      border-color: #38BDF8;
+      box-shadow: 0 16px 36px rgba(10, 25, 47, 0.6), 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    .card-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      margin-bottom: 18px;
     }
     .logo-frame {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 20px;
+      width: 128px;
+      height: 128px;
+      margin-bottom: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -67,41 +96,37 @@
       width: 100%;
       height: 100%;
       display: block;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
     }
     .card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: #FFFFFF;
       margin-bottom: 8px;
     }
-    .badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(74, 144, 226, 0.18);
-      color: #4A90E2;
-      border: 1px solid rgba(74, 144, 226, 0.4);
-      margin-bottom: 12px;
-    }
     .card p {
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       color: #94A3B8;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .preview-section {
       background: #0d1e38;
       border: 1px solid #233554;
-      border-radius: 18px;
-      padding: 32px;
-      margin-top: 32px;
+      border-radius: 20px;
+      padding: 36px 28px;
+      margin-top: 40px;
     }
     .preview-section h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
       text-align: center;
+    }
+    .preview-section p.sub {
+      text-align: center;
+      color: #94A3B8;
+      font-size: 0.92rem;
+      margin-bottom: 28px;
     }
     .mock-navbar {
       display: flex;
@@ -109,98 +134,116 @@
       justify-content: space-between;
       background: rgba(10, 25, 47, 0.95);
       border: 1px solid #233554;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px 24px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .mock-brand {
       display: flex;
       align-items: center;
       gap: 12px;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #FFFFFF;
+      letter-spacing: -0.02em;
     }
     .mock-brand img {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
     }
     .mock-links {
       display: flex;
-      gap: 18px;
-      font-size: 0.86rem;
+      gap: 20px;
+      font-size: 0.88rem;
       color: #94A3B8;
+      font-weight: 500;
     }
     .mock-links span.active {
       color: #FFFFFF;
       font-weight: 700;
+    }
+    .variant-label {
+      font-size: 0.78rem;
+      color: #64748B;
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Nuovo Brand Identity: FinCalcolatore</h1>
-      <p class="lead">4 proposte visive distinte per sostituire il vecchio logo anonimo</p>
+      <div class="badge-pill">Design Evolution • Identità Visiva</div>
+      <h1>Il Monogramma "F" Esponenziale</h1>
+      <p class="lead">
+        Abbiamo preso l'idea della <strong>lettera "F" fusa con la freccia di crescita dell'interesse composto</strong> e l'abbiamo ridisegnata da zero in 4 declinazioni grafiche raffinate, dinamiche e senza forme goffe.
+      </p>
     </header>
 
     <div class="grid">
-      <!-- Proposta 1 -->
+      
+      <!-- Evoluzione 1A: Razor Kinetic -->
       <div class="card">
-        <div class="badge">CONSIGLIATA • TOP FINTECH</div>
+        <div class="card-badge">TOP FINTECH MINIMAL</div>
         <div class="logo-frame">
-          <img src="logo_concept_1_monogram.svg" alt="Concept 1">
+          <img src="logo_f_razor.svg" alt="Evolution 1A">
         </div>
-        <h3>1. Il Monogramma "F" Esponenziale</h3>
+        <h3>1A. "Razor Kinetic F"</h3>
         <p>
-          Monogramma geometrico della <strong>F</strong> in cui i bracci orizzontali formano una freccia di accelerazione e compounding. Minimalista, atletico, moderno stile Stripe / Linear.
+          Tagli geometrici a 45° precisi. Il braccio superiore dell'F culmina in una freccia ad ala aerodinamica che fende lo spazio. Stile ultra-pulito alla Linear / Tesla.
         </p>
       </div>
 
-      <!-- Proposta 2 -->
+      <!-- Evoluzione 1B: Ribbon Fold -->
       <div class="card">
-        <div class="badge">RIGORE MATEMATICO</div>
+        <div class="card-badge">EFFETTO PROFONDITÀ 2.5D</div>
         <div class="logo-frame">
-          <img src="logo_concept_2_prism.svg" alt="Concept 2">
+          <img src="logo_f_ribbon.svg" alt="Evolution 1B">
         </div>
-        <h3>2. Il Prisma Delta (&Delta;)</h3>
+        <h3>1B. "Ribbon Fold F"</h3>
         <p>
-          Simbolo geometrico del <strong>Delta</strong> (variazione e crescita) composto da 3 sfaccettature che rappresentano Capitale, Tempo e Rendimento. Molto istituzionale.
+          Un nastro geometrico a torsione dimensionale: la colonna verticale si piega fluidamente nella traversa superiore che proietta una cuspide luminosa a Nord-Est.
         </p>
       </div>
 
-      <!-- Proposta 3 -->
+      <!-- Evoluzione 1C: Kinetic Surge -->
       <div class="card">
-        <div class="badge">LIBERTÀ &amp; OBIETTIVO FIRE</div>
+        <div class="card-badge">SLANCIO &amp; ENERGIA</div>
         <div class="logo-frame">
-          <img src="logo_concept_3_compass.svg" alt="Concept 3">
+          <img src="logo_f_surge.svg" alt="Evolution 1C">
         </div>
-        <h3>3. La Bussola Quantitativa</h3>
+        <h3>1C. "Kinetic Surge F"</h3>
         <p>
-          Una bussola ad alta precisione con il vettore a doppia lama puntato a Nord-Est (verso la Libertà Finanziaria e il FIRE). Evoca direzione e chiarezza.
+          Il tronco della F è ancorato e solido, mentre i due rami orizzontali sono cunei paralleli ad alta velocità. La punta è una freccia geometrica decisa e potente.
         </p>
       </div>
 
-      <!-- Proposta 4 -->
+      <!-- Evoluzione 1D: Angular Arrow -->
       <div class="card">
-        <div class="badge">INTERESSE COMPOSTO</div>
+        <div class="card-badge">ARCHITETTURA MODERNA</div>
         <div class="logo-frame">
-          <img src="logo_concept_4_curves.svg" alt="Concept 4">
+          <img src="logo_f_angular_arrow.svg" alt="Evolution 1D">
         </div>
-        <h3>4. Le Onde di Compounding</h3>
+        <h3>1D. "Angular Arrow F"</h3>
         <p>
-          Fonde la lettera F con onde paraboliche crescenti sovrapposte. Fluido, dinamico, focalizzato sull'effetto valanga dell'interesse composto.
+          La traversa superiore dell'F si stacca e si trasforma integralmente in una grande freccia direzionale verso il futuro. Altamente iconico e memorabile.
         </p>
       </div>
+
     </div>
 
-    <!-- Sezione Mockup nella Navbar -->
+    <!-- ANTEPRIMA NELLA NAVBAR REALE -->
     <div class="preview-section">
-      <h2>Anteprima Live nella Barra di Navigazione</h2>
+      <h2>Come appaiono dal vivo nella barra del sito</h2>
+      <p class="sub">Guarda l'equilibrio con il nome del brand "FinCalcolatore" e i link di navigazione</p>
 
+      <div class="variant-label">Anteprima 1A: Razor Kinetic F</div>
       <div class="mock-navbar">
         <div class="mock-brand">
-          <img src="logo_concept_1_monogram.svg" alt="Concept 1">
+          <img src="logo_f_razor.svg" alt="Razor F">
           <span>FinCalcolatore</span>
         </div>
         <div class="mock-links">
@@ -211,9 +254,10 @@
         </div>
       </div>
 
+      <div class="variant-label">Anteprima 1B: Ribbon Fold F</div>
       <div class="mock-navbar">
         <div class="mock-brand">
-          <img src="logo_concept_2_prism.svg" alt="Concept 2">
+          <img src="logo_f_ribbon.svg" alt="Ribbon F">
           <span>FinCalcolatore</span>
         </div>
         <div class="mock-links">
@@ -224,9 +268,10 @@
         </div>
       </div>
 
+      <div class="variant-label">Anteprima 1C: Kinetic Surge F</div>
       <div class="mock-navbar">
         <div class="mock-brand">
-          <img src="logo_concept_3_compass.svg" alt="Concept 3">
+          <img src="logo_f_surge.svg" alt="Kinetic Surge F">
           <span>FinCalcolatore</span>
         </div>
         <div class="mock-links">
@@ -237,9 +282,10 @@
         </div>
       </div>
 
+      <div class="variant-label">Anteprima 1D: Angular Arrow F</div>
       <div class="mock-navbar">
         <div class="mock-brand">
-          <img src="logo_concept_4_curves.svg" alt="Concept 4">
+          <img src="logo_f_angular_arrow.svg" alt="Angular Arrow F">
           <span>FinCalcolatore</span>
         </div>
         <div class="mock-links">
@@ -249,6 +295,7 @@
           <span>Migliori Broker</span>
         </div>
       </div>
+
     </div>
   </div>
 </body>
