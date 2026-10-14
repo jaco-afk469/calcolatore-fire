@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="assets/logos/fincalcolatore.svg">
-  <link rel="stylesheet" href="style.css?v=4.3">
+  <link rel="stylesheet" href="style.css?v=4.4">
 
   <!-- Schema.org WebApplication Structured Data -->
   <script type="application/ld+json">
@@ -154,30 +154,32 @@
         </h2>
 
         <!-- Input RAL -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="ralInput" class="input-label">Reddito Lordo Annuo (RAL)</label>
-            <div class="input-value-badge">
-              <input type="number" id="ralInput" value="35000" min="15000" max="150000" step="1000" class="numeric-field">
-              <span class="currency-symbol">€</span>
-            </div>
+            <span class="input-val-tag">€</span>
           </div>
-          <input type="range" id="ralRange" min="15000" max="150000" step="1000" value="35000" class="range-slider">
-          <div class="tax-bracket-summary">
+          <div class="input-field-wrapper">
+            <span class="input-prefix">€</span>
+            <input type="number" id="ralInput" class="text-input has-prefix tabular-nums" value="35000" min="15000" max="150000" step="1000">
+          </div>
+          <input type="range" id="ralRange" class="range-slider" min="15000" max="150000" step="1000" value="35000">
+          <div class="tax-bracket-summary" style="margin-top: 10px; padding: 10px 14px; font-size: 0.82rem;">
             Aliquota marginale IRPEF stimata: <strong id="kpiMarginalRate" style="color: var(--accent-primary);">37%</strong> (inclusi ~2% addizionali)
           </div>
         </div>
 
         <!-- Input Versamento Annuo -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="contribInput" class="input-label">Versamento Annuo nel Fondo</label>
-            <div class="input-value-badge">
-              <input type="number" id="contribInput" value="5164" min="500" max="15000" step="50" class="numeric-field">
-              <span class="currency-symbol">€</span>
-            </div>
+            <span class="input-val-tag">€ / anno</span>
           </div>
-          <input type="range" id="contribRange" min="500" max="15000" step="50" value="5164" class="range-slider">
+          <div class="input-field-wrapper">
+            <span class="input-prefix">€</span>
+            <input type="number" id="contribInput" class="text-input has-prefix tabular-nums" value="5164" min="500" max="15000" step="50">
+          </div>
+          <input type="range" id="contribRange" class="range-slider" min="500" max="15000" step="50" value="5164">
           <div class="preset-chips-row">
             <button type="button" class="preset-chip-btn preset-contrib" data-val="1200">100€/m (1.200€)</button>
             <button type="button" class="preset-chip-btn preset-contrib" data-val="2400">200€/m (2.400€)</button>
@@ -186,30 +188,32 @@
         </div>
 
         <!-- Input Anni alla Pensione -->
-        <div class="input-group">
-          <div class="input-header">
-            <label for="yearsInput" class="input-label">Orizzonte Temporale (Anni)</label>
-            <div class="input-value-badge">
-              <input type="number" id="yearsInput" value="25" min="5" max="40" step="1" class="numeric-field">
-              <span class="currency-symbol">anni</span>
-            </div>
+        <div class="form-group">
+          <div class="label-row">
+            <label for="yearsInput" class="input-label">Orizzonte Temporale</label>
+            <span class="input-val-tag">Anni</span>
           </div>
-          <input type="range" id="yearsRange" min="5" max="40" step="1" value="25" class="range-slider">
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+          <div class="input-field-wrapper">
+            <input type="number" id="yearsInput" class="text-input has-suffix tabular-nums" value="25" min="5" max="40" step="1">
+            <span class="input-suffix">Anni</span>
+          </div>
+          <input type="range" id="yearsRange" class="range-slider" min="5" max="40" step="1" value="25">
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
             Aliquota finale stimata a scadenza: <strong id="kpiPensionTaxRate" style="color: var(--accent-emerald);">12.0%</strong>
           </div>
         </div>
 
         <!-- Input Rendimento Lordo Atteso -->
-        <div class="input-group">
-          <div class="input-header">
+        <div class="form-group">
+          <div class="label-row">
             <label for="returnInput" class="input-label">Rendimento Lordo Annuo di Mercato</label>
-            <div class="input-value-badge">
-              <input type="number" id="returnInput" value="6.5" min="2" max="12" step="0.5" class="numeric-field">
-              <span class="currency-symbol">%</span>
-            </div>
+            <span class="input-val-tag">%</span>
           </div>
-          <input type="range" id="returnRange" min="2" max="12" step="0.5" value="6.5" class="range-slider">
+          <div class="input-field-wrapper">
+            <input type="number" id="returnInput" class="text-input has-suffix tabular-nums" value="6.5" min="2" max="12" step="0.5">
+            <span class="input-suffix">%</span>
+          </div>
+          <input type="range" id="returnRange" class="range-slider" min="2" max="12" step="0.5" value="6.5">
         </div>
 
         <!-- TOGGLE REINVESTIMENTO RIMBORSO 730 -->
@@ -235,26 +239,28 @@
             Costi di Gestione Annui (TER / ISC)
           </summary>
           <div style="margin-top: 14px;">
-            <div class="input-group" style="margin-bottom: 12px;">
-              <div class="input-header">
-                <label for="terPensionInput" class="input-label" style="font-size: 0.8rem;">TER Fondo Pensione Aperto</label>
-                <div class="input-value-badge">
-                  <input type="number" id="terPensionInput" value="1.4" min="0.4" max="2.5" step="0.1" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <div class="label-row">
+                <label for="terPensionInput" class="input-label" style="font-size: 0.84rem;">TER Fondo Pensione Aperto</label>
+                <span class="input-val-tag">%</span>
               </div>
-              <input type="range" id="terPensionRange" min="0.4" max="2.5" step="0.1" value="1.4" class="range-slider">
+              <div class="input-field-wrapper">
+                <input type="number" id="terPensionInput" class="text-input has-suffix tabular-nums" value="1.4" min="0.4" max="2.5" step="0.1">
+                <span class="input-suffix">%</span>
+              </div>
+              <input type="range" id="terPensionRange" class="range-slider" min="0.4" max="2.5" step="0.1" value="1.4">
             </div>
 
-            <div class="input-group" style="margin-bottom: 0;">
-              <div class="input-header">
-                <label for="terEtfInput" class="input-label" style="font-size: 0.8rem;">TER PAC ETF Globale</label>
-                <div class="input-value-badge">
-                  <input type="number" id="terEtfInput" value="0.2" min="0.05" max="0.5" step="0.05" class="numeric-field">
-                  <span class="currency-symbol">%</span>
-                </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <div class="label-row">
+                <label for="terEtfInput" class="input-label" style="font-size: 0.84rem;">TER PAC ETF Globale</label>
+                <span class="input-val-tag">%</span>
               </div>
-              <input type="range" id="terEtfRange" min="0.05" max="0.5" step="0.05" value="0.2" class="range-slider">
+              <div class="input-field-wrapper">
+                <input type="number" id="terEtfInput" class="text-input has-suffix tabular-nums" value="0.2" min="0.05" max="0.5" step="0.05">
+                <span class="input-suffix">%</span>
+              </div>
+              <input type="range" id="terEtfRange" class="range-slider" min="0.05" max="0.5" step="0.05" value="0.2">
             </div>
           </div>
         </details>
