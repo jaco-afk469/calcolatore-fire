@@ -83,7 +83,99 @@ async function publishToMeta() {
   }
 }
 
-// 2. PUBBLICAZIONE REDDIT
+// 2. PUBBLICAZIONE VIA BUFFER (INSTAGRAM, TIKTOK, FACEBOOK)
+async function publishToBuffer() {
+  let token = process.env.BUFFER_ACCESS_TOKEN;
+  if (!token) {
+    const keyFile = path.join(__dirname, '..', 'API KEY BUFFER', 'Usare solo se chiesta esplicitamente.txt');
+    if (fs.existsSync(keyFile)) {
+      token = fs.readFileSync(keyFile, 'utf8').trim();
+    }
+  }
+
+  if (!token) {
+    console.log('[Buffer] ⚠️ BUFFER_ACCESS_TOKEN non impostato.');
+    return;
+  }
+
+  try {
+    console.log('[Buffer] Connessione a Buffer GraphQL API...');
+    
+    // 1. Recupera Organization ID
+    const orgRes = await bufferGraphQL(token, `query { account { organizations { id name } } }`);
+    if (!orgRes?.data?.account?.organizations?.[0]?.id) {
+      console.error('[Buffer] Impossibile recuperare Organization ID:', orgRes);
+      return;
+    }
+    const orgId = orgRes.data.account.organizations[0].id;
+
+    // 2. Recupera i canali connessi
+    const channelsRes = await bufferGraphQL(token, `query { channels(input: { organizationId: "${orgId}" }) { id name service } }`);
+    const channels = channelsRes?.data?.channels || [];
+    console.log(`[Buffer] Canali trovati: ${channels.map(c => `${c.service} (${c.name})`).join(', ')}`);
+
+    const imageUrl = 'https://raw.githubusercontent.com/jaco-afk469/calcolatore-fire/main/automation/output/current_post.png';
+    const cleanCaption = payload.instagram.caption.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').trim();
+
+    for (const channel of channels) {
+      console.log(`[Buffer] Invio post a canale: ${channel.service} (${channel.name})...`);
+      
+      const input = {
+        channelId: channel.id,
+        text: cleanCaption,
+        schedulingType: 'automatic',
+        mode: 'addToQueue',
+        assets: [{ image: { url: imageUrl } }]
+      };
+
+      if (channel.service === 'instagram') {
+        input.metadata = { instagram: { type: 'post', shouldShareToFeed: true } };
+      }
+
+      const postMutation = `mutation CreatePost($input: CreatePostInput!) {
+        createPost(input: $input) {
+          ... on PostActionSuccess { post { id status dueAt } }
+          ... on MutationError { message }
+        }
+      }`;
+
+      const postRes = await bufferGraphQL(token, postMutation, { input });
+      if (postRes?.data?.createPost?.post) {
+        const p = postRes.data.createPost.post;
+        console.log(`[Buffer] Post programmato con successo! ID=${p.id} Data=${p.dueAt} Stato=${p.status}`);
+      } else {
+        console.error(`[Buffer] Errore pubblicazione canale ${channel.name}:`, postRes?.data?.createPost?.message || postRes);
+      }
+    }
+  } catch (err) {
+    console.error('[Buffer] Errore esecuzione:', err.message);
+  }
+}
+
+function bufferGraphQL(token, query, variables = null) {
+  return new Promise((resolve, reject) => {
+    const bodyStr = JSON.stringify({ query, variables });
+    const req = https.request('https://api.buffer.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+        'User-Agent': 'FinCalcolatore-Autopilot/1.0'
+      }
+    }, res => {
+      let data = '';
+      res.on('data', c => data += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); } catch (e) { resolve(data); }
+      });
+    });
+    req.on('error', reject);
+    req.write(bodyStr);
+    req.end();
+  });
+}
+
+// 3. PUBBLICAZIONE REDDIT
 async function publishToReddit() {
   const clientId = process.env.REDDIT_CLIENT_ID;
   const clientSecret = process.env.REDDIT_CLIENT_SECRET;
@@ -92,7 +184,6 @@ async function publishToReddit() {
 
   if (!clientId || !clientSecret || !username || !password) {
     console.log('[Reddit] ⚠️ Credenziali REDDIT_* non impostate nei segreti di GitHub.');
-    console.log('[Reddit] -> Modalità Anteprima/Dry-Run: Discussione pronta per la pubblicazione.');
     return;
   }
 
@@ -101,7 +192,6 @@ async function publishToReddit() {
     const authHeader = 'Basic ' + Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
     const authBody = `grant_type=password&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
-    // Richiesta Token
     const authRes = await new Promise((resolve, reject) => {
       const req = https.request({
         hostname: 'www.reddit.com',
@@ -153,7 +243,7 @@ async function publishToReddit() {
   }
 }
 
-// 3. ARCHIVIAZIONE NELLO STORICO LOCALE
+// 4. ARCHIVIAZIONE NELLO STORICO LOCALE
 function archiveHistory() {
   const logFile = path.join(__dirname, 'history.log');
   const logLine = `[${new Date().toISOString()}] SLOT=${payload.slot.toUpperCase()} ID=${payload.id} CATEGORY="${payload.category}"\n`;
@@ -162,6 +252,7 @@ function archiveHistory() {
 }
 
 async function run() {
+  await publishToBuffer();
   await publishToMeta();
   await publishToReddit();
   archiveHistory();
