@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jaco-afk469.github.io/calcolatore-fire/sitemap.xml
+Sitemap: https://fincalcolatore.vercel.app/sitemap.xml
