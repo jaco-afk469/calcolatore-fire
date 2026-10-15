@@ -12,7 +12,7 @@
 const APP_CONFIG = {
   // Impostazioni Generali
   appName: "FinCalcolatore",
-  appUrl: "https://jaco-afk469.github.io/calcolatore-fire/",
+  appUrl: "https://fincalcolatore.vercel.app/",
   defaultCurrency: "€",
 
   // 1. MONETIZZAZIONE AFFILIAZIONI & BROKER PARTNER
