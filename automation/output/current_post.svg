@@ -33,10 +33,11 @@
   </g>
 
   <!-- Hook Question -->
-  <text x="80" y="210" font-family="'Poppins', Arial, sans-serif" font-size="38" font-weight="800" fill="#FFFFFF" letter-spacing="-0.01em">
-    La Regola del 4% NON funziona se hai meno di 40 anni...
+  <text x="80" y="195" font-family="'Poppins', Arial, sans-serif" font-size="32" font-weight="800" fill="#FFFFFF" letter-spacing="-0.01em">
+    <tspan x="80" dy="0">Coast FIRE: Quanto capitale ti serve a 30</tspan>
+    <tspan x="80" dy="42">anni per non dover più risparmiare un solo euro?</tspan>
   </text>
-  <text x="80" y="260" font-family="'Poppins', Arial, sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+  <text x="80" y="270" font-family="'Poppins', Arial, sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
     Simulazione matematica con dati ufficiali • Fonte: fincalcolatore.vercel.app
   </text>
 
@@ -47,13 +48,13 @@
     <!-- Row 1 -->
     <g transform="translate(50, 45)">
       <text x="0" y="22" font-family="'Poppins', Arial, sans-serif" font-size="17" font-weight="600" fill="#94A3B8">
-        1. Orizzonte Standard 30 Anni (Trinity Study)
+        1. Capitale Investito Raggiunto a 30 Anni
       </text>
       <text x="0" y="68" font-family="'Poppins', Arial, sans-serif" font-size="38" font-weight="800" fill="#CBD5E1">
-        4,0% annuo
+        80.000 €
       </text>
       <text x="820" y="68" font-family="'Poppins', Arial, sans-serif" font-size="16" font-weight="500" fill="#64748B" text-anchor="end">
-        Tasso di prelievo sicuro (SWR)
+        Risparmiati nei primi anni di carriera
       </text>
     </g>
 
@@ -62,13 +63,13 @@
     <!-- Row 2 -->
     <g transform="translate(50, 215)">
       <text x="0" y="22" font-family="'Poppins', Arial, sans-serif" font-size="17" font-weight="600" fill="#4A90E2">
-        2. Orizzonte 40-50 Anni (Pensione Anticipata)
+        2. Risparmi Mensili Necessari dai 30 ai 65 Anni
       </text>
       <text x="0" y="68" font-family="'Poppins', Arial, sans-serif" font-size="38" font-weight="800" fill="#4A90E2">
-        3,2% - 3,5%
+        0,00 € / mese
       </text>
       <text x="820" y="68" font-family="'Poppins', Arial, sans-serif" font-size="16" font-weight="700" fill="#3B82F6" text-anchor="end">
-        Tasso corretto anti-crollo iniziale
+        Puoi spendere il 100% del tuo stipendio futuro
       </text>
     </g>
 
@@ -77,14 +78,14 @@
     <!-- Row 3 -->
     <g transform="translate(50, 385)">
       <text x="0" y="22" font-family="'Poppins', Arial, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">
-        Moltiplicatore Patrimonio Reale:
+        Patrimonio a 65 Anni (7% annuo per 35 anni):
       </text>
       <text x="0" y="80" font-family="'Poppins', Arial, sans-serif" font-size="52" font-weight="900" fill="#FFFFFF" letter-spacing="-0.02em">
-        28,6x - 31x
+        854.000 €
       </text>
       <rect x="650" y="32" width="170" height="44" rx="12" fill="#1E56A0"/>
       <text x="735" y="59" font-family="'Poppins', Arial, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">
-        Modello Aggiornato
+        Pensione Coperta
       </text>
     </g>
   </g>
