@@ -32,7 +32,7 @@ const APP_CONFIG = {
         ratingStars: "★★★★★",
         ratingLabel: "Scelta Top",
         ctaText: "Inizia con Trade Republic",
-        url: "https://traderepublic.com/",
+        url: "https://refnocode.trade.re/j4dzx07v",
         specs: [
           { label: "Canone Conto", value: "0,00 €", highlight: true },
           { label: "Ordini PAC", value: "0,00 €", highlight: true },
