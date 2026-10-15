@@ -62,10 +62,8 @@ function generateSvgCard(p) {
   </g>
 
   <!-- Hook Question -->
-  <text x="80" y="210" font-family="'Poppins', Arial, sans-serif" font-size="38" font-weight="800" fill="#FFFFFF" letter-spacing="-0.01em">
-    ${escapeXml(p.hook.length > 55 ? p.hook.substring(0, 52) + '...' : p.hook)}
-  </text>
-  <text x="80" y="260" font-family="'Poppins', Arial, sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
+  ${renderHook(p.hook)}
+  <text x="80" y="270" font-family="'Poppins', Arial, sans-serif" font-size="18" font-weight="500" fill="#94A3B8">
     Simulazione matematica con dati ufficiali • Fonte: fincalcolatore.vercel.app
   </text>
 
@@ -140,6 +138,25 @@ function escapeXml(unsafe) {
   });
 }
 
+function renderHook(hook) {
+  if (hook.length <= 46) {
+    return `<text x="80" y="215" font-family="'Poppins', Arial, sans-serif" font-size="36" font-weight="800" fill="#FFFFFF" letter-spacing="-0.01em">${escapeXml(hook)}</text>`;
+  }
+  const words = hook.split(' ');
+  let l1 = '', l2 = '';
+  for (const w of words) {
+    if ((l1 + ' ' + w).trim().length <= 42 && !l2) {
+      l1 = (l1 + ' ' + w).trim();
+    } else {
+      l2 = (l2 + ' ' + w).trim();
+    }
+  }
+  return `<text x="80" y="195" font-family="'Poppins', Arial, sans-serif" font-size="32" font-weight="800" fill="#FFFFFF" letter-spacing="-0.01em">
+    <tspan x="80" dy="0">${escapeXml(l1)}</tspan>
+    <tspan x="80" dy="42">${escapeXml(l2)}</tspan>
+  </text>`;
+}
+
 // Assicura cartella di output
 const outDir = path.join(__dirname, 'output');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
@@ -150,6 +167,27 @@ const svgPath = path.join(outDir, 'current_post.svg');
 fs.writeFileSync(svgPath, svgContent, 'utf8');
 console.log(`[Autopilot] Grafica SVG generata in: ${svgPath}`);
 
+// Render PNG se Chrome è disponibile
+const cp = require('child_process');
+const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const pngPath = path.join(outDir, 'current_post.png');
+if (fs.existsSync(chromePath)) {
+  try {
+    const svgAbs = 'file:///' + svgPath.replace(/\\/g, '/');
+    cp.execFileSync(chromePath, [
+      '--headless',
+      '--disable-gpu',
+      '--window-size=1080,1080',
+      '--hide-scrollbars',
+      `--screenshot=${pngPath}`,
+      svgAbs
+    ]);
+    console.log(`[Autopilot] Grafica PNG 1080x1080 generata in: ${pngPath}`);
+  } catch (e) {
+    console.warn('[Autopilot] Rendering PNG Chrome fallito:', e.message);
+  }
+}
+
 // Scrivi Payload Metadati
 const payload = {
   id: post.id,
@@ -158,16 +196,16 @@ const payload = {
   slot: slot === 0 ? 'pranzo' : 'sera',
   instagram: {
     caption: post.caption_ig,
-    image_file: 'current_post.svg'
+    image_file: 'current_post.png'
   },
   facebook: {
     caption: post.caption_ig,
-    image_file: 'current_post.svg'
+    image_file: 'current_post.png'
   },
   reddit: {
     title: post.reddit_title,
     body: post.reddit_body,
-    subreddit: 'FinCalcolatore' // O subreddit di finanza se applicabile
+    subreddit: 'FinCalcolatore'
   },
   tiktok: {
     hook: post.hook,
