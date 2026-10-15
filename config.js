@@ -76,7 +76,7 @@ const APP_CONFIG = {
         id: "buddybank",
         name: "buddybank (UniCredit)",
         priority: 3, // ⭐ PRIORITÀ 3
-        promoCode: "BUDDY50", // Codice amico UniCredit
+        promoCode: "B2601MIMPFBICD", // Codice amico UniCredit
         payoutNote: "Fino a 30€-50€ bonus UniCredit",
         logo: "assets/logos/buddybank.jpg",
         category: "Banca Digitale UniCredit",
