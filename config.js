@@ -77,7 +77,7 @@ const APP_CONFIG = {
         name: "buddybank (UniCredit)",
         priority: 3, // ⭐ PRIORITÀ 3
         promoCode: "B2601MIMPFBICD", // Codice amico UniCredit
-        payoutNote: "Fino a 30€-50€ bonus UniCredit",
+        payoutNote: "Fino a 80€ bonus UniCredit",
         logo: "assets/logos/buddybank.jpg",
         category: "Banca Digitale UniCredit",
         ratingScore: "4.7",
@@ -95,8 +95,8 @@ const APP_CONFIG = {
           "<strong>Carta di debito inclusa:</strong> carta internazionale a canone zero collegabile ad Apple Pay e Google Pay",
           "<strong>Solidità UniCredit:</strong> conto corrente protetto dal Fondo Interbancario di Tutela dei Depositi (FITD)"
         ],
-        perkTag: "PROMO INVITO",
-        perkText: "Bonus benvenuto con codice amico"
+        perkTag: "BONUS 80€",
+        perkText: "Ricevi 80€ di bonus con codice amico"
       },
       {
         id: "hype",
